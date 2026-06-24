@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TerroiRisk — Physics doesn't take bribes</title>
+<meta name="description" content="A physical, reproducible quality index for fine wine. ERA5 reanalysis + Sentinel-2. Predictions are dated, hashed, and published before the critics score the vintage." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mark">TerroiRisk</div>
+    <div class="mark-sub">physical index · fine wine</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Reproducible. Dated. Hashed.</p>
+    <h1 class="thesis">Physics doesn't<br>take bribes.</h1>
+    <p class="lede">
+      A wine critic gives a number after dinner. We give a number from the
+      atmosphere — soil moisture, thermal range, growing-degree days — measured
+      by satellite and reanalysis, the same for everyone, audited against the
+      vine's own physiology. No palate. No invitation list. No revision after
+      the auction.
+    </p>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="prob-num">01</div>
+      <p>A 100-point score is a private judgment sold as a public fact. Two
+         critics disagree by 5 points on the same bottle. The market moves anyway.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-num">02</div>
+      <p>The growing season is not subjective. The clay holds water or it doesn't.
+         September nights are cold or they aren't. That signal is recorded, free,
+         and gridded over every appellation on earth.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-num">03</div>
+      <p>We fit one physical driver per regime — out-of-sample, leave-one-vintage-out —
+         and publish the prediction <em>before</em> the vintage is tasted. Then we wait.</p>
+    </div>
+  </div>
+</section>
+
+<section class="regimes">
+  <div class="wrap">
+    <h2 class="sec-title">Three validated regimes</h2>
+    <p class="sec-note">No universal formula exists. Each terroir answers to its own
+      physics — that non-universality is the method, not a flaw.</p>
+    <div class="table-scroll">
+    <table class="regime-table">
+      <thead>
+        <tr>
+          <th>Regime</th><th>Physical driver</th><th>n</th>
+          <th>R²<sub>oos</sub></th><th>MAE</th><th>Validation target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-l="Regime">Pomerol</td>
+          <td data-l="Driver">Soil moisture, Sep–Oct</td>
+          <td data-l="n">96</td>
+          <td data-l="R²" class="num">0.289</td>
+          <td data-l="MAE" class="num">1.84 pt</td>
+          <td data-l="Target">Wine-Searcher · Petrus + Trotanoy + Église-Clinet</td>
+        </tr>
+        <tr>
+          <td data-l="Regime">Bolgheri</td>
+          <td data-l="Driver">Diurnal range, September</td>
+          <td data-l="n">~280</td>
+          <td data-l="R²" class="num">0.201</td>
+          <td data-l="MAE" class="num">1.85 pt</td>
+          <td data-l="Target">Wine-Searcher · 10-producer pool</td>
+        </tr>
+        <tr>
+          <td data-l="Regime">Barolo</td>
+          <td data-l="Driver">GDD Apr–Oct + catastrophe flag</td>
+          <td data-l="n">27–33</td>
+          <td data-l="R²" class="num">0.391–0.499</td>
+          <td data-l="MAE" class="num">0.91–1.19 /10</td>
+          <td data-l="Target">Vignaioli Piemontesi + Lavinium</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sec-foot">
+      The same Barolo model fitted to a critic's scores instead of the growers'
+      physiological record returns <span class="num neg">R² = −0.11</span>.
+      Read that twice. The physics predicts the agronomist. It does not predict
+      the critic — because the critic is not measuring the year.
+    </p>
+  </div>
+</section>
+
+<section class="prediction" id="prediction">
+  <div class="wrap">
+    <p class="eyebrow seal-eyebrow">Public prediction · sealed</p>
+    <h2 class="sec-title">Pomerol 2025 — before the verdict</h2>
+    <p class="pred-intro">
+      Issued <strong id="issue-date">24 June 2026</strong>. The vintage is
+      scored by the critics in roughly 18 months — this page existed first.
+      The model targets the <strong>Wine-Searcher aggregate</strong> (Petrus +
+      Trotanoy + Église-Clinet), not any single critic; the aggregate filters
+      one taster's noise and lets the physical signal stand. The dataset hash
+      below is the seal — change one byte and it no longer matches.
+    </p>
+
+    <div class="pred-card">
+      <div class="pred-row">
+        <span class="pred-label">Petrus, predicted band <span class="pred-mae">±1.84 MAE</span></span>
+        <span class="pred-value num band"><span id="petrus-lo">__PETRUS_LO__</span><span class="band-dash">–</span><span id="petrus-hi">__PETRUS_HI__</span></span>
+      </div>
+      <div class="pred-row">
+        <span class="pred-label">Point estimate · direction</span>
+        <span class="pred-value mono-sm"><span id="petrus-pred">__PETRUS_PRED__</span> pt · <span id="direction">__DIRECTION__</span></span>
+      </div>
+      <div class="pred-row">
+        <span class="pred-label">Soil moisture, Sep–Oct 2025 (m³/m³)</span>
+        <span class="pred-value num" id="soil-value">__SOIL_MOISTURE__</span>
+      </div>
+      <div class="pred-row">
+        <span class="pred-label">Model</span>
+        <span class="pred-value mono-sm">Petrus = 102.78 − 33.61 × soil_moisture</span>
+      </div>
+      <div class="pred-row">
+        <span class="pred-label">Coordinates · dataset</span>
+        <span class="pred-value mono-sm">44.92945 N, −0.19285 E · ERA5-Land</span>
+      </div>
+
+      <div class="seal">
+        <div class="seal-tag">SHA-256 · dataset seal</div>
+        <code class="seal-hash" id="dataset-hash">__SHA256__</code>
+        <div class="seal-verify">
+          Verify: <code>sha256sum pomerol_2025_soil_moisture.csv</code> must
+          return the hash above. The raw dataset is committed to the public
+          repository — re-run the extraction, re-hash, and confirm the seal yourself.
+        </div>
+      </div>
+    </div>
+
+    <p class="pred-note">
+      Higher soil moisture at harvest means a wetter, more diluted Merlot on
+      Pomerol's water-holding blue clay — and a lower score. The sign is negative
+      by physics, declared before the scores were seen. We publish a band, not a
+      single point: the model's out-of-sample MAE is ±1.84, so the honest claim
+      is the interval, and the direction relative to the appellation mean.
+    </p>
+    <p class="pred-note" style="margin-top:14px;">
+      <strong>On critics and noise.</strong> We also fitted the same model against
+      Wine Advocate pure scores (hand-extracted from subscription). The physical
+      signal still holds — same negative sign, same driver — but out-of-sample
+      accuracy drops: R²<sub>oos</sub> 0.171 vs 0.289, MAE 2.86 vs 1.84.
+      Parker's individual scores carry a critic-variance premium of roughly
+      ±1 point that the atmosphere cannot predict. The Wine-Searcher aggregate
+      filters that noise. That difference is not a flaw in the physics —
+      it is a measurement of how much of a score is weather, and how much is palate.
+    </p>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap">
+    <h2 class="sec-title">Who is behind this</h2>
+    <div class="who-cols">
+      <p>A physicist and an AIS-certified sommelier, working solo, against the
+         grain. One side knows reanalysis grids and out-of-sample validation;
+         the other knows what's actually in the glass. Neither sells scores.</p>
+      <p>The premise is adversarial on purpose: every prediction is a falsifiable
+         claim, time-stamped in public, that the establishment's number can be
+         anticipated from the weather it pretends to transcend — or can't, which
+         is itself the finding.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-line">
+      <span>TerroiRisk</span>
+      <a href="mailto:contact@terroirisk.com">contact@terroirisk.com</a>
+    </div>
+    <p class="foot-fine">
+      Meteorological data: ERA5 / ERA5-Land via Open-Meteo (CC BY 4.0).
+      Satellite: Sentinel-2, Copernicus. Predictions are research artifacts,
+      not investment advice.
+    </p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
