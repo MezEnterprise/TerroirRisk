@@ -11,15 +11,17 @@
  */
 
 const PREDICTION = {
-  // ---- valori ERA5 Pomerol set-ott 2025, sigillati 24 giu 2026 ----
+  // ---- valori ERA5 Pomerol set-ott 2025, sigillati 25 giu 2026 ----
+  // Modello: due epoche post-2000 — Petrus = 99.72 − 15.90 × SM
+  // R²_oos = 0.496, MAE = 1.74 pt (upgrade da modello base R²=0.289)
   soilMoisture: "0.2538",
-  petrusPred:   "94.2",
-  petrusLo:     "92.4",
-  petrusHi:     "96.1",
-  direction:    "below",
+  petrusPred:   "95.7",
+  petrusLo:     "93.9",
+  petrusHi:     "97.4",
+  direction:    "above",
   sha256:       "a993d7ee7b8b567cd825b27b0159767d5e93685c2b26bb645d1616619a5c08d2",
   // ----------------------------------------------------------------
-  issueDate: "24 June 2026",
+  issueDate: "25 June 2026",
 };
 
 function setText(id, value) {
