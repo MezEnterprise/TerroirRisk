@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body { user-select: none; -webkit-user-select: none; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
 
 :root {
   --noir:     #0A0A0F;
@@ -40,91 +38,88 @@ body {
   top: 0; left: 0; right: 0;
   z-index: 100;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  padding: 0 2.5rem;
-  height: 64px;
-  background: rgba(10, 10, 15, 0.85);
-  backdrop-filter: blur(12px);
+  gap: 1rem;
+  padding: 0 2rem;
+  height: 72px;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(201, 169, 110, 0.12);
 }
 
 .navbar-logo {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   letter-spacing: 0.18em;
   color: var(--cream);
   text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.navbar-logo span {
-  color: var(--gold);
-}
+.navbar-logo span { color: var(--gold); }
 
 .appellation-nav {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
   justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: nowrap;
 }
 
 .app-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  cursor: pointer;
+  gap: 4px;
   text-decoration: none;
-  transition: opacity 0.2s;
+  cursor: default;
 }
 
+.app-badge.active { cursor: pointer; }
+.app-badge.active:hover { opacity: 0.8; }
+
 .app-badge-ring {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: 14px;
   transition: all 0.25s;
 }
 
 .app-badge.active .app-badge-ring {
   border-color: var(--gold);
   color: var(--gold);
-  box-shadow: 0 0 12px rgba(201,169,110,0.3);
+  box-shadow: 0 0 14px rgba(201,169,110,0.35);
 }
 
 .app-badge.locked .app-badge-ring {
-  border-color: var(--locked);
-  color: var(--muted);
-  position: relative;
+  border-color: #2A2530;
+  color: #2A2530;
 }
 
-.app-badge.locked .app-badge-ring::after {
-  content: '🔒';
-  font-size: 8px;
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
+.app-badge.pending .app-badge-ring {
+  border-color: #3A3040;
+  color: #3A3040;
 }
 
 .app-badge-label {
-  font-size: 8px;
-  letter-spacing: 0.1em;
+  font-size: 7.5px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-family: 'Inter', sans-serif;
+  white-space: nowrap;
 }
 
-.app-badge.active .app-badge-label { color: var(--gold); }
-.app-badge.locked .app-badge-label { color: var(--locked); }
+.app-badge.active .app-badge-label  { color: var(--gold); }
+.app-badge.locked .app-badge-label  { color: #2A2530; }
+.app-badge.pending .app-badge-label { color: #3A3040; }
 
 /* ── HERO ── */
 .hero {
