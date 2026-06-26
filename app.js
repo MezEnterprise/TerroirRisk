@@ -2,7 +2,7 @@
 // Particelle: piccoli '+' che salgono lentamente come punti dati
 
 (function () {
-  const canvas = document.getElementById('canvas-particles');
+  const canvas = document.getElementById('cv');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
