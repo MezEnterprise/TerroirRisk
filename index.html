@@ -1,170 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TerroiRisk — Physics doesn't take bribes</title>
-<meta name="description" content="Physical quality predictions for fine wine. ERA5 reanalysis. Dated, hashed, published before the critics score the vintage."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerroiRisk — Physics doesn't take bribes</title>
+  <meta name="description" content="A cryptographically sealed, physics-based predictive quality index for fine wine. ERA5 meteorological data meets Sentinel-2 satellite imagery.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="nav-left">
-      <span class="nav-logo">TerroiRisk</span>
-      <span class="nav-tag">physical index · fine wine</span>
+  <canvas id="canvas-particles"></canvas>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="navbar-logo" href="/">Terroir<span>Risk</span></a>
+    <div class="appellation-nav">
+      <a class="app-badge active" href="pomerol.html">
+        <div class="app-badge-ring">POM</div>
+        <span class="app-badge-label">Pomerol</span>
+      </a>
+      <div class="app-badge locked">
+        <div class="app-badge-ring">BOL</div>
+        <span class="app-badge-label">Bolgheri</span>
+      </div>
+      <div class="app-badge locked">
+        <div class="app-badge-ring">CHA</div>
+        <span class="app-badge-label">Champagne</span>
+      </div>
     </div>
-    <nav class="nav-shields">
+  </nav>
 
-      <a href="#pomerol" class="hex-wrap">
-        <div class="hex active">
-          <div class="hex-inner">
-            <svg width="40" height="46" viewBox="0 0 48 54">
-              <g transform="translate(24,27)">
-                <path d="M0,-22 C-3,-19 -5,-20 -8,-21 C-7,-17 -9,-15 -12,-15 C-10,-12 -11,-9 -13,-7 C-9,-7 -8,-4 -9,-1 C-6,-2 -3,0 -2,4 C-2,8 -1,12 0,16 C1,12 2,8 2,4 C3,0 6,-2 9,-1 C8,-4 9,-7 13,-7 C11,-9 10,-12 12,-15 C9,-15 7,-17 8,-21 C5,-20 3,-19 0,-22 Z" fill="#2D5028" opacity=".9"/>
-                <g stroke="#1A3818" stroke-width=".8" opacity=".7" fill="none">
-                  <line x1="0" y1="-20" x2="0" y2="15"/>
-                  <line x1="0" y1="-6" x2="-10" y2="-12"/>
-                  <line x1="0" y1="-6" x2="10" y2="-12"/>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div class="glow"></div>
-        </div>
-        <span class="hex-label active-label">Pomerol</span>
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Physical prediction · Fine wine · Est. 2026</p>
+
+    <h1 class="hero-title">
+      Physics<br>doesn't take <em>bribes</em>
+    </h1>
+
+    <p class="hero-sub">
+      We publish <strong>cryptographically sealed predictions</strong> before critics 
+      score a vintage. Then we return — with proof.<br><br>
+      No opinions. No relationships. No conflicts of interest.<br>
+      Only ERA5 reanalysis data and Sentinel&#8209;2 satellite imagery.
+    </p>
+
+    <div class="hero-cta">
+      <a href="pomerol.html" class="btn-primary">
+        Explore Pomerol
+        <span class="btn-arrow">→</span>
       </a>
+    </div>
 
-      <a href="#" class="hex-wrap">
-        <div class="hex locked">
-          <div class="hex-inner">
-            <svg width="40" height="46" viewBox="0 0 48 54">
-              <ellipse cx="14" cy="28" rx="4" ry="17" fill="#2A3820" opacity=".85"/>
-              <ellipse cx="24" cy="25" rx="4.5" ry="20" fill="#344828" opacity=".9"/>
-              <ellipse cx="34" cy="28" rx="4" ry="17" fill="#2A3820" opacity=".85"/>
-            </svg>
-          </div>
-          <div class="lock-icon">🔒</div>
-          <div class="glow"></div>
-        </div>
-        <span class="hex-label locked-label">Bolgheri</span>
-      </a>
+    <div class="hero-divider">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+  </section>
 
-      <a href="#" class="hex-wrap">
-        <div class="hex locked">
-          <div class="hex-inner">
-            <svg width="40" height="46" viewBox="0 0 48 54">
-              <circle cx="15" cy="42" r="4" fill="none" stroke="rgba(200,169,106,.7)" stroke-width="1.2"/>
-              <circle cx="15" cy="31" r="3" fill="none" stroke="rgba(200,169,106,.5)" stroke-width="1"/>
-              <circle cx="24" cy="44" r="4.5" fill="none" stroke="rgba(200,169,106,.8)" stroke-width="1.4"/>
-              <circle cx="24" cy="32" r="3.3" fill="none" stroke="rgba(200,169,106,.55)" stroke-width="1.1"/>
-              <circle cx="24" cy="22" r="2.2" fill="none" stroke="rgba(200,169,106,.4)" stroke-width=".9"/>
-              <circle cx="33" cy="42" r="4" fill="none" stroke="rgba(200,169,106,.7)" stroke-width="1.2"/>
-              <circle cx="33" cy="31" r="3" fill="none" stroke="rgba(200,169,106,.5)" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="lock-icon">🔒</div>
-          <div class="glow"></div>
-        </div>
-        <span class="hex-label locked-label">Champagne</span>
-      </a>
+  <!-- ABOUT -->
+  <section class="about-strip">
+    <blockquote class="about-quote">
+      "The vine remembers every drought, every frost, every warm September night.
+       We only learned to read its memory."
+      <cite>— TerroiRisk, 2026</cite>
+    </blockquote>
 
-    </nav>
-  </div>
-</header>
+    <p class="about-body">
+      TerroiRisk is not a wine rating service. It is a <strong>notarial act</strong> — 
+      a dated, immutable prediction derived from the physics of climate and soil, 
+      published before any critic opens a bottle.<br><br>
+      Each prediction is sealed on the Bitcoin blockchain before the vintage is scored. 
+      When the scores arrive, the record already exists. 
+      <strong>You cannot rewrite what the atmosphere measured.</strong>
+    </p>
+  </section>
 
-<section class="hero">
-  <div class="wrap hero-inner">
-    <p class="eyebrow">Pomerol · Vintage 2025 · Sealed 25 June 2026</p>
-    <h1 class="hero-title">Physics doesn't<br><em>take bribes.</em></h1>
-    <p class="hero-body">Soil moisture. Satellite imagery. ERA5 reanalysis.<br>Predictions dated and sealed before the critics pour a glass.</p>
-  </div>
-</section>
-
-<section class="predictions" id="pomerol">
-  <div class="wrap">
-    <p class="section-eye">Pomerol · Physical predictions 2025</p>
-    <div class="cards">
-
-      <article class="card">
-        <div class="card-img-wrap"><img src="petrus.jpg" alt="Petrus" class="card-img"/></div>
-        <div class="card-info">
-          <p class="card-appel">Pomerol · 100% Merlot</p>
-          <h2 class="card-name">Petrus</h2>
-          <div class="scores">
-            <div class="score-line"><span class="sl-label">WS expected</span><span class="sl-val primary">95.7</span></div>
-            <div class="score-line"><span class="sl-label">WA expected</span><span class="sl-val">95.0</span></div>
-            <div class="score-line"><span class="sl-label">Band ±1.74</span><span class="sl-val mono">93.9 – 97.4</span></div>
-            <div class="score-line"><span class="sl-label">Direction</span><span class="sl-val above">↑ above mean</span></div>
-          </div>
-          <div class="real-scores"><span class="rs-label">Real scores</span><span class="rs-val">due ~2027</span></div>
-          <button class="seal-toggle" onclick="toggleSeal('s1')">Verify seal</button>
-          <div class="seal" id="s1">
-            <p class="seal-tag">SHA-256 · ERA5 dataset · 25 Jun 2026</p>
-            <code>a993d7ee7b8b567cd825b27b0159767d5e93685c2b26bb645d1616619a5c08d2</code>
-            <a href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" class="seal-link">github.com/MezEnterprise/TerroirRisk ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img-wrap"><img src="trotanoy.jpg" alt="Trotanoy" class="card-img"/></div>
-        <div class="card-info">
-          <p class="card-appel">Pomerol · 90% Merlot</p>
-          <h2 class="card-name">Trotanoy</h2>
-          <div class="scores">
-            <div class="score-line"><span class="sl-label">WS expected</span><span class="sl-val primary">93.3</span></div>
-            <div class="score-line"><span class="sl-label">WA expected</span><span class="sl-val dim">—</span></div>
-            <div class="score-line"><span class="sl-label">Band ±1.74</span><span class="sl-val mono">91.6 – 95.1</span></div>
-            <div class="score-line"><span class="sl-label">Direction</span><span class="sl-val below">↓ below mean</span></div>
-          </div>
-          <div class="real-scores"><span class="rs-label">Real scores</span><span class="rs-val">due ~2027</span></div>
-          <button class="seal-toggle" onclick="toggleSeal('s2')">Verify seal</button>
-          <div class="seal" id="s2">
-            <p class="seal-tag">SHA-256 · ERA5 dataset · 25 Jun 2026</p>
-            <code>a993d7ee7b8b567cd825b27b0159767d5e93685c2b26bb645d1616619a5c08d2</code>
-            <a href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" class="seal-link">github.com/MezEnterprise/TerroirRisk ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img-wrap"><img src="eglise.jpg" alt="L'Église-Clinet" class="card-img"/></div>
-        <div class="card-info">
-          <p class="card-appel">Pomerol · 85% Merlot</p>
-          <h2 class="card-name">L'Église-Clinet</h2>
-          <div class="scores">
-            <div class="score-line"><span class="sl-label">WS expected</span><span class="sl-val primary">94.1</span></div>
-            <div class="score-line"><span class="sl-label">WA expected</span><span class="sl-val dim">—</span></div>
-            <div class="score-line"><span class="sl-label">Band ±1.74</span><span class="sl-val mono">92.3 – 95.8</span></div>
-            <div class="score-line"><span class="sl-label">Direction</span><span class="sl-val below">↓ below mean</span></div>
-          </div>
-          <div class="real-scores"><span class="rs-label">Real scores</span><span class="rs-val">due ~2027</span></div>
-          <button class="seal-toggle" onclick="toggleSeal('s3')">Verify seal</button>
-          <div class="seal" id="s3">
-            <p class="seal-tag">SHA-256 · ERA5 dataset · 25 Jun 2026</p>
-            <code>a993d7ee7b8b567cd825b27b0159767d5e93685c2b26bb645d1616619a5c08d2</code>
-            <a href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" class="seal-link">github.com/MezEnterprise/TerroirRisk ↗</a>
-          </div>
-        </div>
-      </article>
-
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">1.74<sup>pt</sup></div>
+      <div class="stat-label">Mean absolute error<br>across 8 châteaux</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">−0.69</div>
+      <div class="stat-label">Satellite vigour vs score<br>Pomerol correlation</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2025</div>
+      <div class="stat-label">Vintage sealed<br>before critics score</div>
     </div>
   </div>
-</section>
 
-<footer class="foot">
-  <div class="wrap foot-inner">
-    <span class="foot-brand">TerroiRisk</span>
-    <a href="mailto:contact@terroirisk.com" class="foot-mail">contact@terroirisk.com</a>
-  </div>
-  <div class="wrap"><p class="foot-fine">ERA5 / ERA5-Land via Open-Meteo (CC BY 4.0) · Sentinel-2, Copernicus · Predictions are research artifacts, not investment advice.</p></div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps
+  </footer>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
