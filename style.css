@@ -9,15 +9,16 @@
       --muted: #6A6560;
       --dim: #6A6080;
     }
-    html, body {
-      background: var(--noir);
+    html { background: var(--noir); }
+    body {
+      background: transparent;
       color: var(--cream);
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       min-height: 100vh;
       overflow-x: hidden;
     }
-    #cv { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    #cv { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; display: block; }
 
     /* NAV */
     nav {
