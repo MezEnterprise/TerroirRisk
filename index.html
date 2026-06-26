@@ -5,25 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TerroiRisk — Physics doesn't take bribes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      box-sizing: border-box; margin: 0; padding: 0;
+      -webkit-user-select: none; -moz-user-select: none; user-select: none;
     }
-
     :root {
-      --noir:   #0A0A0F;
-      --gold:   #C9A96E;
-      --cream:  #F0EDE8;
-      --muted:  #6A6560;
-      --dim:    #252030;
+      --noir: #0A0A0F;
+      --gold: #C9A96E;
+      --cream: #F0EDE8;
+      --muted: #6A6560;
+      --dim: #2A2535;
     }
-
     html, body {
       background: var(--noir);
       color: var(--cream);
@@ -32,306 +26,186 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
+    #cv { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    /* CANVAS */
-    #cv {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* NAVBAR */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 80px;
-      background: rgba(10,10,15,0.92);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 76px;
+      background: rgba(10,10,15,0.93);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(201,169,110,0.13);
     }
-
     .nav-logo {
-      position: absolute;
-      left: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.15rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--cream);
+      position: absolute; left: 2rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 1.15rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; color: var(--cream);
     }
     .nav-logo b { color: var(--gold); font-weight: 300; }
 
-    .nav-badges {
+    /* BADGES — centrati assoluti */
+    .badges {
       position: absolute;
-      left: 50%;
-      top: 50%;
+      left: 50%; top: 50%;
       transform: translate(-50%, -50%);
-      display: flex;
-      align-items: flex-start;
-      gap: 1.8rem;
+      display: flex; align-items: center; gap: 1.6rem;
     }
+    .bdg { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; cursor: default; }
+    .bdg.on { cursor: pointer; }
 
-    .badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      text-decoration: none;
-      cursor: default;
-    }
-    .badge.on { cursor: pointer; }
-
-    .badge-circle {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
+    .bdg-ring {
+      position: relative;
+      width: 52px; height: 52px; border-radius: 50%;
       border: 1.5px solid var(--dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--dim);
-      transition: box-shadow 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.09em; color: var(--dim);
     }
-    .badge.on .badge-circle {
-      border-color: var(--gold);
-      color: var(--gold);
-      box-shadow: 0 0 16px rgba(201,169,110,0.3);
+    .bdg.on .bdg-ring {
+      border-color: var(--gold); color: var(--gold);
+      box-shadow: 0 0 14px rgba(201,169,110,0.28);
     }
-    .badge.on:hover .badge-circle {
-      box-shadow: 0 0 24px rgba(201,169,110,0.5);
-    }
+    .bdg.on:hover .bdg-ring { box-shadow: 0 0 24px rgba(201,169,110,0.5); }
 
-    .badge-label {
-      font-size: 7.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--dim);
-      text-align: center;
+    /* icona piccola bottom-right */
+    .bdg-ring .ico {
+      position: absolute; bottom: 3px; right: 3px;
+      font-size: 9px; line-height: 1;
+      opacity: 0.55;
     }
-    .badge.on .badge-label { color: var(--gold); }
+    .bdg.on .bdg-ring .ico { opacity: 0; } /* Pomerol: nessuna icona */
+
+    .bdg-lbl {
+      font-size: 7px; letter-spacing: 0.13em; text-transform: uppercase;
+      font-family: 'Inter', sans-serif; color: var(--dim); white-space: nowrap;
+    }
+    .bdg.on .bdg-lbl { color: var(--gold); }
 
     /* HERO */
     .hero {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 2rem 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 76px 2rem 0;
     }
-
     .eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2.2rem;
-      opacity: 0;
-      animation: up 1s ease 0.3s forwards;
+      font-size: 0.67rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+      opacity: 0; animation: up 1s ease 0.3s forwards;
     }
-
     h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(3rem, 8vw, 6rem);
-      line-height: 1.08;
-      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+      font-size: clamp(3rem, 8vw, 6rem); line-height: 1.08; color: var(--cream);
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: up 1s ease 0.6s forwards;
+      opacity: 0; animation: up 1s ease 0.6s forwards;
     }
     h1 em { color: var(--gold); font-style: normal; }
-
     .sub {
-      font-size: clamp(0.88rem, 1.8vw, 1rem);
-      line-height: 1.9;
-      color: var(--muted);
-      max-width: 500px;
-      margin-bottom: 3.5rem;
-      opacity: 0;
-      animation: up 1s ease 0.9s forwards;
+      font-size: clamp(0.88rem, 1.8vw, 1rem); line-height: 1.9; color: var(--muted);
+      max-width: 500px; margin-bottom: 3.5rem;
+      opacity: 0; animation: up 1s ease 0.9s forwards;
     }
     .sub strong { color: var(--cream); font-weight: 400; }
-
-    .cta {
-      opacity: 0;
-      animation: up 1s ease 1.2s forwards;
-    }
-
+    .cta { opacity: 0; animation: up 1s ease 1.2s forwards; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.9rem 2.4rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      background: transparent;
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      padding: 0.9rem 2.4rem; border: 1px solid var(--gold);
+      color: var(--gold); font-family: 'Inter', sans-serif;
+      font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; background: transparent;
       transition: background 0.3s, color 0.3s;
     }
     .btn:hover { background: var(--gold); color: var(--noir); }
 
     /* ABOUT */
     .about {
-      position: relative;
-      z-index: 1;
-      padding: 7rem 2rem;
-      max-width: 740px;
-      margin: 0 auto;
-      text-align: center;
+      position: relative; z-index: 1;
+      padding: 7rem 2rem; max-width: 740px; margin: 0 auto; text-align: center;
     }
-
     blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      line-height: 1.55;
-      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.55; color: var(--cream);
       margin-bottom: 2rem;
     }
     cite {
-      display: block;
-      font-style: normal;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-top: 1.2rem;
+      display: block; font-style: normal; font-family: 'Inter', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-top: 1.2rem;
     }
-
-    .about-text {
-      font-size: 0.93rem;
-      line-height: 1.9;
-      color: var(--muted);
-    }
+    .about-text { font-size: 0.93rem; line-height: 1.9; color: var(--muted); }
     .about-text strong { color: var(--cream); font-weight: 400; }
 
     /* STATS */
     .stats {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      max-width: 860px;
-      margin: 0 auto 6rem;
+      position: relative; z-index: 1;
+      display: flex; max-width: 860px; margin: 0 auto 6rem;
       border-top: 1px solid rgba(201,169,110,0.13);
       border-bottom: 1px solid rgba(201,169,110,0.13);
     }
-    .stat {
-      flex: 1;
-      padding: 3rem 1.5rem;
-      text-align: center;
-      border-right: 1px solid rgba(201,169,110,0.13);
-    }
+    .stat { flex: 1; padding: 3rem 1.5rem; text-align: center; border-right: 1px solid rgba(201,169,110,0.13); }
     .stat:last-child { border-right: none; }
-    .stat-n {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 2.8rem;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
+    .stat-n { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2.8rem; color: var(--cream); line-height: 1; margin-bottom: 0.5rem; }
     .stat-n sup { font-size: 1.1rem; color: var(--gold); vertical-align: super; }
-    .stat-l {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    .stat-l { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 
     /* FOOTER */
     footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 1.8rem;
-      border-top: 1px solid rgba(201,169,110,0.08);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--dim);
+      position: relative; z-index: 1; text-align: center;
+      padding: 1.8rem; border-top: 1px solid rgba(201,169,110,0.08);
+      font-size: 0.68rem; letter-spacing: 0.1em; color: var(--dim);
     }
 
-    @keyframes up {
-      from { opacity:0; transform:translateY(16px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
+    @keyframes up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
-    @media(max-width:640px){
-      .nav-badges { gap: 1rem; }
-      .badge-circle { width: 38px; height: 38px; font-size: 13px; }
+    @media(max-width:680px){
+      .badges { gap: 0.8rem; }
+      .bdg-ring { width: 42px; height: 42px; font-size: 8px; }
       .stats { flex-direction: column; }
       .stat { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.13); }
       .stat:last-child { border-bottom: none; }
     }
-    @media(prefers-reduced-motion:reduce){
-      *, *::before, *::after { animation: none !important; }
-    }
+    @media(prefers-reduced-motion:reduce){ *, *::before, *::after { animation: none !important; } }
   </style>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+<body onselectstart="return false" ondragstart="return false">
 
 <canvas id="cv"></canvas>
 
 <nav>
   <a class="nav-logo" href="/">Terroir<b>Risk</b></a>
+  <div class="badges">
 
-  <div class="nav-badges">
-    <a class="badge on" href="pomerol.html">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2 L20 12 L12 22 L4 12 Z"/></svg>
-      </div>
-      <span class="badge-label">Pomerol</span>
+    <a class="bdg on" href="pomerol.html">
+      <div class="bdg-ring">POM<span class="ico"></span></div>
+      <span class="bdg-lbl">Pomerol</span>
     </a>
-    <div class="badge">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11 V7 a4 4 0 0 1 8 0 v4"/></svg>
-      </div>
-      <span class="badge-label">Bolgheri</span>
+
+    <div class="bdg">
+      <div class="bdg-ring">BOL<span class="ico">🔒</span></div>
+      <span class="bdg-lbl">Bolgheri</span>
     </div>
-    <div class="badge">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11 V7 a4 4 0 0 1 8 0 v4"/></svg>
-      </div>
-      <span class="badge-label">Champagne</span>
+
+    <div class="bdg">
+      <div class="bdg-ring">CHA<span class="ico">🔒</span></div>
+      <span class="bdg-lbl">Champagne</span>
     </div>
-    <div class="badge">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11 V7 a4 4 0 0 1 8 0 v4"/></svg>
-      </div>
-      <span class="badge-label">Napa Valley</span>
+
+    <div class="bdg">
+      <div class="bdg-ring">NAP<span class="ico">🔒</span></div>
+      <span class="bdg-lbl">Napa Valley</span>
     </div>
-    <div class="badge">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3 h10 M7 21 h10 M7 3 c0 4 10 6 10 9 c0 3 -10 5 -10 9 M17 3 c0 4 -10 6 -10 9 c0 3 10 5 10 9"/></svg>
-      </div>
-      <span class="badge-label">Barolo</span>
+
+    <div class="bdg">
+      <div class="bdg-ring">BAR<span class="ico">⏳</span></div>
+      <span class="bdg-lbl">Barolo</span>
     </div>
-    <div class="badge">
-      <div class="badge-circle">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3 h10 M7 21 h10 M7 3 c0 4 10 6 10 9 c0 3 -10 5 -10 9 M17 3 c0 4 -10 6 -10 9 c0 3 10 5 10 9"/></svg>
-      </div>
-      <span class="badge-label">Burgundy</span>
+
+    <div class="bdg">
+      <div class="bdg-ring">BUR<span class="ico">⏳</span></div>
+      <span class="bdg-lbl">Burgundy</span>
     </div>
+
   </div>
 </nav>
 
@@ -344,9 +218,7 @@
     No opinions. No relationships. No conflicts of interest.<br>
     Only ERA5 reanalysis data and Sentinel&#8209;2 satellite imagery.
   </p>
-  <div class="cta">
-    <a href="pomerol.html" class="btn">Explore Pomerol →</a>
-  </div>
+  <div class="cta"><a href="pomerol.html" class="btn">Explore Pomerol →</a></div>
 </section>
 
 <section class="about">
