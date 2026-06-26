@@ -16,7 +16,7 @@
       --gold: #C9A96E;
       --cream: #F0EDE8;
       --muted: #6A6560;
-      --dim: #2A2535;
+      --dim: #6A6080;
     }
     html, body {
       background: var(--noir);
@@ -56,10 +56,10 @@
 
     .bdg-ring {
       position: relative;
-      width: 52px; height: 52px; border-radius: 50%;
+      width: 54px; height: 54px; border-radius: 50%;
       border: 1.5px solid var(--dim);
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 500;
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500;
       letter-spacing: 0.09em; color: var(--dim);
     }
     .bdg.on .bdg-ring {
@@ -70,11 +70,11 @@
 
     /* icona piccola bottom-right */
     .bdg-ring .ico {
-      position: absolute; bottom: 3px; right: 3px;
-      font-size: 9px; line-height: 1;
-      opacity: 0.55;
+      position: absolute; bottom: 2px; right: 2px;
+      font-size: 8px; line-height: 1;
+      opacity: 0.8;
     }
-    .bdg.on .bdg-ring .ico { opacity: 0; } /* Pomerol: nessuna icona */
+    .bdg.on .bdg-ring .ico { display: none; }
 
     .bdg-lbl {
       font-size: 7px; letter-spacing: 0.13em; text-transform: uppercase;
