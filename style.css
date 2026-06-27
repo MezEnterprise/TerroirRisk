@@ -6,7 +6,7 @@
       --noir: #0A0A0F;
       --gold: #C9A96E;
       --cream: #F0EDE8;
-      --muted: #6A6560;
+      --muted: #9A9590;
       --dim: #6A6080;
     }
     html { background: var(--noir); }
@@ -87,12 +87,12 @@
       text-align: center; padding: 76px 2rem 0;
       background-image: url('vineyard.jpg');
       background-size: cover;
-      background-position: center 40%;
+      background-position: center 20%;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(10, 10, 15, 0.72);
+      background: rgba(10, 10, 15, 0.82);
       z-index: 0;
     }
     .hero > * { position: relative; z-index: 1; }
@@ -122,7 +122,7 @@
     .cta { opacity: 0; animation: up 1s ease 1.2s forwards; }
     .btn {
   display: inline-flex; align-items: center; gap: 1rem;
-  padding: 1.1rem 3rem; border: 1px solid var(--gold);
+  padding: 1.1rem 3rem; border: 1.5px solid var(--gold);
   color: var(--gold); font-family: 'Inter', sans-serif;
   font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
   text-decoration: none; background: transparent;
