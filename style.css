@@ -38,23 +38,18 @@
 
     /* BADGES — centrati assoluti */
     .badges {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex; align-items: center; gap: 1.4rem;
-  padding: 0.6rem 1.8rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; align-items: center; gap: 1.6rem;
+    }
     .bdg { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; cursor: default; }
     .bdg.on { cursor: pointer; }
 
     .bdg-ring {
       position: relative;
       width: 54px; height: 54px; border-radius: 50%;
-      border: 1.5px solid #4A4560;
+      border: 1.5px solid var(--dim);
       display: flex; align-items: center; justify-content: center;
       font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500;
       letter-spacing: 0.09em; color: var(--dim);
@@ -156,17 +151,7 @@
     @keyframes up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
     @media(max-width:680px){
-      .badges {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex; align-items: center; gap: 1.4rem;
-  padding: 0.6rem 1.8rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+      .badges { gap: 0.8rem; }
       .bdg-ring { width: 42px; height: 42px; font-size: 8px; }
       .stats { flex-direction: column; }
       .stat { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.13); }
