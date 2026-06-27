@@ -61,11 +61,17 @@
 
     /* icona piccola bottom-right */
     .bdg-ring .ico {
-      position: absolute; bottom: 2px; right: 2px;
-      font-size: 8px; line-height: 1;
-      opacity: 0.8;
-    }
-    .bdg.on .bdg-ring .ico { display: none; }
+  position: absolute; bottom: 1px; right: 1px;
+  color: #A090C0;
+  width: 13px !important;
+  height: 13px !important;
+}
+    .bdg.on .bdg-ring .ico {
+  position: absolute; bottom: 1px; right: 1px;
+  color: #A090C0;
+  width: 13px !important;
+  height: 13px !important;
+}
 
     .bdg-lbl {
       font-size: 7px; letter-spacing: 0.13em; text-transform: uppercase;
