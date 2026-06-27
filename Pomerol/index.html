@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomerol — TerroiRisk</title>
+  <title>Pomerol · TerroiRisk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
@@ -59,6 +59,10 @@
     .pred-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--white);line-height:1;text-shadow:0 0 30px rgba(111,143,205,0.5)}
     .pred-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-top:0.3rem}
     .pred-band{font-size:0.64rem;color:var(--blue);margin-top:0.2rem}
+    .seal-verify{display:inline-flex;flex-direction:column;align-items:flex-end;gap:0.2rem;margin-top:0.7rem;text-decoration:none;transition:opacity 0.2s}
+    .seal-verify:hover{opacity:0.75}
+    .seal-hash{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;color:var(--gold-d)}
+    .seal-go{font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:1px}
     .chart-wrap{flex:1;position:relative;min-height:220px}
     canvas.chart{width:100%;height:100%;display:block;min-height:220px}
     .chart-legend{display:flex;gap:1.6rem;padding:0.7rem 0 0.2rem;flex-wrap:wrap}
@@ -116,14 +120,14 @@
   <div class="hero">
     <p class="hero-eye">Pomerol · Bordeaux right bank · validated regime</p>
     <h1 class="hero-title">Nine estates.<br>One signal the soil <em>cannot fake</em>.</h1>
-    <p class="hero-sub">Pomerol sits on blue clay. A wet September dilutes the wine; a dry one concentrates it. We measure exactly one thing — <b>water in the soil through harvest</b> — and seal our prediction before any critic tastes the vintage. Below, our model against the two critics that move the market.</p>
+    <p class="hero-sub">Pomerol sits on blue clay. A wet September dilutes the wine; a dry one concentrates it. We measure exactly one thing, <b>water in the soil through harvest</b>, and seal our prediction before any critic tastes the vintage. Below, our model against the two critics that move the market.</p>
   </div>
 
-  <!-- 01 — THE SIGNAL + CHART -->
+  <!-- 01 THE SIGNAL + CHART -->
   <div class="sec">
     <div class="sec-num">01</div>
     <h2 class="sec-title">One number from the ground</h2>
-    <p class="sec-lede">For thirty-five years, soil water in September has tracked Pétrus's score better than any tasting note. It is free, public, and measured by satellites that have never heard of Bordeaux. <b>The white line is us.</b> The dashed lines are the critics. Where they stop — because they haven't tasted 2025 yet — we keep going.</p>
+    <p class="sec-lede">For thirty-five years, soil water in September has tracked Pétrus's score better than any tasting note. It is free, public, and measured by satellites that have never heard of Bordeaux. <b>The white line is us.</b> The dashed lines are the critics. Where they stop, because they haven't tasted 2025 yet, we keep going.</p>
 
     <div class="selector" id="selector">
       <button class="sel-btn active" data-ch="petrus">Pétrus</button>
@@ -148,8 +152,12 @@
             <div class="chart-title">Score history vs critics</div>
             <div class="chart-pred">
               <div class="pred-num" id="p-num">95.7</div>
-              <div class="pred-label">2025 — our sealed prediction</div>
+              <div class="pred-label">2025 · our sealed prediction</div>
               <div class="pred-band" id="p-band">range 93.9 – 97.4</div>
+              <a class="seal-verify" href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" rel="noopener">
+                <span class="seal-hash">⬡ a993d7ee…c08d2</span>
+                <span class="seal-go">verify on Bitcoin →</span>
+              </a>
             </div>
           </div>
           <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
@@ -169,31 +177,31 @@
       </div>
     </div>
 
-    <p class="sec-foot">Our target is the Wine-Searcher aggregate, not a single critic. We tested Wine Advocate's individual scores too — accuracy fell by a third. <b>The critic adds a personal variance the atmosphere cannot predict. That gap is the whole point:</b> physics predicts the consensus, not the mood of one palate.</p>
+    <p class="sec-foot">Our target is the Wine-Searcher aggregate, not a single critic. We tested Wine Advocate's individual scores too, and accuracy fell by a third. <b>The critic adds a personal variance the atmosphere cannot predict. That gap is the whole point:</b> physics predicts the consensus, not the mood of one palate.</p>
   </div>
 
-  <!-- 02 — HONEST LIMITS -->
+  <!-- 02 HONEST LIMITS -->
   <div class="sec">
     <div class="sec-num">02</div>
     <h2 class="sec-title">Where we are right, and where we are not</h2>
-    <p class="sec-lede">A model that hides its edges is a sales pitch, not a science. Ours has two clear limits — and both are features, not bugs.</p>
+    <p class="sec-lede">A model that hides its edges is a sales pitch, not a science. Ours has two clear limits, and both are features, not bugs.</p>
     <div class="limits">
       <div class="limit">
         <div class="limit-k">We don't chase the 100s</div>
-        <p>A perfect score is the critic's mood on a great day. We measure whether the vintage is <b>physically sound</b>, not whether Parker felt generous. Our line sits below the spikes on purpose — <b>we predict ripeness, not enthusiasm.</b></p>
+        <p>A perfect score is the critic's mood on a great day. We measure whether the vintage is <b>physically sound</b>, not whether Parker felt generous. Our line sits below the spikes on purpose: <b>we predict ripeness, not enthusiasm.</b></p>
       </div>
       <div class="limit">
         <div class="limit-k">We never miss a wet year</div>
-        <p>The rain-compromised vintages — 1992, 1999, 2024 — we call <b>every time</b>. We miss, by little, some average years in the damp-moderate middle. <b>The model is a detector of compromise, not an oracle of greatness.</b></p>
+        <p>The rain-compromised vintages, 1992, 1999, 2024, we call <b>every time</b>. We miss, by little, some average years in the damp-moderate middle. <b>The model is a detector of compromise, not an oracle of greatness.</b></p>
       </div>
     </div>
   </div>
 
-  <!-- 03 — TWO EPOCHS -->
+  <!-- 03 TWO EPOCHS -->
   <div class="sec">
     <div class="sec-num">03</div>
-    <h2 class="sec-title">Modern winemaking changed the rules — by 42%</h2>
-    <p class="sec-lede">The rain penalty is not constant. Parcel-by-parcel selection after 2000 compresses it, measurably. A wet 1992 scored 90. A wetter 2024 scores around 95 — selection recovered four points the rain used to take. <b>That is why a wet 2025 still lands above average.</b></p>
+    <h2 class="sec-title">Modern winemaking changed the rules, by 42%</h2>
+    <p class="sec-lede">The rain penalty is not constant. Parcel-by-parcel selection after 2000 compresses it, measurably. A wet 1992 scored 90. A wetter 2024 scores around 95: selection recovered four points the rain used to take. <b>That is why a wet 2025 still lands above average.</b></p>
     <div class="card" style="padding:2.5rem 2rem;display:flex;align-items:center;justify-content:center;gap:clamp(1.5rem,6vw,5rem)">
       <div style="text-align:center;flex:1;max-width:240px">
         <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Before 2000</div>
@@ -209,27 +217,27 @@
         <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">penalty per unit of soil water</div>
       </div>
     </div>
-    <p class="sec-foot">Ignore these two epochs and the model's accuracy collapses by a third. For any vintage from 2000 onward, the gentler post-2000 penalty is the honest one — and it is the one we used to seal 2025.</p>
+    <p class="sec-foot">Ignore these two epochs and the model's accuracy collapses by a third. For any vintage from 2000 onward, the gentler post-2000 penalty is the honest one, and it is the one we used to seal 2025.</p>
   </div>
 
-  <!-- 04 — INVERSE VIGOUR -->
+  <!-- 04 INVERSE VIGOUR -->
   <div class="sec">
     <div class="sec-num">04</div>
     <h2 class="sec-title">At Pomerol, the less green vine makes the costlier wine</h2>
-    <p class="sec-lede">Weather data sees one pixel for all nine estates — blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Then we lined it up against price. The correlation is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour — the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
+    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.74 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
     <div class="vig" id="vig"></div>
-    <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health — it measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
+    <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health. It measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
   </div>
 
-  <!-- 05 — TRUST -->
+  <!-- 05 TRUST -->
   <div class="sec">
     <div class="sec-num">05</div>
     <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
     <div class="trust">
       <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
       <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
-      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We only report accuracy on vintages the model never trained on. No leakage, no flattery — the tested year never sees itself.</p></div>
-      <div class="t-card"><div class="t-k">Falsified in the open</div><p>Heat, frost, annual greenness — all tested, all failed, all documented. The model's edges are published, not hidden.</p></div>
+      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We only report accuracy on vintages the model never trained on. No leakage, no flattery: the tested year never sees itself.</p></div>
+      <div class="t-card"><div class="t-k">Falsified in the open</div><p>Heat, frost, annual greenness: all tested, all failed, all documented. The model's edges are published, not hidden.</p></div>
     </div>
     <blockquote>"The vine remembers every drought, every frost, every warm September night. We only learned to read its memory."<cite>TerroiRisk · 2026</cite></blockquote>
   </div>
