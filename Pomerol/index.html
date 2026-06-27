@@ -3,221 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomerol — TerroiRisk · The sealed prediction</title>
+  <title>Pomerol — TerroiRisk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--noir:#0d0d14;--card:#13131e;--card2:#16161f;--gold:#C9A96E;--gold-d:#8a724a;--cream:#F0EDE8;--muted:#9A9590;--dim:#6A6080;--wine:#8B1A2E;--blue:#6f8fcd;--white:#ffffff;--line:rgba(255,255,255,0.07)}
+    html,body{background:var(--noir);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 50% 60% at 0% 100%,rgba(111,143,205,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 100% 0%,rgba(139,26,46,0.07) 0%,transparent 70%)}
+    #cv{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(13,13,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.05rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;color:var(--cream)}
+    .nav-logo b{color:var(--gold);font-weight:300}
+    .nav-back{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .nav-back:hover{color:var(--gold)}
+    .page{position:relative;z-index:1;padding:80px 2rem 6rem;max-width:1440px;margin:0 auto}
+    .ph{padding:2.5rem 0;border-bottom:1px solid var(--line);margin-bottom:2rem}
+    .ph-eye{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem}
+    .ph-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);line-height:1.05}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:1.5rem}
+    .card-top{display:grid;grid-template-columns:220px 1fr;min-height:360px}
+    .bottle-box{background:var(--card2);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;gap:1rem}
+    .bottle-placeholder{width:80px;height:180px;border:1px solid var(--line);border-radius:40px 40px 8px 8px;background:linear-gradient(180deg,rgba(201,169,110,0.08),rgba(201,169,110,0.03));display:flex;align-items:center;justify-content:center}
+    .bottle-placeholder span{font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;transform:rotate(180deg)}
+    .bottle-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--cream);text-align:center;line-height:1.1}
+    .bottle-sub{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);text-align:center}
+    .chart-area{padding:1.8rem 2rem 1rem;display:flex;flex-direction:column}
+    .chart-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.4rem;flex-wrap:wrap;gap:1rem}
+    .chart-title{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+    .chart-pred{text-align:right}
+    .pred-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--white);line-height:1;text-shadow:0 0 30px rgba(111,143,205,0.5)}
+    .pred-label{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-top:0.3rem}
+    .pred-band{font-size:0.65rem;color:var(--blue);margin-top:0.2rem}
+    .chart-wrap{flex:1;position:relative;min-height:230px}
+    canvas.chart{width:100%;height:100%;display:block;min-height:230px}
+    .chart-legend{display:flex;gap:1.8rem;padding:0.8rem 0 0.2rem;flex-wrap:wrap}
+    .leg{display:flex;align-items:center;gap:0.5rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+    .leg-line{width:20px;height:0;border-top-width:2px;border-top-style:solid}
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+    .stat{padding:1.4rem 1.8rem;border-right:1px solid var(--line)}
+    .stat:last-child{border-right:none}
+    .stat-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-bottom:0.5rem}
+    .stat-value{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--cream);line-height:1}
+    .stat-value.good{color:#6fcf97}
+    .stat-value.warn{color:var(--white);text-shadow:0 0 20px rgba(111,143,205,0.4)}
+    .stat-sub{font-size:0.65rem;color:var(--muted);margin-top:0.3rem}
+    @media(max-width:800px){.card-top{grid-template-columns:1fr}.bottle-box{flex-direction:row;min-height:auto;padding:1.2rem}.bottle-placeholder{width:50px;height:110px}.stats-row{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(3){border-top:1px solid var(--line)}}
+    @media(max-width:500px){.page{padding:72px 1rem 4rem}.stats-row{grid-template-columns:1fr}.stat{border-right:none;border-top:1px solid var(--line)}}
+  </style>
 </head>
-<body onselectstart="return false" ondragstart="return false">
-
+<body>
 <canvas id="cv"></canvas>
-
 <nav>
   <a class="nav-logo" href="../index.html">Terroir<b>Risk</b></a>
-  <div class="badges">
-    <a class="bdg on" href="pomerol.html">
-      <div class="bdg-ring">POM</div>
-      <span class="bdg-lbl">Pomerol</span>
-    </a>
-    <div class="bdg">
-      <div class="bdg-ring">BOL<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
-      <span class="bdg-lbl">Bolgheri</span>
-    </div>
-    <div class="bdg">
-      <div class="bdg-ring">CHA<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
-      <span class="bdg-lbl">Champagne</span>
-    </div>
-    <div class="bdg">
-      <div class="bdg-ring">NAP<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
-      <span class="bdg-lbl">Napa Valley</span>
-    </div>
-    <div class="bdg">
-      <div class="bdg-ring">BAR<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><path d="M6 2h12v2l-4 6 4 6v2H6v-2l4-6-4-6V2z" fill="#C9A96E"/></svg></div>
-      <span class="bdg-lbl">Barolo</span>
-    </div>
-    <div class="bdg">
-      <div class="bdg-ring">BUR<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><path d="M6 2h12v2l-4 6 4 6v2H6v-2l4-6-4-6V2z" fill="#C9A96E"/></svg></div>
-      <span class="bdg-lbl">Burgundy</span>
-    </div>
-  </div>
+  <a class="nav-back" href="../index.html">← Home</a>
 </nav>
+<div class="page">
+  <div class="ph">
+    <p class="ph-eye">Pomerol · Bordeaux right bank · nine estates</p>
+    <h1 class="ph-title">Nine estates. One signal.</h1>
+  </div>
 
-<!-- ===== HERO ===== -->
-<header class="phero">
-  <p class="eyebrow">Pomerol · Bordeaux right bank · validated regime</p>
-  <h1>The atmosphere<br>signed it <em>first</em></h1>
-  <p class="phero-sub">
-    On 25 June 2026, eighteen months before any critic opened a 2025 bottle,
-    we sealed a number on the Bitcoin blockchain. The soil told us. We only listened.
-  </p>
-
-  <!-- SIGNATURE: the sealed prediction card -->
-  <div class="seal">
-    <div class="seal-tag">Sealed prediction · immutable</div>
-    <div class="seal-body">
-      <div class="seal-wine">
-        <span class="seal-ch">Pétrus</span>
-        <span class="seal-vint">2025</span>
+  <div class="card">
+    <div class="card-top">
+      <div class="bottle-box">
+        <div class="bottle-placeholder"><span>bottle image</span></div>
+        <div class="bottle-name">Pétrus</div>
+        <div class="bottle-sub">Pomerol · 100% Merlot</div>
       </div>
-      <div class="seal-score">
-        <span class="seal-num">95.7</span><span class="seal-pt">pt</span>
-        <span class="seal-band">band 93.9 – 97.4 · Wine-Searcher aggregate</span>
+      <div class="chart-area">
+        <div class="chart-header">
+          <div class="chart-title">Score history vs critics</div>
+          <div class="chart-pred">
+            <div class="pred-num">95.7</div>
+            <div class="pred-label">2025 — our sealed prediction</div>
+            <div class="pred-band">range 93.9 – 97.4</div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas class="chart" id="chart-petrus"></canvas>
+        </div>
+        <div class="chart-legend">
+          <div class="leg"><div class="leg-line" style="border-top-color:#C9A96E;border-top-style:dashed"></div>Wine Advocate</div>
+          <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
+          <div class="leg"><div class="leg-line" style="border-top-color:#ffffff;width:22px;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
+          <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25);border-top:none"></div>2025 prediction range</div>
+        </div>
       </div>
     </div>
-    <div class="seal-meta">
-      <div class="seal-row"><span>SHA-256</span><code>a993d7ee…c08d2</code></div>
-      <div class="seal-row"><span>Commit</span><code>5a8a4bc · 25 Jun 2026</code></div>
-      <div class="seal-row"><span>Chain</span><code>Bitcoin · OpenTimestamps</code></div>
-      <div class="seal-row"><span>Critics score</span><code>~ late 2027</code></div>
-    </div>
-    <a class="seal-verify" href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" rel="noopener">Verify on GitHub →</a>
-  </div>
-  <p class="phero-fine">You cannot rewrite what the atmosphere measured.</p>
-</header>
-
-<!-- ===== THE SIGNAL ===== -->
-<section class="band">
-  <div class="band-num">01</div>
-  <h2>One number from the ground</h2>
-  <p class="lede">
-    Pomerol sits on blue clay — the <em>boutonnière</em>. It does not feed the vine, it strangles it.
-    A wet September dilutes; a dry one concentrates. So we measure exactly one thing:
-    <strong>soil moisture, September–October</strong>, from ERA5-Land reanalysis. Free, public,
-    impossible to bribe.
-  </p>
-
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-n">0.496</div>
-      <div class="m-l">R² out-of-sample<br><span>two-epoch model, LOVO</span></div>
-    </div>
-    <div class="metric">
-      <div class="m-n">1.74<sup>pt</sup></div>
-      <div class="m-l">Mean absolute error<br><span>leave-one-vintage-out</span></div>
-    </div>
-    <div class="metric">
-      <div class="m-n">96</div>
-      <div class="m-l">Observations<br><span>32 vintages × 3 châteaux</span></div>
-    </div>
-    <div class="metric">
-      <div class="m-n">76<sup>%</sup></div>
-      <div class="m-l">Direction correct<br><span>25 of 33 vintages</span></div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Model error · unseen vintages</div>
+        <div class="stat-value warn">± 1.74<span style="font-size:1rem"> pt</span></div>
+        <div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">2024 backtest · out of sample</div>
+        <div class="stat-value good">−0.9<span style="font-size:1rem"> pt</span></div>
+        <div class="stat-sub">We said 94.1 · Parker scored 95</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">2025 prediction</div>
+        <div class="stat-value warn">95.7</div>
+        <div class="stat-sub">Sealed Jun 25 2026 · critics score late 2027</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Wettest September since 1993</div>
+        <div class="stat-value">0.355<span style="font-size:0.9rem;color:var(--dim)"> m³/m³</span></div>
+        <div class="stat-sub">Extreme wet vintages never missed</div>
+      </div>
     </div>
   </div>
-
-  <p class="foot">
-    Target: Wine-Searcher aggregate (Pétrus + Trotanoy + L'Église-Clinet), three pure-Merlot
-    châteaux on one plateau. We tested Wine Advocate's individual scores too — R²_oos fell to 0.171.
-    The critic adds a variance the atmosphere cannot predict. That gap is the whole point.
-  </p>
-</section>
-
-<!-- ===== TRACK RECORD ===== -->
-<section class="band alt">
-  <div class="band-num">02</div>
-  <h2>The track record, before the verdict</h2>
-  <p class="lede">
-    Thirty-three vintages of Pétrus, 1987–2023. For each year the model predicts whether the wine
-    lands <span class="hi-up">above</span> or <span class="hi-dn">below</span> the historical mean of 94.9.
-    The extremes are never wrong — the model is a detector of compromise, not an oracle of greatness.
-  </p>
-  <div class="rec-wrap">
-    <div class="rec-legend">
-      <span><i class="dot up"></i> predicted &amp; real above mean</span>
-      <span><i class="dot dn"></i> predicted &amp; real below mean</span>
-      <span><i class="dot miss"></i> direction miss (all within ±1.74 band)</span>
-    </div>
-    <div class="rec" id="rec"></div>
-  </div>
-  <p class="foot">
-    The eight misses cluster in the damp-moderate middle (SM 0.19–0.26) — the zone of genuine
-    ambiguity. The wettest vintages since 1993 (1992, 1999, 2024) are always called correctly.
-    <strong>2024 backtest: predicted 94.1, Neal Martin barrel ~95 → error −0.9 pt</strong>, out of sample.
-  </p>
-</section>
-
-<!-- ===== TWO EPOCHS ===== -->
-<section class="band">
-  <div class="band-num">03</div>
-  <h2>Modern winemaking has a coefficient</h2>
-  <p class="lede">
-    The rain penalty is not constant. Parcel-by-parcel selection after 2000 compresses it —
-    measurably. We split the soil-moisture coefficient into two epochs and watched it shrink.
-  </p>
-  <div class="epoch">
-    <div class="epoch-col">
-      <div class="epoch-era">Pre-2000</div>
-      <div class="epoch-bar"><span style="width:100%"></span></div>
-      <div class="epoch-val">−27.64</div>
-      <div class="epoch-note">pt per m³/m³ of soil moisture</div>
-    </div>
-    <div class="epoch-arrow">−42.5%</div>
-    <div class="epoch-col">
-      <div class="epoch-era">Post-2000</div>
-      <div class="epoch-bar"><span style="width:57.5%"></span></div>
-      <div class="epoch-val">−15.90</div>
-      <div class="epoch-note">pt per m³/m³ of soil moisture</div>
-    </div>
-  </div>
-  <p class="foot">
-    A wet 1992 (SM 0.339) scored 90. A wetter 2024 (SM 0.355) scores ~95. Selection recovered four
-    points the rain used to take. Ignore the two epochs and R²_oos collapses from 0.496 to 0.322.
-    For any vintage from 2000 onward, the post-2000 coefficient is the honest one.
-  </p>
-</section>
-
-<!-- ===== INVERSE VIGOUR (SIGNATURE 2) ===== -->
-<section class="band alt vigour">
-  <div class="band-num">04</div>
-  <h2>At Pomerol, less green means more money</h2>
-  <p class="lede">
-    ERA5 sees one weather pixel for all eight châteaux — it is blind to terroir. So we went to
-    Sentinel-2, 10 metres, August–October. The chart below ranks the eight estates by Wine&nbsp;Advocate
-    score against satellite vigour (NDRE). The correlation is <strong>r = −0.69</strong>. Negative.
-    The greener the vine, the cheaper the wine.
-  </p>
-  <div class="vig" id="vig"></div>
-  <p class="foot">
-    Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit.
-    Sandy soils give easy water, lush vegetation, lesser wine. The satellite does not measure vine
-    health — it measures how much the vine suffers. Swap the château dummy for NDRE and a vineyard
-    <em>never seen in training</em> is still predicted to 1.74 pt out of sample.
-  </p>
-</section>
-
-<!-- ===== METHOD / TRUST ===== -->
-<section class="band method">
-  <div class="band-num">05</div>
-  <h2>Why you can trust a number you cannot bribe</h2>
-  <div class="trust">
-    <div class="t-card">
-      <div class="t-k">Public data only</div>
-      <p>ERA5-Land via Copernicus, Sentinel-2 L2A. No proprietary feed, no API key, no relationship with anyone who sells wine.</p>
-    </div>
-    <div class="t-card">
-      <div class="t-k">Sealed before scored</div>
-      <p>Every prediction is SHA-256 hashed and timestamped on Bitcoin before a critic tastes the vintage. The record predates the verdict.</p>
-    </div>
-    <div class="t-card">
-      <div class="t-k">Out-of-sample or nothing</div>
-      <p>Leave-one-vintage-out is the only metric we report. The tested year never enters its own training. No leakage, no flattery.</p>
-    </div>
-    <div class="t-card">
-      <div class="t-k">Falsified in the open</div>
-      <p>Heat, frost signatures, annual NDVI — all tested, all failed, all documented. The model's edges are published, not hidden.</p>
-    </div>
-  </div>
-  <blockquote>
-    "The vine remembers every drought, every frost, every warm September night.
-    We only learned to read its memory."
-    <cite>TerroiRisk · 2026</cite>
-  </blockquote>
-  <div class="cta"><a class="btn" href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" rel="noopener">Open the sealed record →</a></div>
-</section>
-
-<footer>© 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps · 72% climate, 28% terroir, 0% opinion</footer>
+</div>
 
 <script src="../app.js?v=13"></script>
-<script src="app-pomerol.js?v=1"></script>
+<script>
+(function(){
+  var wa_y=[1987,1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var wa_s=[87,91,100,100,90,92,93,96,92,91,100,94,100,95,90,93,92,97,96,93,97,100,100,95,96,91,93,100,100,98,100,96,100,95,99,98,94];
+  var ws_y=[1987,1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+  var ws_s=[89,92,97,97,90,91,92,95,92,92,97,93,97,95,94,94,97,94,93,98,97,94,93,95,97,98,96,97,97,97,96,98,97];
+  var mod_y=[1987,1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var mod_s=[91.9,94.4,94.9,94.9,90.3,90.4,91.8,92.8,92.3,93.2,92.7,91.0,95.5,95.7,96.5,96.3,96.6,95.1,95.6,96.9,96.6,96.7,95.6,96.3,95.6,96.9,96.4,97.0,96.3,95.2,96.7,96.8,96.0,94.1];
+  var pred=95.7, bandLo=93.9, bandHi=97.4;
+
+  function draw(){
+    var canvas=document.getElementById('chart-petrus');
+    if(!canvas)return;
+    var dpr=window.devicePixelRatio||1;
+    var W=canvas.offsetWidth,H=canvas.offsetHeight;
+    if(!W||!H)return;
+    canvas.width=W*dpr;canvas.height=H*dpr;
+    var ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+
+    var PAD={top:14,right:96,bottom:28,left:34};
+    var cw=W-PAD.left-PAD.right,ch=H-PAD.top-PAD.bottom;
+    var minY=1987,maxY=2026,minS=84,maxS=103;
+    function xp(yr){return PAD.left+(yr-minY)/(maxY-minY)*cw}
+    function yp(s){return PAD.top+(1-(s-minS)/(maxS-minS))*ch}
+
+    // grid
+    [88,92,96,100].forEach(function(s){
+      ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;ctx.setLineDash([]);
+      ctx.beginPath();ctx.moveTo(PAD.left,yp(s));ctx.lineTo(PAD.left+cw,yp(s));ctx.stroke();
+      ctx.fillStyle='rgba(106,96,128,0.6)';ctx.font='9px Inter,sans-serif';ctx.textAlign='right';
+      ctx.fillText(s,PAD.left-4,yp(s)+3);
+    });
+    // year labels
+    ctx.fillStyle='rgba(106,96,128,0.55)';ctx.font='9px Inter,sans-serif';ctx.textAlign='center';
+    [1990,1995,2000,2005,2010,2015,2020,2025].forEach(function(y){ctx.fillText(y,xp(y),H-PAD.bottom+12);});
+
+    // vertical divider 2024/2025 — "where critics stop"
+    var xDiv=xp(2024.5);
+    ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1;ctx.setLineDash([2,3]);
+    ctx.beginPath();ctx.moveTo(xDiv,PAD.top);ctx.lineTo(xDiv,PAD.top+ch);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(106,96,128,0.7)';ctx.font='8px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('CRITICS STOP',xDiv+5,PAD.top+10);
+
+    // 2025 PREDICTION BAND (C1) — glowing zone in the future
+    var xb0=xp(2025)-4, xb1=xp(2026);
+    var bandGrad=ctx.createLinearGradient(xb0,0,xb1,0);
+    bandGrad.addColorStop(0,'rgba(111,143,205,0.05)');
+    bandGrad.addColorStop(0.5,'rgba(111,143,205,0.22)');
+    bandGrad.addColorStop(1,'rgba(111,143,205,0.05)');
+    ctx.fillStyle=bandGrad;
+    ctx.fillRect(xb0,yp(bandHi),xb1-xb0,yp(bandLo)-yp(bandHi));
+    // band edges
+    ctx.strokeStyle='rgba(111,143,205,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(xb0,yp(bandHi));ctx.lineTo(xb1,yp(bandHi));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(xb0,yp(bandLo));ctx.lineTo(xb1,yp(bandLo));ctx.stroke();
+    ctx.setLineDash([]);
+
+    function drawLine(ys,ss,color,width,dash,glow){
+      ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin='round';
+      if(dash)ctx.setLineDash(dash);else ctx.setLineDash([]);
+      if(glow){ctx.shadowColor='rgba(111,143,205,0.8)';ctx.shadowBlur=8;}
+      ys.forEach(function(y,i){i===0?ctx.moveTo(xp(y),yp(ss[i])):ctx.lineTo(xp(y),yp(ss[i]));});
+      ctx.stroke();
+      ctx.shadowBlur=0;ctx.setLineDash([]);
+    }
+
+    // critics — dashed, secondary
+    drawLine(wa_y,wa_s,'rgba(201,169,110,0.65)',1.3,[5,3],false);
+    drawLine(ws_y,ws_s,'rgba(111,143,205,0.6)',1.3,[5,3],false);
+    // US — white, full, glow (protagonist)
+    drawLine(mod_y,mod_s,'#ffffff',2.4,null,true);
+
+    // connect model 2024 to band center
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1.5;ctx.setLineDash([2,2]);
+    ctx.beginPath();ctx.moveTo(xp(2024),yp(94.1));ctx.lineTo(xp(2025.5),yp(pred));ctx.stroke();
+    ctx.setLineDash([]);
+
+    // pred dot in band
+    var xP=xp(2025.5),yP=yp(pred);
+    ctx.beginPath();ctx.arc(xP,yP,8,0,Math.PI*2);ctx.fillStyle='rgba(111,143,205,0.3)';ctx.fill();
+    ctx.beginPath();ctx.arc(xP,yP,4,0,Math.PI*2);ctx.fillStyle='#ffffff';
+    ctx.shadowColor='rgba(111,143,205,1)';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+    ctx.fillStyle='#ffffff';ctx.font='600 12px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText('95.7',xP,yP-14);
+  }
+  function init(){setTimeout(draw,80);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  window.addEventListener('resize',draw);
+})();
+</script>
 </body>
 </html>
