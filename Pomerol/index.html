@@ -10,7 +10,8 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--noir:#0d0d14;--card:#13131e;--card2:#16161f;--gold:#C9A96E;--gold-d:#8a724a;--cream:#F0EDE8;--muted:#9A9590;--dim:#6A6080;--wine:#8B1A2E;--blue:#6f8fcd;--white:#fff;--line:rgba(255,255,255,0.07)}
     html,body{background:var(--noir);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 50% 60% at 0% 100%,rgba(111,143,205,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 100% 0%,rgba(139,26,46,0.07) 0%,transparent 70%)}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 65% at 0% 100%,rgba(139,26,46,0.22) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 100% 0%,rgba(139,26,46,0.14) 0%,transparent 65%),radial-gradient(ellipse 30% 40% at 50% 100%,rgba(201,169,110,0.05) 0%,transparent 60%)}
+    .hero-sub,.sec-lede,.sec-foot,.limit p,.t-card p{text-align:justify;text-justify:inter-word}
     #cv{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
     nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(13,13,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
     .nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.05rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;color:var(--cream)}
@@ -29,7 +30,7 @@
 
     /* SECTION */
     .sec{padding:3.5rem 0;border-top:1px solid var(--line)}
-    .sec-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold-d);margin-bottom:0.9rem}
+    .sec-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;color:var(--wine);margin-bottom:0.9rem}
     .sec-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.6vw,2.8rem);color:var(--cream);line-height:1.1;margin-bottom:1.3rem}
     .sec-lede{font-size:clamp(0.98rem,1.5vw,1.1rem);line-height:1.8;color:var(--muted);max-width:760px;margin-bottom:2.5rem}
     .sec-lede b{color:var(--cream);font-weight:500}
@@ -45,7 +46,7 @@
     .sel-btn:hover{color:var(--cream);border-color:rgba(201,169,110,0.3)}
     .sel-btn.active{color:var(--noir);background:var(--gold);border-color:var(--gold)}
     .sel-btn.soon{opacity:0.35;cursor:not-allowed}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+    .card{background:var(--card);border:1px solid var(--line);border-top:2px solid rgba(139,26,46,0.5);border-radius:6px;overflow:hidden}
     .card-top{display:grid;grid-template-columns:200px 1fr;min-height:340px}
     .bottle-box{background:var(--card2);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.2rem;gap:1rem}
     .bottle-placeholder{width:70px;height:160px;border:1px solid var(--line);border-radius:35px 35px 8px 8px;background:linear-gradient(180deg,rgba(201,169,110,0.08),rgba(201,169,110,0.03));display:flex;align-items:center;justify-content:center}
@@ -100,6 +101,12 @@
     .t-card p{font-size:0.84rem;line-height:1.7;color:var(--muted)}
     blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.5;color:var(--cream);text-align:center;max-width:680px;margin:3.5rem auto 0}
     blockquote cite{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-top:1.2rem}
+
+    .claim-break{padding:5rem 0 3rem;border-top:1px solid rgba(139,26,46,0.3)}
+    .claim-eye{font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.4rem}
+    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.8rem,6.5vw,5.5rem);color:var(--cream);line-height:1.04;letter-spacing:-0.01em;margin-bottom:1.4rem}
+    .claim-title em{color:var(--gold);text-shadow:0 0 50px rgba(201,169,110,0.3)}
+    .claim-sub{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
 
     footer{position:relative;z-index:1;text-align:center;padding:3rem 2rem;border-top:1px solid var(--line);font-size:0.64rem;letter-spacing:0.1em;color:var(--dim)}
 
@@ -218,6 +225,13 @@
       </div>
     </div>
     <p class="sec-foot">Ignore these two epochs and the model's accuracy collapses by a third. For any vintage from 2000 onward, the gentler post-2000 penalty is the honest one, and it is the one we used to seal 2025.</p>
+  </div>
+
+  <!-- CLAIM BREAK -->
+  <div class="claim-break">
+    <p class="claim-eye">The second signal · satellite</p>
+    <h2 class="claim-title">We score a vineyard<br>we have <em>never seen</em><br>to within 1.74 points.</h2>
+    <p class="claim-sub">Without knowing its name. Without its history. From space.</p>
   </div>
 
   <!-- 04 INVERSE VIGOUR -->
