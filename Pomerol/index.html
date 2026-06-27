@@ -79,11 +79,13 @@
     .vig{display:flex;flex-direction:column;gap:0.6rem}
     .vrow{display:grid;grid-template-columns:130px 1fr 52px;align-items:center;gap:1rem}
     .vname{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;text-align:right;white-space:nowrap}
-    .vtrack{position:relative;height:28px;background:rgba(255,255,255,0.03);border-radius:3px;overflow:hidden}
+    .vtrack{position:relative;height:28px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
     .vbar{position:absolute;left:0;top:0;bottom:0;border-radius:3px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
     .vscore{font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:left}
     .vaxis{display:grid;grid-template-columns:130px 1fr 52px;gap:1rem;margin-top:0.6rem}
     .vaxis .vlab{grid-column:2;display:flex;justify-content:space-between;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim)}
+    .scatter-wrap{position:relative;width:100%;height:440px;max-width:820px}
+    canvas#scatter{width:100%;height:100%;display:block}
     .vs-foot{font-size:0.85rem;line-height:1.8;color:var(--dim);max-width:720px;margin-top:2.5rem}
     .vs-foot b{color:var(--muted)}
     .vs-foot em{font-family:'Cormorant Garamond',serif;color:var(--gold);font-style:italic}
@@ -148,7 +150,7 @@
     <div class="stats-row">
       <div class="stat"><div class="stat-label">Model error · unseen vintages</div><div class="stat-value warn">± 1.74<span style="font-size:1rem"> pt</span></div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
       <div class="stat"><div class="stat-label">2024 backtest · out of sample</div><div class="stat-value good">−0.9<span style="font-size:1rem"> pt</span></div><div class="stat-sub">We said 94.1 · Parker scored 95</div></div>
-      <div class="stat"><div class="stat-label">2025 prediction</div><div class="stat-value warn">95.7</div><div class="stat-sub">Sealed Jun 25 2026 · critics score late 2027</div></div>
+      <div class="stat"><div class="stat-label">2025 prediction</div><div class="stat-value warn">95.7</div><div class="stat-sub">Sealed June 2026 · critics score late 2027</div></div>
       <div class="stat"><div class="stat-label">Wettest September since 1993</div><div class="stat-value">0.355<span style="font-size:0.9rem;color:var(--dim)"> m³/m³</span></div><div class="stat-sub">Extreme wet vintages never missed</div></div>
     </div>
   </div>
@@ -256,37 +258,46 @@
     draw();
   });
 
-  // ===== VIGOUR (§19.2) =====
+  // ===== VIGOUR BARS (§19.2) — bar = how green the vine looks, number = score =====
   var vig=[["Pétrus",97.5,0.222],["Lafleur",98.1,0.239],["VCC",97.0,0.258],["L'Évangile",94.9,0.255],["Trotanoy",95.1,0.260],["Le Pin",95.6,0.282],["Église-Clinet",95.9,0.317],["Clinet",93.9,0.322]];
   vig.sort(function(a,b){return a[2]-b[2]});
   var vc=document.getElementById('vig');
   var nMin=0.20,nMax=0.34;
-  // color scale: low ndre (gold) -> high ndre (cold blue)
-  function colorFor(ndre){
-    var t=(ndre-0.222)/(0.322-0.222); // 0=petrus gold, 1=clinet cold
-    t=Math.max(0,Math.min(1,t));
-    // gold #C9A96E -> cold #5a6a8a
-    var r=Math.round(201+(90-201)*t), g=Math.round(169+(106-169)*t), bb=Math.round(110+(138-110)*t);
-    return 'rgb('+r+','+g+','+bb+')';
+  function rgbFor(ndre){
+    var t=(ndre-0.222)/(0.322-0.222);t=Math.max(0,Math.min(1,t));
+    return {r:Math.round(201+(90-201)*t),g:Math.round(169+(106-169)*t),b:Math.round(110+(138-110)*t)};
   }
+  function colorFor(ndre){var c=rgbFor(ndre);return 'rgb('+c.r+','+c.g+','+c.b+')';}
   vig.forEach(function(v){
     var name=v[0],wa=v[1],ndre=v[2];
     var pct=((ndre-nMin)/(nMax-nMin))*100;
-    var col=colorFor(ndre);
+    var c=rgbFor(ndre);
+    var solid='rgb('+c.r+','+c.g+','+c.b+')';
+    var soft='rgba('+c.r+','+c.g+','+c.b+',0.75)';
+    var glow='rgba('+c.r+','+c.g+','+c.b+',0.4)';
     var row=document.createElement('div');
     row.className='vrow';
-    row.innerHTML='<div class="vname" style="color:'+col+'">'+name+'</div>'+
-      '<div class="vtrack"><div class="vbar" data-w="'+pct.toFixed(1)+'" style="background:linear-gradient(90deg,'+col+'33,'+col+'cc)"></div></div>'+
-      '<div class="vscore" style="color:'+col+'">'+wa.toFixed(1)+'</div>';
+    row.innerHTML='<div class="vname" style="color:'+solid+'">'+name+'</div>'+
+      '<div class="vtrack"><div class="vbar" data-w="'+pct.toFixed(1)+'" style="background:linear-gradient(90deg,'+soft+','+solid+');box-shadow:0 0 14px '+glow+'"></div></div>'+
+      '<div class="vscore" style="color:'+solid+'">'+wa.toFixed(1)+'</div>';
     vc.appendChild(row);
   });
   var ax=document.createElement('div');ax.className='vaxis';
-  ax.innerHTML='<div class="vlab"><span>less green · noble suffering</span><span>more green · easy water</span></div>';
+  ax.innerHTML='<div class="vlab"><span>less green · suffers · costlier</span><span>more green · easy water</span></div>';
   vc.appendChild(ax);
-  function animateVig(){vc.querySelectorAll('.vbar').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%'});}
+  var vigDone=false;
+  function animateVig(){
+    if(vigDone)return;vigDone=true;
+    vc.querySelectorAll('.vbar').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%'});
+  }
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animateVig();io.disconnect();}})},{threshold:0.25});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animateVig();io.disconnect();}})},{threshold:0.15});
     io.observe(vc);
+    setTimeout(animateVig,1200);
+    window.addEventListener('scroll',function(){
+      var r=vc.getBoundingClientRect();
+      if(r.top<window.innerHeight&&r.bottom>0)animateVig();
+    },{passive:true});
   }else animateVig();
 
   function init(){setTimeout(draw,80);}
