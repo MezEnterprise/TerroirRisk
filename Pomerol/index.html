@@ -178,7 +178,7 @@
       </div>
       <div class="stats-row">
         <div class="stat"><div class="stat-label">Model error · unseen vintages</div><div class="stat-value warn">± 1.74<span style="font-size:1rem"> pt</span></div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
-        <div class="stat"><div class="stat-label">2024 backtest · out of sample</div><div class="stat-value good">−0.9<span style="font-size:1rem"> pt</span></div><div class="stat-sub">We said 94.1 · Parker scored 95</div></div>
+        <div class="stat"><div class="stat-label">2024 backtest · out of sample</div><div class="stat-value good">−0.9<span style="font-size:1rem"> pt</span></div><div class="stat-sub">Predicted 94.1 · Wine Advocate early score ~95 · WS aggregate pending</div></div>
         <div class="stat"><div class="stat-label">2025 prediction</div><div class="stat-value warn">95.7</div><div class="stat-sub">Sealed June 2026 · critics score late 2027</div></div>
         <div class="stat"><div class="stat-label">Wettest September since 1993</div><div class="stat-value">0.355<span style="font-size:0.9rem;color:var(--dim)"> m³/m³</span></div><div class="stat-sub">Extreme wet vintages never missed</div></div>
       </div>
@@ -250,7 +250,7 @@
     <div class="trust">
       <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
       <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
-      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We only report accuracy on vintages the model never trained on. No leakage, no flattery: the tested year never sees itself.</p></div>
+      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
       <div class="t-card"><div class="t-k">Falsified in the open</div><p>Heat, frost, annual greenness: all tested, all failed, all documented. The model's edges are published, not hidden.</p></div>
     </div>
     <blockquote>"The vine remembers every drought, every frost, every warm September night. We only learned to read its memory."<cite>TerroiRisk · 2026</cite></blockquote>
