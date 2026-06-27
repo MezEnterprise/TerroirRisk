@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomerol — TerroiRisk · The sealed prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body onselectstart="return false" ondragstart="return false">
+
+<canvas id="cv"></canvas>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Terroir<b>Risk</b></a>
+  <div class="badges">
+    <a class="bdg on" href="pomerol.html">
+      <div class="bdg-ring">POM</div>
+      <span class="bdg-lbl">Pomerol</span>
+    </a>
+    <div class="bdg">
+      <div class="bdg-ring">BOL<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
+      <span class="bdg-lbl">Bolgheri</span>
+    </div>
+    <div class="bdg">
+      <div class="bdg-ring">CHA<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
+      <span class="bdg-lbl">Champagne</span>
+    </div>
+    <div class="bdg">
+      <div class="bdg-ring">NAP<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
+      <span class="bdg-lbl">Napa Valley</span>
+    </div>
+    <div class="bdg">
+      <div class="bdg-ring">BAR<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><path d="M6 2h12v2l-4 6 4 6v2H6v-2l4-6-4-6V2z" fill="#C9A96E"/></svg></div>
+      <span class="bdg-lbl">Barolo</span>
+    </div>
+    <div class="bdg">
+      <div class="bdg-ring">BUR<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><path d="M6 2h12v2l-4 6 4 6v2H6v-2l4-6-4-6V2z" fill="#C9A96E"/></svg></div>
+      <span class="bdg-lbl">Burgundy</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="phero">
+  <p class="eyebrow">Pomerol · Bordeaux right bank · validated regime</p>
+  <h1>The atmosphere<br>signed it <em>first</em></h1>
+  <p class="phero-sub">
+    On 25 June 2026, eighteen months before any critic opened a 2025 bottle,
+    we sealed a number on the Bitcoin blockchain. The soil told us. We only listened.
+  </p>
+
+  <!-- SIGNATURE: the sealed prediction card -->
+  <div class="seal">
+    <div class="seal-tag">Sealed prediction · immutable</div>
+    <div class="seal-body">
+      <div class="seal-wine">
+        <span class="seal-ch">Pétrus</span>
+        <span class="seal-vint">2025</span>
+      </div>
+      <div class="seal-score">
+        <span class="seal-num">95.7</span><span class="seal-pt">pt</span>
+        <span class="seal-band">band 93.9 – 97.4 · Wine-Searcher aggregate</span>
+      </div>
+    </div>
+    <div class="seal-meta">
+      <div class="seal-row"><span>SHA-256</span><code>a993d7ee…c08d2</code></div>
+      <div class="seal-row"><span>Commit</span><code>5a8a4bc · 25 Jun 2026</code></div>
+      <div class="seal-row"><span>Chain</span><code>Bitcoin · OpenTimestamps</code></div>
+      <div class="seal-row"><span>Critics score</span><code>~ late 2027</code></div>
+    </div>
+    <a class="seal-verify" href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" rel="noopener">Verify on GitHub →</a>
+  </div>
+  <p class="phero-fine">You cannot rewrite what the atmosphere measured.</p>
+</header>
+
+<!-- ===== THE SIGNAL ===== -->
+<section class="band">
+  <div class="band-num">01</div>
+  <h2>One number from the ground</h2>
+  <p class="lede">
+    Pomerol sits on blue clay — the <em>boutonnière</em>. It does not feed the vine, it strangles it.
+    A wet September dilutes; a dry one concentrates. So we measure exactly one thing:
+    <strong>soil moisture, September–October</strong>, from ERA5-Land reanalysis. Free, public,
+    impossible to bribe.
+  </p>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="m-n">0.496</div>
+      <div class="m-l">R² out-of-sample<br><span>two-epoch model, LOVO</span></div>
+    </div>
+    <div class="metric">
+      <div class="m-n">1.74<sup>pt</sup></div>
+      <div class="m-l">Mean absolute error<br><span>leave-one-vintage-out</span></div>
+    </div>
+    <div class="metric">
+      <div class="m-n">96</div>
+      <div class="m-l">Observations<br><span>32 vintages × 3 châteaux</span></div>
+    </div>
+    <div class="metric">
+      <div class="m-n">76<sup>%</sup></div>
+      <div class="m-l">Direction correct<br><span>25 of 33 vintages</span></div>
+    </div>
+  </div>
+
+  <p class="foot">
+    Target: Wine-Searcher aggregate (Pétrus + Trotanoy + L'Église-Clinet), three pure-Merlot
+    châteaux on one plateau. We tested Wine Advocate's individual scores too — R²_oos fell to 0.171.
+    The critic adds a variance the atmosphere cannot predict. That gap is the whole point.
+  </p>
+</section>
+
+<!-- ===== TRACK RECORD ===== -->
+<section class="band alt">
+  <div class="band-num">02</div>
+  <h2>The track record, before the verdict</h2>
+  <p class="lede">
+    Thirty-three vintages of Pétrus, 1987–2023. For each year the model predicts whether the wine
+    lands <span class="hi-up">above</span> or <span class="hi-dn">below</span> the historical mean of 94.9.
+    The extremes are never wrong — the model is a detector of compromise, not an oracle of greatness.
+  </p>
+  <div class="rec-wrap">
+    <div class="rec-legend">
+      <span><i class="dot up"></i> predicted &amp; real above mean</span>
+      <span><i class="dot dn"></i> predicted &amp; real below mean</span>
+      <span><i class="dot miss"></i> direction miss (all within ±1.74 band)</span>
+    </div>
+    <div class="rec" id="rec"></div>
+  </div>
+  <p class="foot">
+    The eight misses cluster in the damp-moderate middle (SM 0.19–0.26) — the zone of genuine
+    ambiguity. The wettest vintages since 1993 (1992, 1999, 2024) are always called correctly.
+    <strong>2024 backtest: predicted 94.1, Neal Martin barrel ~95 → error −0.9 pt</strong>, out of sample.
+  </p>
+</section>
+
+<!-- ===== TWO EPOCHS ===== -->
+<section class="band">
+  <div class="band-num">03</div>
+  <h2>Modern winemaking has a coefficient</h2>
+  <p class="lede">
+    The rain penalty is not constant. Parcel-by-parcel selection after 2000 compresses it —
+    measurably. We split the soil-moisture coefficient into two epochs and watched it shrink.
+  </p>
+  <div class="epoch">
+    <div class="epoch-col">
+      <div class="epoch-era">Pre-2000</div>
+      <div class="epoch-bar"><span style="width:100%"></span></div>
+      <div class="epoch-val">−27.64</div>
+      <div class="epoch-note">pt per m³/m³ of soil moisture</div>
+    </div>
+    <div class="epoch-arrow">−42.5%</div>
+    <div class="epoch-col">
+      <div class="epoch-era">Post-2000</div>
+      <div class="epoch-bar"><span style="width:57.5%"></span></div>
+      <div class="epoch-val">−15.90</div>
+      <div class="epoch-note">pt per m³/m³ of soil moisture</div>
+    </div>
+  </div>
+  <p class="foot">
+    A wet 1992 (SM 0.339) scored 90. A wetter 2024 (SM 0.355) scores ~95. Selection recovered four
+    points the rain used to take. Ignore the two epochs and R²_oos collapses from 0.496 to 0.322.
+    For any vintage from 2000 onward, the post-2000 coefficient is the honest one.
+  </p>
+</section>
+
+<!-- ===== INVERSE VIGOUR (SIGNATURE 2) ===== -->
+<section class="band alt vigour">
+  <div class="band-num">04</div>
+  <h2>At Pomerol, less green means more money</h2>
+  <p class="lede">
+    ERA5 sees one weather pixel for all eight châteaux — it is blind to terroir. So we went to
+    Sentinel-2, 10 metres, August–October. The chart below ranks the eight estates by Wine&nbsp;Advocate
+    score against satellite vigour (NDRE). The correlation is <strong>r = −0.69</strong>. Negative.
+    The greener the vine, the cheaper the wine.
+  </p>
+  <div class="vig" id="vig"></div>
+  <p class="foot">
+    Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit.
+    Sandy soils give easy water, lush vegetation, lesser wine. The satellite does not measure vine
+    health — it measures how much the vine suffers. Swap the château dummy for NDRE and a vineyard
+    <em>never seen in training</em> is still predicted to 1.74 pt out of sample.
+  </p>
+</section>
+
+<!-- ===== METHOD / TRUST ===== -->
+<section class="band method">
+  <div class="band-num">05</div>
+  <h2>Why you can trust a number you cannot bribe</h2>
+  <div class="trust">
+    <div class="t-card">
+      <div class="t-k">Public data only</div>
+      <p>ERA5-Land via Copernicus, Sentinel-2 L2A. No proprietary feed, no API key, no relationship with anyone who sells wine.</p>
+    </div>
+    <div class="t-card">
+      <div class="t-k">Sealed before scored</div>
+      <p>Every prediction is SHA-256 hashed and timestamped on Bitcoin before a critic tastes the vintage. The record predates the verdict.</p>
+    </div>
+    <div class="t-card">
+      <div class="t-k">Out-of-sample or nothing</div>
+      <p>Leave-one-vintage-out is the only metric we report. The tested year never enters its own training. No leakage, no flattery.</p>
+    </div>
+    <div class="t-card">
+      <div class="t-k">Falsified in the open</div>
+      <p>Heat, frost signatures, annual NDVI — all tested, all failed, all documented. The model's edges are published, not hidden.</p>
+    </div>
+  </div>
+  <blockquote>
+    "The vine remembers every drought, every frost, every warm September night.
+    We only learned to read its memory."
+    <cite>TerroiRisk · 2026</cite>
+  </blockquote>
+  <div class="cta"><a class="btn" href="https://github.com/MezEnterprise/TerroirRisk" target="_blank" rel="noopener">Open the sealed record →</a></div>
+</section>
+
+<footer>© 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps · 72% climate, 28% terroir, 0% opinion</footer>
+
+<script src="../app.js?v=13"></script>
+<script src="app-pomerol.js?v=1"></script>
+</body>
+</html>
