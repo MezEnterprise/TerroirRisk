@@ -99,6 +99,10 @@
     .t-card{background:var(--noir);padding:1.8rem 1.7rem}
     .t-k{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--gold);margin-bottom:0.7rem}
     .t-card p{font-size:0.84rem;line-height:1.7;color:var(--muted)}
+    .falsified{width:100%;margin-top:1rem;border-collapse:collapse;font-size:0.76rem}
+    .falsified th{text-align:left;font-weight:500;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;font-size:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--line)}
+    .falsified td{padding:0.35rem 0;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .falsified td:last-child{color:var(--wine);font-family:'JetBrains Mono',monospace;font-size:0.72rem}
     blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.5;color:var(--cream);text-align:center;max-width:680px;margin:3.5rem auto 0}
     blockquote cite{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-top:1.2rem}
 
@@ -250,7 +254,15 @@
       <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
       <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
       <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
-      <div class="t-card"><div class="t-k">Falsified in the open</div><p>Heat, frost, annual greenness: all tested, all failed, all documented. The model's edges are published, not hidden.</p></div>
+      <div class="t-card"><div class="t-k">Falsified in the open</div><p>Heat, frost, annual greenness: all tested, all failed, all documented. The model's edges are published, not hidden.</p>
+        <table class="falsified">
+          <tr><th>Hypothesis tested</th><th>Result</th></tr>
+          <tr><td>Heat days ≥ 35°C</td><td>R² = −0.241</td></tr>
+          <tr><td>Annual NDMI (greenness)</td><td>R² = −0.024</td></tr>
+          <tr><td>Spring frost signal</td><td>not separable</td></tr>
+          <tr><td>Annual NDVI trend</td><td>R² = −0.018</td></tr>
+        </table>
+      </div>
     </div>
     <blockquote>"The vine remembers every drought, every frost, every warm September night. We only learned to read its memory."<cite>TerroiRisk · 2026</cite></blockquote>
   </div>
