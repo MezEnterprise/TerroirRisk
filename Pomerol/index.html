@@ -156,7 +156,7 @@
         </div>
         <div class="chart-area">
           <div class="chart-header">
-            <div class="chart-title">Score history vs critics</div>
+            <div class="chart-title">Wine-Searcher aggregate vs TerroiRisk model</div>
             <div class="chart-pred">
               <div class="pred-num" id="p-num">95.7</div>
               <div class="pred-label">2025 · our sealed prediction</div>
@@ -169,7 +169,6 @@
           </div>
           <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
           <div class="chart-legend">
-            <div class="leg"><div class="leg-line" style="border-top-color:#C9A96E;border-top-style:dashed"></div>Wine Advocate</div>
             <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
             <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
             <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25)"></div>2025 range</div>
@@ -285,7 +284,7 @@
     var xb0=xp(2025)-4,xb1=xp(2026);var bg=ctx.createLinearGradient(xb0,0,xb1,0);bg.addColorStop(0,'rgba(111,143,205,0.05)');bg.addColorStop(0.5,'rgba(111,143,205,0.22)');bg.addColorStop(1,'rgba(111,143,205,0.05)');ctx.fillStyle=bg;ctx.fillRect(xb0,yp(d.bandHi),xb1-xb0,yp(d.bandLo)-yp(d.bandHi));
     ctx.strokeStyle='rgba(111,143,205,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(xb0,yp(d.bandHi));ctx.lineTo(xb1,yp(d.bandHi));ctx.stroke();ctx.beginPath();ctx.moveTo(xb0,yp(d.bandLo));ctx.lineTo(xb1,yp(d.bandLo));ctx.stroke();ctx.setLineDash([]);
     function line(ys,ss,color,w,dash,glow){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineJoin='round';if(dash)ctx.setLineDash(dash);else ctx.setLineDash([]);if(glow){ctx.shadowColor='rgba(111,143,205,0.8)';ctx.shadowBlur=8;}ys.forEach(function(y,i){i===0?ctx.moveTo(xp(y),yp(ss[i])):ctx.lineTo(xp(y),yp(ss[i]));});ctx.stroke();ctx.shadowBlur=0;ctx.setLineDash([]);}
-    line(d.wa_y,d.wa_s,'rgba(201,169,110,0.65)',1.3,[5,3]);line(d.ws_y,d.ws_s,'rgba(111,143,205,0.6)',1.3,[5,3]);line(d.mod_y,d.mod_s,'#fff',2.4,null,true);
+    line(d.ws_y,d.ws_s,'rgba(111,143,205,0.6)',1.3,[5,3]);line(d.mod_y,d.mod_s,'#fff',2.4,null,true);
     var lastMod=d.mod_s[d.mod_s.length-1];ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1.5;ctx.setLineDash([2,2]);ctx.beginPath();ctx.moveTo(xp(2024),yp(lastMod));ctx.lineTo(xp(2025.5),yp(d.pred));ctx.stroke();ctx.setLineDash([]);
     var xP=xp(2025.5),yP=yp(d.pred);ctx.beginPath();ctx.arc(xP,yP,8,0,Math.PI*2);ctx.fillStyle='rgba(111,143,205,0.3)';ctx.fill();ctx.beginPath();ctx.arc(xP,yP,4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.shadowColor='rgba(111,143,205,1)';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#fff';ctx.font='600 12px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(d.pred,xP,yP-14);
   }
