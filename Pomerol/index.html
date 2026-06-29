@@ -60,10 +60,10 @@
     .pred-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--white);line-height:1;text-shadow:0 0 30px rgba(111,143,205,0.5)}
     .pred-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-top:0.3rem}
     .pred-band{font-size:0.64rem;color:var(--blue);margin-top:0.2rem}
-    .seal-verify{display:inline-flex;flex-direction:column;align-items:flex-end;gap:0.2rem;margin-top:0.7rem;text-decoration:none;transition:opacity 0.2s}
-    .seal-verify:hover{opacity:0.75}
-    .seal-hash{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;color:var(--gold-d)}
-    .seal-go{font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:1px}
+    .seal-verify{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0.3rem;margin-top:0.9rem;text-decoration:none;transition:opacity 0.2s;padding:0.8rem 1.1rem;background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.2);border-radius:4px}
+    .seal-verify:hover{opacity:0.8;background:rgba(201,169,110,0.1)}
+    .seal-hash{font-family:'JetBrains Mono',monospace;font-size:0.85rem;letter-spacing:0.06em;color:var(--gold)}
+    .seal-go{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
     .chart-wrap{flex:1;position:relative;min-height:220px}
     canvas.chart{width:100%;height:100%;display:block;min-height:220px}
     .chart-legend{display:flex;gap:1.6rem;padding:0.7rem 0 0.2rem;flex-wrap:wrap}
@@ -140,6 +140,13 @@
     <p class="hero-sub">Pomerol sits on blue clay. A wet September dilutes the wine; a dry one concentrates it. We measure <b>water stress in the soil</b> and <b>the thirst of the air above it</b>, then seal our prediction before any critic tastes the vintage. Below, our model against the critics that move the market.</p>
   </div>
 
+  <!-- CLAIM BREAK — secondo blocco dopo hero -->
+  <div class="claim-break" style="padding:3rem 0 2.5rem;border-top:1px solid rgba(139,26,46,0.3)">
+    <p class="claim-eye">The second signal · satellite</p>
+    <h2 class="claim-title">We score a vineyard<br>we have <em>never seen</em><br>to within 1.18 points.</h2>
+    <p class="claim-sub">Without knowing its name. Without its history. From space.</p>
+  </div>
+
   <!-- 01 THE SIGNAL + CHART -->
   <div class="sec">
     <div class="sec-num">01</div>
@@ -185,7 +192,7 @@
                 <span class="seal-go">verify on Bitcoin →</span>
               </a>
             </div>
-            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)">29 June 2026</b>, months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
+            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)">29 June 2026</b> — months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
           </div>
         </div>
       </div>
@@ -222,9 +229,42 @@
     </div>
   </div>
 
-  <!-- 03 TWO EPOCHS + VPD -->
+  <!-- 03 INVERSE VIGOUR -->
   <div class="sec">
     <div class="sec-num">03</div>
+    <h2 class="sec-title">At Pomerol, the less green vine makes the costlier wine</h2>
+    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.18 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
+    <div class="vig" id="vig"></div>
+    <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health. It measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
+  </div>
+
+  <!-- 04 TRUST -->
+  <div class="sec">
+    <div class="sec-num">04</div>
+    <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
+    <div class="trust">
+      <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
+      <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
+      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
+      <div class="t-card"><div class="t-k">Falsified in the open</div><p>We tested everything. Most failed. What remained is what you see.</p>
+        <table class="falsified">
+          <tr><th>Hypothesis tested</th><th>Result</th></tr>
+          <tr><td>Soil moisture alone (1 epoch)</td><td>∗∗∗</td></tr>
+          <tr><td>Growing degree days</td><td>∗∗∗</td></tr>
+          <tr><td>Véraison date (GFV model)</td><td>∗∗∗</td></tr>
+          <tr><td>Annual NDVI / NDMI greenness</td><td>∗∗∗</td></tr>
+          <tr><td>Spring frost signal</td><td>∗∗∗</td></tr>
+          <tr><td>DTR September (diurnal range)</td><td>∗∗∗</td></tr>
+          <tr class="validated"><td>Soil moisture · two epochs + VPD + heat flag</td><td>active ✓</td></tr>
+        </table>
+      </div>
+    </div>
+    <blockquote>"The vine remembers every drought, every frost, every warm September night. We only learned to read its memory."<cite>TerroiRisk · 2026</cite></blockquote>
+  </div>
+
+  <!-- 05 TECHNICAL DETAIL — three physical laws -->
+  <div class="sec">
+    <div class="sec-num">05 · technical appendix</div>
     <h2 class="sec-title">Three physical laws, one model</h2>
     <p class="sec-lede">The rain penalty is not constant. Parcel-by-parcel selection after 2000 compresses it by 42%. A wet 1992 scored 90; a wetter 2024 scores around 95: selection recovered points the rain used to take. And a third signal runs orthogonal to both: when the air is hot and dry, it pulls water from the vine regardless of what the soil holds. <b>These three physics do not overlap.</b></p>
     <div class="card" style="padding:2.5rem 2rem;display:flex;align-items:center;justify-content:center;gap:clamp(1rem,4vw,3.5rem);flex-wrap:wrap">
@@ -252,44 +292,13 @@
     <p class="sec-foot">Ignore these three physics and accuracy collapses. The two-epoch soil model alone explained 45% of variance. Adding atmospheric demand raised it to 58%. Adding the heat-damage flag raised it to <b>69%</b>. Each layer earns its place.</p>
   </div>
 
-  <!-- CLAIM BREAK -->
-  <div class="claim-break">
-    <p class="claim-eye">The second signal · satellite</p>
-    <h2 class="claim-title">We score a vineyard<br>we have <em>never seen</em><br>to within 1.18 points.</h2>
-    <p class="claim-sub">Without knowing its name. Without its history. From space.</p>
-  </div>
-
-  <!-- 04 INVERSE VIGOUR -->
-  <div class="sec">
-    <div class="sec-num">04</div>
-    <h2 class="sec-title">At Pomerol, the less green vine makes the costlier wine</h2>
-    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.18 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
-    <div class="vig" id="vig"></div>
-    <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health. It measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
-  </div>
-
-  <!-- 05 TRUST -->
-  <div class="sec">
-    <div class="sec-num">05</div>
-    <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
-    <div class="trust">
-      <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
-      <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
-      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
-      <div class="t-card"><div class="t-k">Falsified in the open</div><p>We tested everything. Most failed. What remained is what you see.</p>
-        <table class="falsified">
-          <tr><th>Hypothesis tested</th><th>Result</th></tr>
-          <tr><td>Soil moisture alone (1 epoch)</td><td>∗∗∗</td></tr>
-          <tr><td>Growing degree days</td><td>∗∗∗</td></tr>
-          <tr><td>Véraison date (GFV model)</td><td>∗∗∗</td></tr>
-          <tr><td>Annual NDVI / NDMI greenness</td><td>∗∗∗</td></tr>
-          <tr><td>Spring frost signal</td><td>∗∗∗</td></tr>
-          <tr><td>DTR September (diurnal range)</td><td>∗∗∗</td></tr>
-          <tr class="validated"><td>Soil moisture · two epochs + VPD + heat flag</td><td>active ✓</td></tr>
-        </table>
-      </div>
-    </div>
-    <blockquote>"The vine remembers every drought, every frost, every warm September night. We only learned to read its memory."<cite>TerroiRisk · 2026</cite></blockquote>
+  <!-- CONVERSION HOOK -->
+  <div style="padding:4rem 0 3rem;border-top:1px solid rgba(139,26,46,0.3);text-align:center">
+    <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.2rem">Get notified</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.1;margin-bottom:1rem">When the critics score 2025,<br>we'll send you <em>the comparison</em>.</h2>
+    <p style="font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto">Our prediction is sealed. The verdict arrives in early 2027. We'll send one email — prediction vs score, no commentary.</p>
+    <a href="mailto:terroirisk@gmail.com?subject=Notify me — Pomerol 2025&body=Please notify me when the 2025 Pomerol scores are published." style="display:inline-flex;align-items:center;gap:0.7rem;background:var(--gold);color:var(--noir);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;padding:0.9rem 2rem;border-radius:3px;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">Notify me when scores drop →</a>
+    <p style="font-size:0.65rem;color:var(--dim);margin-top:1rem">One email. No newsletter. No spam. <span style="color:var(--gold-d)">terroirisk@gmail.com</span></p>
   </div>
 
 </div>
