@@ -114,9 +114,10 @@
 
     .claim-break{padding:4rem 0 3rem;border-top:1px solid rgba(139,26,46,0.3)}
     .claim-eye{font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.4rem}
-    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.8rem,6vw,5.2rem);color:var(--cream);line-height:1.04;letter-spacing:-0.02em;margin-bottom:1.4rem;max-width:none}
+    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.8rem,6vw,5.2rem);color:var(--cream);line-height:1.04;letter-spacing:-0.02em;margin-bottom:1.4rem;max-width:100%;word-break:break-word}
     .claim-title em{color:var(--gold);text-shadow:0 0 50px rgba(201,169,110,0.3)}
     .claim-sub{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
+    @media(max-width:480px){.claim-title{font-size:2.2rem;line-height:1.1}}
 
     footer{position:relative;z-index:1;text-align:center;padding:3rem 2rem;border-top:1px solid var(--line);font-size:0.64rem;letter-spacing:0.1em;color:var(--dim)}
 
@@ -192,7 +193,7 @@
                 <span class="seal-go">verify on Bitcoin →</span>
               </a>
             </div>
-            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)">29 June 2026</b> — months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
+            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)">29 June 2026</b>, months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
           </div>
         </div>
       </div>
@@ -233,7 +234,7 @@
   <div class="sec">
     <div class="sec-num">03</div>
     <h2 class="sec-title">At Pomerol, the less green vine makes the costlier wine</h2>
-    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.18 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
+    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
     <div class="vig" id="vig"></div>
     <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health. It measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
   </div>
