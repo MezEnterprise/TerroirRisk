@@ -167,6 +167,15 @@
         <div class="chart-area">
           <div class="chart-header">
             <div class="chart-title">Wine-Searcher aggregate vs TerroiRisk model v11</div>
+          </div>
+          <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
+          <div class="chart-legend">
+            <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
+            <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
+            <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25)"></div>2025 range</div>
+            <div class="leg"><div style="width:10px;height:10px;border-radius:50%;background:#e07a30;flex-shrink:0"></div>2013 declared residual</div>
+          </div>
+          <div style="margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1.2rem">
             <div class="chart-pred">
               <div class="pred-num" id="p-num">98.3</div>
               <div class="pred-label">2025 · our sealed prediction</div>
@@ -175,14 +184,8 @@
                 <span class="seal-hash" id="seal-hash">⬡ 5ff008f1…c294ac</span>
                 <span class="seal-go">verify on Bitcoin →</span>
               </a>
+              <div style="font-size:0.72rem;line-height:1.6;color:var(--dim);max-width:340px;margin-top:0.7rem">This prediction was hashed and timestamped on the Bitcoin blockchain on 29 June 2026 — months before any critic tastes the 2025 vintage. The .ots file above is mathematical proof that the number existed before the verdict.</div>
             </div>
-          </div>
-          <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
-          <div class="chart-legend">
-            <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
-            <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
-            <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25)"></div>2025 range</div>
-            <div class="leg"><div style="width:10px;height:10px;border-radius:50%;background:#e07a30;flex-shrink:0"></div>2013 declared residual</div>
           </div>
         </div>
       </div>
@@ -252,7 +255,7 @@
   <!-- CLAIM BREAK -->
   <div class="claim-break">
     <p class="claim-eye">The second signal · satellite</p>
-    <h2 class="claim-title">We score a vineyard<br>we have <em>never seen</em><br>to within 1.74 points.</h2>
+    <h2 class="claim-title">We score a vineyard<br>we have <em>never seen</em><br>to within 1.18 points.</h2>
     <p class="claim-sub">Without knowing its name. Without its history. From space.</p>
   </div>
 
@@ -260,7 +263,7 @@
   <div class="sec">
     <div class="sec-num">04</div>
     <h2 class="sec-title">At Pomerol, the less green vine makes the costlier wine</h2>
-    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.74 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
+    <p class="sec-lede">Weather data sees one pixel for all nine estates, blind to what separates them. So we went to satellite, ten metres per pixel, and measured how green each vine looks from space. Climate tells us <b>which vintage</b>; the satellite tells us <b>which vineyard</b>. Two axes that never overlap. We can score a vineyard we have never seen, to within 1.18 points, without knowing its name. The correlation between greenness and price is <span class="rneg">−0.69</span>. <b>Negative.</b> The bars below show vigour, the greener the vine. Read the scores beside them: <b>as the green grows, the score falls.</b></p>
     <div class="vig" id="vig"></div>
     <p class="sec-foot">Blue clay strangles the best vines into noble suffering: small canopy, concentrated fruit. Sandy soils give easy water, lush vegetation, lesser wine. <b>The satellite doesn't measure vine health. It measures how much the vine suffers.</b> And at Pomerol, <em>suffering is the price of greatness.</em></p>
   </div>
