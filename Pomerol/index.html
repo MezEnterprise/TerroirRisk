@@ -152,20 +152,38 @@
   <div class="sec">
     <div class="sec-num">01</div>
     <h2 class="sec-title">Two numbers from the ground and the sky</h2>
-    <p class="sec-lede">For thirty-five years, soil water in September has tracked Pétrus's score better than any tasting note. In 2026 we added a second physical axis: <b>Vapour Pressure Deficit</b>, the atmospheric demand that pulls water from the vine. Soil moisture measures what the ground holds; VPD measures how hard the air pulls it away. Together they explain <b>69% of vintage variance</b>, double what soil alone could do. <b>The white line is us.</b> The dashed line is Wine-Searcher. Where it stops, because critics haven't tasted 2025 yet, we keep going.</p>
+    <p class="sec-lede">For thirty-five years, soil water in September has tracked Pétrus's score better than any tasting note. In 2026 we added a second physical axis: <b>Vapour Pressure Deficit</b>, the atmospheric demand that pulls water from the vine. Soil moisture measures what the ground holds; VPD measures how hard the air pulls it away. Together they explain <b>69% of vintage variance</b>, double what soil alone could do. <b>The white line is us.</b> The dashed line is Wine-Searcher aggregate score history.</p>
 
-    <div class="selector" id="selector">
-      <button class="sel-btn active" data-ch="petrus">Pétrus</button>
-      <button class="sel-btn" data-ch="trotanoy">Trotanoy</button>
-      <button class="sel-btn" data-ch="eglise">L'Église-Clinet</button>
-      <button class="sel-btn soon" disabled>Lafleur</button>
-      <button class="sel-btn soon" disabled>Vieux Ch. Certan</button>
-      <button class="sel-btn soon" disabled>L'Évangile</button>
-      <button class="sel-btn soon" disabled>Le Pin</button>
-      <button class="sel-btn soon" disabled>Clinet</button>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1rem">
+
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,110,0.15),transparent 70%)"></div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem">Pétrus · Pomerol</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:#fff;line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)">98.3</div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 97.1 – 99.5</div>
+        <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold-d)">⬡ 5ff008f1…c294ac</div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(139,26,46,0.15),transparent 70%)"></div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem">Trotanoy · Pomerol</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--cream);line-height:1">96.0</div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 94.8 – 97.2</div>
+        <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(111,143,205,0.15),transparent 70%)"></div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem">L'Église-Clinet · Pomerol</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--cream);line-height:1">96.7</div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 95.5 – 97.9</div>
+        <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
+      </div>
+
     </div>
+    <p style="font-size:0.7rem;color:var(--dim);margin-top:0.9rem">Only Pétrus 2025 is verifiable today. Trotanoy and Église-Clinet are sealed, hash release pending.</p>
 
-    <div class="card">
+    <div class="card" style="margin-top:2rem">
       <div class="card-top">
         <div class="bottle-box">
           <div class="bottle-placeholder"><img src="petrus.png" alt="Pétrus" id="b-img" style="height:160px;width:auto;object-fit:contain;display:block"></div>
@@ -200,7 +218,7 @@
       <div class="stats-row">
         <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value warn">± 1.18<span style="font-size:1rem"> pt</span></div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
         <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value warn">69%<span style="font-size:1rem"></span></div><div class="stat-sub">R² = 0.693 · LOVO pool-3 · 96 observations</div></div>
-        <div class="stat"><div class="stat-label">2025 prediction · Pétrus</div><div class="stat-value warn" id="s-pred">98.3</div><div class="stat-sub" id="s-pred-sub">Sealed June 2026 · critics score late 2027</div></div>
+        <div class="stat"><div class="stat-label">2025 prediction · Pétrus</div><div class="stat-value warn" id="s-pred">98.3</div><div class="stat-sub" id="s-pred-sub">Sealed June 2026 · bottled score expected 2028</div></div>
         <div class="stat"><div class="stat-label">Physical axes</div><div class="stat-value">2</div><div class="stat-sub">Soil moisture + Vapour Pressure Deficit</div></div>
       </div>
     </div>
@@ -293,13 +311,13 @@
     <p class="sec-foot">Ignore these three physics and accuracy collapses. The two-epoch soil model alone explained 45% of variance. Adding atmospheric demand raised it to 58%. Adding the heat-damage flag raised it to <b>69%</b>. Each layer earns its place.</p>
   </div>
 
-  <!-- CONVERSION HOOK -->
+  <!-- CLOSING PROOF -->
   <div style="padding:4rem 0 3rem;border-top:1px solid rgba(139,26,46,0.3);text-align:center">
-    <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.2rem">Get notified</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.1;margin-bottom:1rem">When the critics score 2025,<br>we'll send you <em>the comparison</em>.</h2>
-    <p style="font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto">Our prediction is sealed. The verdict arrives in early 2027. We'll send one email, prediction vs score, no commentary.</p>
-    <a href="mailto:info@terroirisk.com?subject=Notify me — Pomerol 2025&body=Please notify me when the 2025 Pomerol scores are published." style="display:inline-flex;align-items:center;gap:0.7rem;background:var(--gold);color:var(--noir);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;padding:0.9rem 2rem;border-radius:3px;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">Notify me when scores drop →</a>
-    <p style="font-size:0.65rem;color:var(--dim);margin-top:1rem">One email. No newsletter. No spam. <span style="color:var(--gold-d)">info@terroirisk.com</span></p>
+    <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.2rem">The record</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.1;margin-bottom:1rem">Nothing to sign up for.<br><em>The file already exists.</em></h2>
+    <p style="font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto">The prediction is sealed on Bitcoin. Open the .ots file, check the hash, verify it yourself.</p>
+    <a href="https://github.com/MezEnterprise/TerroirRisk/blob/main/petrus_2025_prediction_v11_txt.ots" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.7rem;background:var(--gold);color:var(--noir);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;padding:0.9rem 2rem;border-radius:3px;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">Open the sealed file →</a>
+    <p style="font-size:0.65rem;color:var(--dim);margin-top:1rem">No email required. <span style="color:var(--gold-d)">info@terroirisk.com</span></p>
   </div>
 
 </div>
@@ -443,15 +461,6 @@
     if(current==='petrus'){seal.style.display='inline-flex';}
     else{seal.style.display='none';}
   }
-
-  document.getElementById('selector').addEventListener('click',function(e){
-    var btn=e.target.closest('.sel-btn');
-    if(!btn||btn.classList.contains('soon'))return;
-    document.querySelectorAll('.sel-btn').forEach(function(b){b.classList.remove('active')});
-    btn.classList.add('active');
-    current=btn.dataset.ch;
-    updateUI();draw();
-  });
 
   // VIGOUR BARS
   var vig=[["Pétrus",97.5,0.222],["Lafleur",98.1,0.239],["VCC",97.0,0.258],["L'Évangile",94.9,0.255],["Trotanoy",95.1,0.260],["Le Pin",95.6,0.282],["Église-Clinet",95.9,0.317],["Clinet",93.9,0.322]];
