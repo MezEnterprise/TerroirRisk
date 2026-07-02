@@ -42,7 +42,7 @@
 
     /* CHART CARD */
     .selector{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-    .sel-btn{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:3px;padding:0.4rem 0.95rem;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+    .sel-btn{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:3px;padding:0.4rem 0.8rem;cursor:pointer;transition:all 0.2s;white-space:nowrap}
     .sel-btn:hover{color:var(--cream);border-color:rgba(201,169,110,0.3)}
     .sel-btn.active{color:var(--noir);background:var(--gold);border-color:var(--gold)}
     .sel-btn.soon{opacity:0.35;cursor:not-allowed}
@@ -149,27 +149,27 @@
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1rem">
 
-      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:1.8rem 1.4rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,110,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem">Pétrus · 2025</div>
-        <div id="hero-count" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
-        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 97.1 – 99.5</div>
+        <div style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;color:var(--gold);margin-bottom:1.8rem">Pétrus · 2025</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)"><span id="hero-count">0.0</span></div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.9rem">range 97.1 – 99.5</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold-d)">⬡ 5ff008f1…c294ac</div>
       </div>
 
-      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.4rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(139,26,46,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--wine);margin-bottom:1.8rem">Trotanoy · 2025</div>
-        <div id="hero-count-2" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--wine);line-height:1">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
-        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 94.8 – 97.2</div>
+        <div style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;color:var(--wine);margin-bottom:1.8rem">Trotanoy · 2025</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--wine);line-height:1"><span id="hero-count-2">0.0</span></div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.9rem">range 94.8 – 97.2</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
       </div>
 
-      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.4rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(111,143,205,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#c0c0c8;margin-bottom:1.8rem">L'Église-Clinet · 2025</div>
-        <div id="hero-count-3" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:#c0c0c8;line-height:1">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
-        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 95.5 – 97.9</div>
+        <div style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;color:#c0c0c8;margin-bottom:1.8rem">Église-Clinet · 2025</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:#c0c0c8;line-height:1"><span id="hero-count-3">0.0</span></div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.9rem">range 95.5 – 97.9</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
       </div>
 
