@@ -176,6 +176,17 @@
     </div>
     <p style="font-size:0.7rem;color:var(--dim);margin-top:0.9rem">Only Pétrus 2025 is verifiable today. Trotanoy and Église-Clinet are sealed, hash release pending.</p>
 
+    <div class="selector" id="selector">
+      <button class="sel-btn active" data-ch="petrus">Pétrus</button>
+      <button class="sel-btn" data-ch="trotanoy">Trotanoy</button>
+      <button class="sel-btn" data-ch="eglise">L'Église-Clinet</button>
+      <button class="sel-btn soon" disabled>Lafleur</button>
+      <button class="sel-btn soon" disabled>Vieux Ch. Certan</button>
+      <button class="sel-btn soon" disabled>L'Évangile</button>
+      <button class="sel-btn soon" disabled>Le Pin</button>
+      <button class="sel-btn soon" disabled>Clinet</button>
+    </div>
+
     <div class="card" style="margin-top:2rem">
       <div class="card-top">
         <div class="bottle-box">
@@ -461,6 +472,15 @@
     if(current==='petrus'){seal.style.display='inline-flex';}
     else{seal.style.display='none';}
   }
+
+  document.getElementById('selector').addEventListener('click',function(e){
+    var btn=e.target.closest('.sel-btn');
+    if(!btn||btn.classList.contains('soon'))return;
+    document.querySelectorAll('.sel-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    current=btn.dataset.ch;
+    updateUI();draw();
+  });
 
   // VIGOUR BARS
   var vig=[["Pétrus",97.5,0.222],["Lafleur",98.1,0.239],["VCC",97.0,0.258],["L'Évangile",94.9,0.255],["Trotanoy",95.1,0.260],["Le Pin",95.6,0.282],["Église-Clinet",95.9,0.317],["Clinet",93.9,0.322]];
