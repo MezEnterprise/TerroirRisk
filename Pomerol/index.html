@@ -216,9 +216,9 @@
         </div>
       </div>
       <div class="stats-row">
-        <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value warn">± 1.18<span style="font-size:1rem"> pt</span></div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
-        <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value warn">69%<span style="font-size:1rem"></span></div><div class="stat-sub">R² = 0.693 · LOVO pool-3 · 96 observations</div></div>
-        <div class="stat"><div class="stat-label">2025 prediction · Pétrus</div><div class="stat-value warn" id="s-pred">98.3</div><div class="stat-sub" id="s-pred-sub">Sealed June 2026 · bottled score expected 2028</div></div>
+        <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value">± 1.18 pt</div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
+        <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value">69%</div><div class="stat-sub">R² = 0.693 · LOVO pool-3 · 96 observations</div></div>
+        <div class="stat"><div class="stat-label">2025 prediction · Pétrus</div><div class="stat-value" id="s-pred">98.3</div><div class="stat-sub" id="s-pred-sub">Sealed June 2026 · bottled score expected 2028</div></div>
         <div class="stat"><div class="stat-label">Physical axes</div><div class="stat-value">2</div><div class="stat-sub">Soil moisture + Vapour Pressure Deficit</div></div>
       </div>
     </div>
@@ -497,7 +497,7 @@
   function countUp(){
     var el=document.getElementById('hero-count');
     if(!el)return;
-    var target=98.3,start=null,dur=900;
+    var target=98.3,start=null,dur=900,done=false;
     function step(ts){
       if(!start)start=ts;
       var p=Math.min((ts-start)/dur,1);
@@ -505,10 +505,14 @@
       el.textContent=(target*eased).toFixed(1);
       if(p<1)requestAnimationFrame(step);else el.textContent=target.toFixed(1);
     }
-    requestAnimationFrame(step);
+    function trigger(){if(done)return;done=true;requestAnimationFrame(step);}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)trigger();});},{threshold:0.4});
+      io.observe(el);
+    }else trigger();
   }
 
-  function init(){updateUI();setTimeout(draw,80);setTimeout(countUp,200);}
+  function init(){updateUI();setTimeout(draw,80);countUp();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
   window.addEventListener('resize',draw);
 })();
