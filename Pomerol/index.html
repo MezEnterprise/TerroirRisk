@@ -114,7 +114,7 @@
 
     .claim-break{padding:4rem 0 3rem;border-top:1px solid rgba(139,26,46,0.3)}
     .claim-eye{font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--wine);margin-bottom:1.4rem}
-    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.8rem,6vw,5.2rem);color:var(--cream);line-height:1.04;letter-spacing:-0.02em;margin-bottom:1.4rem;max-width:100%;word-break:break-word}
+    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.4rem,5.5vw,4.4rem);color:var(--cream);line-height:1.04;letter-spacing:-0.01em;margin-bottom:1.4rem;max-width:100%;word-break:break-word}
     .claim-title em{color:var(--gold);text-shadow:0 0 50px rgba(201,169,110,0.3)}
     .claim-sub{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
     @media(max-width:480px){.claim-title{font-size:2.2rem;line-height:1.1}}
@@ -158,24 +158,24 @@
 
       <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,110,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem">Pétrus · Pomerol</div>
-        <div id="hero-count" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:#fff;line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)">0.0</div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem">Pétrus · 2025</div>
+        <div id="hero-count" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
         <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 97.1 – 99.5</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold-d)">⬡ 5ff008f1…c294ac</div>
       </div>
 
       <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(139,26,46,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem">Trotanoy · Pomerol</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--cream);line-height:1">96.0</div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--wine);margin-bottom:1.8rem">Trotanoy · 2025</div>
+        <div id="hero-count-2" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--wine);line-height:1">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
         <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 94.8 – 97.2</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
       </div>
 
       <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.8rem 1.6rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(111,143,205,0.15),transparent 70%)"></div>
-        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem">L'Église-Clinet · Pomerol</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--cream);line-height:1">96.7</div>
+        <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#c0c0c8;margin-bottom:1.8rem">L'Église-Clinet · 2025</div>
+        <div id="hero-count-3" style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:#c0c0c8;line-height:1">0.0<span style="font-size:1.1rem;color:var(--dim)">/100</span></div>
         <div style="font-size:0.62rem;color:var(--dim);margin-top:0.4rem">range 95.5 – 97.9</div>
         <div style="margin-top:1.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:var(--dim)">sealed · not yet public</div>
       </div>
@@ -495,21 +495,24 @@
   }else animateVig();
 
   function countUp(){
-    var el=document.getElementById('hero-count');
-    if(!el)return;
-    var target=98.3,start=null,dur=900,done=false;
-    function step(ts){
-      if(!start)start=ts;
-      var p=Math.min((ts-start)/dur,1);
-      var eased=1-Math.pow(1-p,3);
-      el.textContent=(target*eased).toFixed(1);
-      if(p<1)requestAnimationFrame(step);else el.textContent=target.toFixed(1);
-    }
-    function trigger(){if(done)return;done=true;requestAnimationFrame(step);}
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)trigger();});},{threshold:0.4});
-      io.observe(el);
-    }else trigger();
+    var targets=[{id:'hero-count',v:98.3},{id:'hero-count-2',v:96.0},{id:'hero-count-3',v:96.7}];
+    targets.forEach(function(t){
+      var el=document.getElementById(t.id);
+      if(!el)return;
+      var start=null,dur=900,done=false;
+      function step(ts){
+        if(!start)start=ts;
+        var p=Math.min((ts-start)/dur,1);
+        var eased=1-Math.pow(1-p,3);
+        el.textContent=(t.v*eased).toFixed(1);
+        if(p<1)requestAnimationFrame(step);else el.textContent=t.v.toFixed(1);
+      }
+      function trigger(){if(done)return;done=true;requestAnimationFrame(step);}
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)trigger();});},{threshold:0.4});
+        io.observe(el);
+      }else trigger();
+    });
   }
 
   function init(){updateUI();setTimeout(draw,80);countUp();}
