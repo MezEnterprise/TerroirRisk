@@ -7,9 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=15">
-  <style>
-    .bdg-sub{display:block;font-size:0.52rem;letter-spacing:0.04em;text-transform:none;color:#6A6080;margin-top:0.15rem;line-height:1.3;text-align:center;max-width:90px}
-  </style>
 </head>
 <body onselectstart="return false" ondragstart="return false">
 
@@ -22,25 +19,21 @@
     <a class="bdg on" href="Pomerol/">
       <div class="bdg-ring">POM</div>
       <span class="bdg-lbl">Pomerol</span>
-      <span class="bdg-sub">Pétrus 2025<br>sealed prediction</span>
     </a>
 
     <a class="bdg on" href="Bolgheri/">
-      <div class="bdg-ring">BOL<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
+      <div class="bdg-ring">BOL</div>
       <span class="bdg-lbl">Bolgheri</span>
-      <span class="bdg-sub">Sassicaia 2025<br>sealed prediction</span>
     </a>
 
     <div class="bdg">
       <div class="bdg-ring">NAP<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><rect x="5" y="11" width="14" height="9" rx="2" fill="#C9A96E"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="#C9A96E" stroke-width="2"/></svg></div>
       <span class="bdg-lbl">Napa Valley</span>
-      <span class="bdg-sub">Coming soon</span>
     </div>
 
     <div class="bdg">
       <div class="bdg-ring">BAR<svg class="ico" viewBox="0 0 24 24" width="13" height="13"><path d="M6 2h12v2l-4 6 4 6v2H6v-2l4-6-4-6V2z" fill="#C9A96E"/></svg></div>
       <span class="bdg-lbl">Barolo</span>
-      <span class="bdg-sub">Falsification study</span>
     </div>
 
   </div>
@@ -54,7 +47,16 @@
     No opinions. No relationships. No conflicts of interest.<br>
     Only ERA5 reanalysis data and Sentinel&#8209;2 satellite imagery.
   </p>
-  <div class="cta"><a href="Pomerol/" class="btn">Explore Pomerol →</a></div>
+  <div class="cta" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem">
+      <a href="Pomerol/" class="btn">Explore Pomerol →</a>
+      <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#6A6080">Pétrus 2025 · sealed prediction</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem">
+      <a href="Bolgheri/" class="btn">Explore Bolgheri →</a>
+      <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#6A6080">Sassicaia 2025 · sealed prediction</span>
+    </div>
+  </div>
 </section>
 
 <section class="about">
