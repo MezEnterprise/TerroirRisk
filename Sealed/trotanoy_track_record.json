@@ -1,0 +1,164 @@
+{
+  "product": "TerroiRisk \u2014 Trotanoy historical track record (Wine Advocate real scores)",
+  "artifact": "historical_track_record",
+  "n_vintages": 38,
+  "span": "1986-2025",
+  "source": "Wine Advocate individual scores, user-provided CSV",
+  "records": [
+    {
+      "vintage": 1986,
+      "wa_score": 85.0
+    },
+    {
+      "vintage": 1988,
+      "wa_score": 86.0
+    },
+    {
+      "vintage": 1989,
+      "wa_score": 90.0
+    },
+    {
+      "vintage": 1990,
+      "wa_score": 94.0
+    },
+    {
+      "vintage": 1992,
+      "wa_score": 88.0
+    },
+    {
+      "vintage": 1993,
+      "wa_score": 90.0
+    },
+    {
+      "vintage": 1994,
+      "wa_score": 88.0
+    },
+    {
+      "vintage": 1995,
+      "wa_score": 93.0
+    },
+    {
+      "vintage": 1996,
+      "wa_score": 88.0
+    },
+    {
+      "vintage": 1997,
+      "wa_score": 89.0
+    },
+    {
+      "vintage": 1998,
+      "wa_score": 99.0
+    },
+    {
+      "vintage": 1999,
+      "wa_score": 89.0
+    },
+    {
+      "vintage": 2000,
+      "wa_score": 95.0
+    },
+    {
+      "vintage": 2001,
+      "wa_score": 94.0
+    },
+    {
+      "vintage": 2002,
+      "wa_score": 89.0
+    },
+    {
+      "vintage": 2003,
+      "wa_score": 92.0
+    },
+    {
+      "vintage": 2004,
+      "wa_score": 86.0
+    },
+    {
+      "vintage": 2005,
+      "wa_score": 96.0
+    },
+    {
+      "vintage": 2006,
+      "wa_score": 93.0
+    },
+    {
+      "vintage": 2007,
+      "wa_score": 89.0
+    },
+    {
+      "vintage": 2008,
+      "wa_score": 96.0
+    },
+    {
+      "vintage": 2009,
+      "wa_score": 97.0
+    },
+    {
+      "vintage": 2010,
+      "wa_score": 97.0
+    },
+    {
+      "vintage": 2011,
+      "wa_score": 92.0
+    },
+    {
+      "vintage": 2012,
+      "wa_score": 96.0
+    },
+    {
+      "vintage": 2013,
+      "wa_score": 92.0
+    },
+    {
+      "vintage": 2014,
+      "wa_score": 97.0
+    },
+    {
+      "vintage": 2015,
+      "wa_score": 97.0
+    },
+    {
+      "vintage": 2016,
+      "wa_score": 99.0
+    },
+    {
+      "vintage": 2017,
+      "wa_score": 97.0
+    },
+    {
+      "vintage": 2018,
+      "wa_score": 99.0
+    },
+    {
+      "vintage": 2019,
+      "wa_score": 95.0
+    },
+    {
+      "vintage": 2020,
+      "wa_score": 94.0
+    },
+    {
+      "vintage": 2021,
+      "wa_score": 94.0
+    },
+    {
+      "vintage": 2022,
+      "wa_score": 94.0
+    },
+    {
+      "vintage": 2023,
+      "wa_score": 96.0
+    },
+    {
+      "vintage": 2024,
+      "wa_score": 92.0
+    },
+    {
+      "vintage": 2025,
+      "wa_score": 95.0
+    }
+  ],
+  "note": "Track record grezzo \u2014 NON ancora un modello fisico predittivo per questo chateau. Serve pipeline dedicata (come Petrus v11) prima di generare previsioni sigillabili.",
+  "sha256": "3fa8c3dbf13e7a5829a295213177480b6cabfb8b1d0a8b60b0c2838035517167",
+  "manifest_built_utc": "2026-07-04T01:24:28.867754+00:00"
+}

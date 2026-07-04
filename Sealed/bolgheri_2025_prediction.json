@@ -1,0 +1,18 @@
+{
+  "product": "TerroiRisk \u2014 Bolgheri physical score model v2 (pool-8, SEALED-READY)",
+  "model": "voto = a + b*DTR_settembre + dummy_produttore",
+  "pool": "8 produttori (Sassicaia baseline + 7 dummy): Sassicaia, Ornellaia, Masseto, Guado_al_Tasso, Grattamacco, Messorio, Paleo_Rosso, Camarcanda",
+  "n_obs": 223,
+  "MAE_pt": 2.173,
+  "R2_insample": 0.207,
+  "coef_dtr_pt_per_C": 0.931,
+  "dtr_set_2025_C": 7.7433,
+  "predictions_2025": {
+    "Sassicaia": 93.1,
+    "Ornellaia": 94.9
+  },
+  "note": "MAE migliorato da 2.85 (pool-2) a 2.173 (pool-8) aggiungendo produttori reali. MD dichiara 1.85 su pool-10 completo \u2014 mancano ancora 2 produttori per il pool pieno.",
+  "vintage": 2025,
+  "sha256": "5dd2afa1edd7089aec6402cd00923b3f866bbb728ffb3d39ffb093df6603e0f7",
+  "manifest_built_utc": "2026-07-04T01:19:22.118919+00:00"
+}
