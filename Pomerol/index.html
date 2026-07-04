@@ -104,7 +104,9 @@
     .vaxis .vlab{grid-column:2;display:flex;justify-content:space-between;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim)}
 
     /* TRUST */
-    .trust{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:0.5rem}
+    .trust{display:grid;grid-template-columns:1fr 1.5fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:0.5rem;align-items:stretch}
+    .trust-left{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+    .trust-left .t-card{flex:1}
     .t-card{background:var(--noir);padding:1.8rem 1.7rem}
     .t-k{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--gold);margin-bottom:0.7rem}
     .t-card p{font-size:0.84rem;line-height:1.7;color:var(--muted)}
@@ -311,9 +313,11 @@
     <div class="sec-num">04</div>
     <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
     <div class="trust">
-      <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
-      <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
-      <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
+      <div class="trust-left">
+        <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis and satellite imagery from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
+        <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
+        <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. No k-fold leakage, no in-sample flattery. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
+      </div>
       <div class="t-card"><div class="t-k">Falsified in the open</div><p>We tested everything. Most failed. What remained is what you see.</p>
         <table class="falsified">
           <tr><th>Hypothesis tested</th><th>Result</th></tr>
