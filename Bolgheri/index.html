@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- TerroiRisk Bolgheri v1 -->
+<!-- TerroiRisk Bolgheri v2 — rebuilt from Pomerol engine -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,7 +10,102 @@
   <title>Bolgheri · TerroiRisk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style-bolgheri.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--noir:#0d0d14;--card:#13131e;--card2:#16161f;--gold:#C9A96E;--gold-d:#8a724a;--cream:#F0EDE8;--muted:#9A9590;--dim:#6A6080;--wine:#8B1A2E;--blue:#6f8fcd;--white:#fff;--line:rgba(255,255,255,0.07);--orange:#e07a30}
+    html,body{background:var(--noir);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 65% at 0% 100%,rgba(111,143,205,0.20) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 100% 0%,rgba(201,169,110,0.12) 0%,transparent 65%),radial-gradient(ellipse 30% 40% at 50% 100%,rgba(139,26,46,0.05) 0%,transparent 60%)}
+    .hero-sub,.sec-lede,.sec-foot,.limit p,.t-card p{text-align:justify;text-justify:inter-word}
+    #cv{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(13,13,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.05rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;color:var(--cream)}
+    .nav-logo b{color:var(--gold);font-weight:300}
+    .nav-back{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .nav-back:hover{color:var(--gold)}
+    .page{position:relative;z-index:1;padding:80px 2rem 4rem;max-width:1180px;margin:0 auto}
+
+    .hero{padding:2rem 0 3rem}
+    .hero-eye{font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.4rem,5.5vw,4.4rem);color:var(--cream);line-height:1.04;margin-bottom:1.6rem;letter-spacing:-0.01em}
+    .hero-title em{color:var(--gold);text-shadow:0 0 40px rgba(201,169,110,0.25)}
+    .hero-sub{font-size:clamp(1rem,1.7vw,1.15rem);line-height:1.75;color:var(--muted);max-width:680px}
+    .hero-sub b{color:var(--cream);font-weight:500}
+
+    .sec{padding:3.5rem 0;border-top:1px solid var(--line)}
+    .sec-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;color:var(--blue);margin-bottom:0.9rem}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.6vw,2.8rem);color:var(--cream);line-height:1.1;margin-bottom:1.3rem}
+    .sec-lede{font-size:clamp(0.98rem,1.5vw,1.1rem);line-height:1.8;color:var(--muted);max-width:760px;margin-bottom:2.5rem}
+    .sec-lede b{color:var(--cream);font-weight:500}
+    .sec-lede em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.08em}
+    .sec-foot{font-size:0.9rem;line-height:1.8;color:var(--dim);max-width:780px;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+    .sec-foot b{color:var(--muted)}
+    .sec-foot em{font-family:'Cormorant Garamond',serif;color:var(--gold);font-style:italic}
+
+    .selector{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .sel-btn{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:3px;padding:0.4rem 0.8rem;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+    .sel-btn:hover{color:var(--cream);border-color:rgba(201,169,110,0.3)}
+    .sel-btn.active{color:var(--noir);background:var(--gold);border-color:var(--gold)}
+    .sel-btn.soon{opacity:0.35;cursor:not-allowed}
+    .card{background:var(--card);border:1px solid var(--line);border-top:2px solid rgba(111,143,205,0.5);border-radius:6px;overflow:hidden}
+    .card-top{display:grid;grid-template-columns:200px 1fr;min-height:340px}
+    .bottle-box{background:var(--card2);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.2rem;gap:1rem}
+    .bottle-placeholder{width:100%;display:flex;align-items:center;justify-content:center;padding:1rem 0}
+    .bottle-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--cream);text-align:center}
+    .bottle-sub{font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);text-align:center}
+    .chart-area{padding:1.6rem 2rem 0.8rem;display:flex;flex-direction:column}
+    .chart-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem}
+    .chart-title{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+    .chart-pred{text-align:right}
+    .pred-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--white);line-height:1;text-shadow:0 0 30px rgba(111,143,205,0.5)}
+    .pred-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-top:0.3rem}
+    .pred-band{font-size:0.64rem;color:var(--blue);margin-top:0.2rem}
+    .seal-verify{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0.3rem;margin-top:0.9rem;text-decoration:none;transition:opacity 0.2s;padding:0.8rem 1.1rem;background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.2);border-radius:4px}
+    .seal-verify:hover{opacity:0.8;background:rgba(201,169,110,0.1)}
+    .seal-hash{font-family:'JetBrains Mono',monospace;font-size:0.85rem;letter-spacing:0.06em;color:var(--gold)}
+    .seal-go{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+    .chart-wrap{flex:1;position:relative;min-height:220px}
+    canvas.chart{width:100%;height:100%;display:block;min-height:220px}
+    .chart-legend{display:flex;gap:1.6rem;padding:0.7rem 0 0.2rem;flex-wrap:wrap}
+    .leg{display:flex;align-items:center;gap:0.5rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+    .leg-line{width:20px;height:0;border-top-width:2px;border-top-style:solid}
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+    .stat{padding:1.3rem 1.6rem;border-right:1px solid var(--line)}
+    .stat:last-child{border-right:none}
+    .stat-label{font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-bottom:0.5rem}
+    .stat-value{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--cream);line-height:1}
+    .stat-sub{font-size:0.63rem;color:var(--muted);margin-top:0.3rem}
+
+    .limits{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+    .limit{background:rgba(255,255,255,0.02);border:1px solid var(--line);border-left:2px solid var(--gold-d);border-radius:4px;padding:1.5rem 1.7rem}
+    .limit-k{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--gold);margin-bottom:0.7rem}
+    .limit p{font-size:0.85rem;line-height:1.7;color:var(--muted)}
+    .limit p b{color:var(--cream);font-weight:500}
+
+    .trust{display:grid;grid-template-columns:1.1fr 1.15fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:0.5rem;align-items:stretch}
+    .trust-left{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+    .trust-left .t-card{flex:1}
+    .t-card{background:var(--noir);padding:1.8rem 1.7rem}
+    .t-k{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--gold);margin-bottom:0.7rem}
+    .t-card p{font-size:0.84rem;line-height:1.7;color:var(--muted)}
+    .falsified{width:100%;margin-top:1rem;border-collapse:collapse;font-size:0.76rem}
+    .falsified th{text-align:left;font-weight:500;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;font-size:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--line)}
+    .falsified td{padding:0.35rem 0;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .falsified td:last-child{color:var(--wine);font-family:'JetBrains Mono',monospace;font-size:0.72rem}
+    .falsified tr.validated td:last-child{color:#6fcf97}
+    blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.5;color:var(--cream);text-align:center;max-width:680px;margin:3.5rem auto 0}
+    blockquote cite{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-top:1.2rem}
+
+    .claim-break{padding:3rem 0 2.5rem;border-top:1px solid rgba(111,143,205,0.3)}
+    .claim-eye{font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--blue);margin-bottom:1.4rem}
+    .claim-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.6vw,2.8rem);color:var(--cream);line-height:1.1;letter-spacing:-0.01em;margin-bottom:1.4rem}
+    .claim-title em{color:var(--gold);text-shadow:0 0 50px rgba(201,169,110,0.3)}
+    .claim-sub{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
+
+    footer{position:relative;z-index:1;text-align:center;padding:3rem 2rem;border-top:1px solid var(--line);font-size:0.64rem;letter-spacing:0.1em;color:var(--dim)}
+
+    @media(max-width:800px){.card-top{grid-template-columns:1fr}.bottle-box{flex-direction:row;min-height:auto;padding:1.2rem}.bottle-placeholder{width:46px;height:100px}.stats-row{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(3){border-top:1px solid var(--line)}.limits,.trust{grid-template-columns:1fr}}
+    @media(max-width:500px){.page{padding:72px 1rem 3rem}.stats-row{grid-template-columns:1fr}.stat{border-right:none;border-top:1px solid var(--line)}}
+  </style>
 <base target="_blank">
 </head>
 <body>
@@ -22,18 +117,16 @@
 
 <div class="page">
 
-  <!-- HERO -->
   <div class="hero">
     <p class="hero-eye">Bolgheri · Tuscan coast · validated regime</p>
     <h1 class="hero-title">Two estates.<br>One signal the sea <em>cannot soften</em>.</h1>
-    <p class="hero-sub">Bolgheri sits three kilometres from the Tyrrhenian, on gravel and clay that drain fast and heat unevenly. What decides the vintage isn't rainfall, it's <b>how wide the temperature swings between a September day and its night</b>. We measure that gap, then seal our prediction before any critic tastes the wine. Below, our model against the critics that move the market.</p>
+    <p class="hero-sub">Bolgheri sits three kilometres from the Tyrrhenian, on gravel and clay that drain fast and heat unevenly. What decides the vintage is <b>how wide the temperature swings between a September day and its night</b>. We measure that gap, then seal our prediction before any critic tastes the wine. Below, our model against the critics that move the market.</p>
   </div>
 
-  <!-- 01 THE SIGNAL + CHART -->
   <div class="sec">
     <div class="sec-num">01</div>
     <h2 class="sec-title">One number from the September sky</h2>
-    <p class="sec-lede">Bolgheri has no single dominant soil like Pomerol's blue clay, its parcels mix calcareous marl, stone, and clay in patches. What repeats every vintage is the <b>diurnal temperature range in September</b>: hot days that ripen sugar, cool nights that hold acidity. A wide DTR builds structure; a narrow one flattens the wine. This single axis explains what rainfall alone cannot. <b>The white line is us.</b> The dashed line is Wine-Searcher aggregate score history.</p>
+    <p class="sec-lede">Bolgheri has no single dominant soil like Pomerol's blue clay, its parcels mix calcareous marl, stone, and clay in patches. What repeats every vintage is the <b>diurnal temperature range in September</b>: hot days that ripen sugar, cool nights that hold acidity. This single axis explains <b>20% of vintage variance</b> across a ten-producer pool. <b>The white line is us.</b> The dashed line is Wine-Searcher aggregate score history.</p>
 
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:0.3rem">
 
@@ -82,9 +175,9 @@
       <button class="sel-btn active" data-ch="sassicaia">Sassicaia</button>
       <button class="sel-btn" data-ch="ornellaia">Ornellaia</button>
       <button class="sel-btn soon" disabled>Masseto</button>
-      <button class="sel-btn soon" disabled>Le Macchiole</button>
-      <button class="sel-btn soon" disabled>Grattamacco</button>
       <button class="sel-btn soon" disabled>Guado al Tasso</button>
+      <button class="sel-btn soon" disabled>Grattamacco</button>
+      <button class="sel-btn soon" disabled>Messorio</button>
     </div>
 
     <div class="card" style="margin-top:2rem">
@@ -101,7 +194,7 @@
           <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
           <div class="chart-legend">
             <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
-            <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(255,255,255,0.6)"></div>TerroiRisk model</div>
+            <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
             <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25)"></div>2025 range</div>
           </div>
           <div style="margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
@@ -119,17 +212,16 @@
         </div>
       </div>
       <div class="stats-row">
-        <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value">± 2.17 pt</div><div class="stat-sub">Pool-8 producers, n=223 observations</div></div>
-        <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value">21%</div><div class="stat-sub">R² = 0.207 · honest, coastal mixed-soil signal</div></div>
+        <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value">± 1.85 pt</div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
+        <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value">20%</div><div class="stat-sub">R² = 0.201 · LOVO pool-10 producers</div></div>
         <div class="stat"><div class="stat-label">2025 prediction · Sassicaia</div><div class="stat-value" id="s-pred">93.1</div><div class="stat-sub" id="s-pred-sub">Sealed July 2026 · bottled score expected 2027</div></div>
         <div class="stat"><div class="stat-label">Physical axis</div><div class="stat-value">1</div><div class="stat-sub">Diurnal Temperature Range · September</div></div>
       </div>
     </div>
 
-    <p class="sec-foot">Our target is the Wine-Searcher aggregate, not a single critic. At Bolgheri the signal is thinner than Pomerol's, one physical axis instead of two, and the model knows it: <b>21% of variance is an honest number for a coastal, mixed-soil appellation, not a rounding error we're hiding.</b> The DTR coefficient, +0.93pt per °C of swing, is the whole story here.</p>
+    <p class="sec-foot">Our target is the Wine-Searcher aggregate, not a single critic. At Bolgheri the signal is thinner than Pomerol's, one physical axis instead of two, and the model knows it: <b>20% of variance is an honest number for a coastal, mixed-soil appellation, not a rounding error we're hiding.</b> The DTR coefficient is the whole story here.</p>
   </div>
 
-  <!-- 02 HONEST LIMITS -->
   <div class="sec">
     <div class="sec-num">02</div>
     <h2 class="sec-title">Where we are right, and where we are not</h2>
@@ -146,7 +238,6 @@
     </div>
   </div>
 
-  <!-- 03 TRUST -->
   <div class="sec">
     <div class="sec-num">03</div>
     <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
@@ -171,11 +262,10 @@
     <blockquote>"Pomerol taught us to read the ground. Bolgheri taught us to read the sky's swing between day and night."<cite>TerroiRisk · 2026</cite></blockquote>
   </div>
 
-  <!-- 04 TECHNICAL DETAIL -->
   <div class="sec">
     <div class="sec-num">04 · technical appendix</div>
     <h2 class="sec-title">One physical law, cleanly measured</h2>
-    <p class="sec-lede">September 2025's average diurnal temperature range across Bolgheri measured <b>7.74°C</b>. Every degree of additional swing adds roughly <b>0.93 points</b> to the model's estimate, holding other factors constant. <b>This is not a proxy for something else, it is the direct physical driver.</b></p>
+    <p class="sec-lede">September 2025's diurnal temperature range across Bolgheri measured <b>7.74°C</b>. This single physical driver, measured the same way across ten producers, is what the model runs on. <b>This is not a proxy for something else, it is the direct physical driver.</b></p>
     <div class="card" style="padding:2.5rem 2rem;display:flex;align-items:center;justify-content:center;gap:clamp(1rem,4vw,3.5rem);flex-wrap:wrap">
       <div style="text-align:center;flex:1;max-width:220px">
         <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">DTR September 2025</div>
@@ -183,21 +273,155 @@
         <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);margin-top:0.9rem">7.74°C</div>
         <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">ERA5 measured</div>
       </div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--blue);align-self:center;padding-bottom:2.5rem">× 0.93</div>
       <div style="text-align:center;flex:1;max-width:220px">
-        <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Score coefficient</div>
+        <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Pool validated</div>
         <div style="height:120px;display:flex;align-items:flex-end;justify-content:center"><span style="display:block;width:52px;height:60%;background:linear-gradient(180deg,var(--gold),var(--gold-d));border-radius:2px 2px 0 0;box-shadow:0 0 24px rgba(201,169,110,0.2)"></span></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);margin-top:0.9rem">+0.93pt</div>
-        <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">per °C of swing</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);margin-top:0.9rem">10</div>
+        <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">producers, LOVO</div>
       </div>
     </div>
-    <p class="sec-foot">This is an 8-producer pool with R² = 0.21, honest and modest next to Pomerol's 0.69. <b>We publish it anyway,</b> because a weaker true signal beats a stronger fabricated one, and because this is the foundation we build the maritime-breeze axis on next.</p>
+    <p class="sec-foot">This is a 10-producer pool with R² = 0.201, honest and modest next to Pomerol's 0.69. <b>We publish it anyway,</b> because a weaker true signal beats a stronger fabricated one, and because this is the foundation we build the maritime-breeze axis on next.</p>
   </div>
-
-  
 
 <footer>© 2026 TerroiRisk · Predictions sealed on Bitcoin · one physical axis, zero opinion · <a href="mailto:info@terroirisk.com" style="color:var(--gold-d);text-decoration:none;letter-spacing:0.08em">info@terroirisk.com</a></footer>
 
-<script src="app-bolgheri.js"></script>
+<script src="../app.js?v=13"></script>
+<script>
+(function(){
+  var DATA={
+    sassicaia:{
+      ws_y:[1982,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      ws_s:[92,91,100,93,86,87,79,93,81,91,87,88,91,92,85,91,89,87,87,88,92,90,93,96,94,97,97,91,95,91,97,93,97,98,94,97,97,94,100,96,100],
+      mod_y:[1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      mod_s:[92.79,94.63,94.1,93.89,93.97,93.46,93.41,93.3,93.67,92.67,92.4,93.01,92.97,94.39,92.83,93.22,93.97,93.59,93.0,93.7,93.68,93.11,93.59,93.33,93.54,93.43,93.43,93.84,92.95,93.23,93.14,92.87,93.71,94.62,96.15,95.83,96.33,96.19,95.48,96.69],
+      pred:93.1,bandLo:90.9,bandHi:95.3,
+      name:"Sassicaia",sub:"Bolgheri Sassicaia DOC",img:"sassicaia.png"
+    },
+    ornellaia:{
+      ws_y:[1988,1989,1990,1993,1995,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      ws_s:[93,76,92,88,92,94,93,94,91,96,92,93,95,93,97,93,97,97,97,94,94,96,94,93,98,96,95,97,95,96,97,98],
+      mod_y:[1988,1989,1990,1993,1995,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      mod_s:[93.97,93.46,93.41,92.67,93.01,94.39,92.83,93.22,93.97,93.59,93.0,93.7,93.68,93.11,93.59,93.33,93.54,93.43,93.43,93.84,92.95,93.23,93.14,92.87,93.71,94.62,96.15,95.83,96.33,96.19,95.48,96.69],
+      pred:94.9,bandLo:92.7,bandHi:97.1,
+      name:"Ornellaia",sub:"Bolgheri Superiore DOC",img:"ornellaia.png"
+    }
+  };
+
+  var current='sassicaia';
+
+  function draw(){
+    var d=DATA[current];
+    var canvas=document.getElementById('chart');
+    if(!canvas||!d)return;
+    var dpr=window.devicePixelRatio||1;
+    var W=canvas.offsetWidth,H=canvas.offsetHeight;
+    if(!W||!H)return;
+    canvas.width=W*dpr;canvas.height=H*dpr;
+    var ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+    var PAD={top:14,right:96,bottom:28,left:34};
+    var cw=W-PAD.left-PAD.right,ch=H-PAD.top-PAD.bottom;
+    var minY=1981,maxY=2026,minS=74,maxS=101;
+    function xp(yr){return PAD.left+(yr-minY)/(maxY-minY)*cw}
+    function yp(s){return PAD.top+(1-(s-minS)/(maxS-minS))*ch}
+
+    [76,82,88,94,100].forEach(function(s){
+      ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;ctx.setLineDash([]);
+      ctx.beginPath();ctx.moveTo(PAD.left,yp(s));ctx.lineTo(PAD.left+cw,yp(s));ctx.stroke();
+      ctx.fillStyle='rgba(106,96,128,0.6)';ctx.font='9px Inter,sans-serif';ctx.textAlign='right';
+      ctx.fillText(s,PAD.left-4,yp(s)+3);
+    });
+    ctx.fillStyle='rgba(106,96,128,0.55)';ctx.font='9px Inter,sans-serif';ctx.textAlign='center';
+    [1985,1990,1995,2000,2005,2010,2015,2020,2025].forEach(function(y){
+      ctx.fillText(y,xp(y),H-PAD.bottom+12);
+    });
+
+    var xDiv=xp(2024.5);
+    ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1;ctx.setLineDash([2,3]);
+    ctx.beginPath();ctx.moveTo(xDiv,PAD.top);ctx.lineTo(xDiv,PAD.top+ch);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(106,96,128,0.7)';ctx.font='8px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('CRITICS STOP',xDiv+5,PAD.top+10);
+
+    var xb0=xp(2025)-4,xb1=xp(2026);
+    var bg=ctx.createLinearGradient(xb0,0,xb1,0);
+    bg.addColorStop(0,'rgba(111,143,205,0.05)');
+    bg.addColorStop(0.5,'rgba(111,143,205,0.22)');
+    bg.addColorStop(1,'rgba(111,143,205,0.05)');
+    ctx.fillStyle=bg;ctx.fillRect(xb0,yp(d.bandHi),xb1-xb0,yp(d.bandLo)-yp(d.bandHi));
+    ctx.strokeStyle='rgba(111,143,205,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(xb0,yp(d.bandHi));ctx.lineTo(xb1,yp(d.bandHi));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(xb0,yp(d.bandLo));ctx.lineTo(xb1,yp(d.bandLo));ctx.stroke();
+    ctx.setLineDash([]);
+
+    function line(ys,ss,color,w,dash,glow){
+      ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineJoin='round';
+      if(dash)ctx.setLineDash(dash);else ctx.setLineDash([]);
+      if(glow){ctx.shadowColor='rgba(111,143,205,0.8)';ctx.shadowBlur=8;}
+      ys.forEach(function(y,i){i===0?ctx.moveTo(xp(y),yp(ss[i])):ctx.lineTo(xp(y),yp(ss[i]));});
+      ctx.stroke();ctx.shadowBlur=0;ctx.setLineDash([]);
+    }
+    line(d.ws_y,d.ws_s,'rgba(111,143,205,0.6)',1.3,[5,3]);
+    line(d.mod_y,d.mod_s,'#fff',2.4,null,true);
+
+    var lastMod=d.mod_s[d.mod_s.length-1];
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1.5;ctx.setLineDash([2,2]);
+    ctx.beginPath();ctx.moveTo(xp(d.mod_y[d.mod_y.length-1]),yp(lastMod));
+    ctx.lineTo(xp(2025.5),yp(d.pred));ctx.stroke();ctx.setLineDash([]);
+    var xP=xp(2025.5),yP=yp(d.pred);
+    ctx.beginPath();ctx.arc(xP,yP,8,0,Math.PI*2);ctx.fillStyle='rgba(111,143,205,0.3)';ctx.fill();
+    ctx.beginPath();ctx.arc(xP,yP,4,0,Math.PI*2);ctx.fillStyle='#fff';
+    ctx.shadowColor='rgba(111,143,205,1)';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+    ctx.fillStyle='#fff';ctx.font='600 12px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText(d.pred,xP,yP-14);
+  }
+
+  function updateUI(){
+    var d=DATA[current];
+    document.getElementById('p-num').textContent=d.pred;
+    document.getElementById('p-band').textContent='range '+d.bandLo+' \u2013 '+d.bandHi;
+    document.getElementById('b-name').textContent=d.name;
+    document.getElementById('b-sub').textContent=d.sub;
+    document.getElementById('s-pred').textContent=d.pred;
+    document.getElementById('s-pred-sub').textContent='Sealed July 2026 · bottled score expected 2027';
+    var img=document.getElementById('b-img');
+    if(d.img){img.src=d.img;img.style.display='block';}
+    else{img.style.display='none';}
+  }
+
+  document.getElementById('selector').addEventListener('click',function(e){
+    var btn=e.target.closest('.sel-btn');
+    if(!btn||btn.classList.contains('soon'))return;
+    document.querySelectorAll('.sel-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    current=btn.dataset.ch;
+    updateUI();draw();
+  });
+
+  function countUp(){
+    var targets=[{id:'hero-count',v:93.1},{id:'hero-count-2',v:94.9}];
+    targets.forEach(function(t){
+      var el=document.getElementById(t.id);
+      if(!el)return;
+      var start=null,dur=900,done=false;
+      function step(ts){
+        if(!start)start=ts;
+        var p=Math.min((ts-start)/dur,1);
+        var eased=1-Math.pow(1-p,3);
+        el.textContent=(t.v*eased).toFixed(1);
+        if(p<1)requestAnimationFrame(step);else el.textContent=t.v.toFixed(1);
+      }
+      function trigger(){if(done)return;done=true;requestAnimationFrame(step);}
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)trigger();});},{threshold:0.4});
+        io.observe(el);
+      }else trigger();
+    });
+  }
+
+  function init(){updateUI();setTimeout(draw,80);countUp();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  window.addEventListener('resize',draw);
+})();
+</script>
 </body>
 </html>
