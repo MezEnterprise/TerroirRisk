@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!-- TerroiRisk Bolgheri v1 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Bolgheri · TerroiRisk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-bolgheri.css">
+<base target="_blank">
+</head>
+<body>
+<canvas id="cv"></canvas>
+<nav>
+  <a class="nav-logo" href="../index.html">Terroir<b>Risk</b></a>
+  <a class="nav-back" href="../index.html">← Home</a>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eye">Bolgheri · Tuscan coast · validated regime</p>
+    <h1 class="hero-title">Two estates.<br>One signal the sea <em>cannot soften</em>.</h1>
+    <p class="hero-sub">Bolgheri sits three kilometres from the Tyrrhenian, on gravel and clay that drain fast and heat unevenly. What decides the vintage isn't rainfall, it's <b>how wide the temperature swings between a September day and its night</b>. We measure that gap, then seal our prediction before any critic tastes the wine. Below, our model against the critics that move the market.</p>
+  </div>
+
+  <!-- 01 THE SIGNAL + CHART -->
+  <div class="sec">
+    <div class="sec-num">01</div>
+    <h2 class="sec-title">One number from the September sky</h2>
+    <p class="sec-lede">Bolgheri has no single dominant soil like Pomerol's blue clay, its parcels mix calcareous marl, stone, and clay in patches. What repeats every vintage is the <b>diurnal temperature range in September</b>: hot days that ripen sugar, cool nights that hold acidity. A wide DTR builds structure; a narrow one flattens the wine. This single axis explains what rainfall alone cannot. <b>The white line is us.</b> The dashed line is Wine-Searcher aggregate score history.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:0.3rem">
+
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:1.4rem 1.4rem 0.6rem 1.4rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,110,0.15),transparent 70%)"></div>
+        <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;color:var(--gold);margin-bottom:0.2rem">Sassicaia · 2025</div>
+        <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-bottom:0.3rem">
+          <span style="font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.25);border-radius:3px;padding:0.15rem 0.5rem">Prediction</span>
+          <span style="font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim)">Sealed Jul 2026</span>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,169,110,0.4)"><span id="hero-count">0.0</span></div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.5rem">confidence band 90.9 – 95.3</div>
+        <div style="font-size:0.72rem;color:var(--dim);margin-top:0.4rem;font-style:italic;font-family:'Cormorant Garamond',serif">Official Score Expected 2027</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold-d)">sealed · Sassicaia 2025</span>
+          <a href="https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/sassicaia_2025_prediction.ots" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:0.3rem;opacity:0.6;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)">verify</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#1a1a24,#0d0d14);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.4rem 1.4rem 0.6rem 1.4rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(111,143,205,0.15),transparent 70%)"></div>
+        <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;color:var(--blue);margin-bottom:0.2rem">Ornellaia · 2025</div>
+        <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-bottom:0.3rem">
+          <span style="font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);background:rgba(111,143,205,0.12);border:1px solid rgba(111,143,205,0.25);border-radius:3px;padding:0.15rem 0.5rem">Prediction</span>
+          <span style="font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim)">Sealed Jul 2026</span>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--blue);line-height:1"><span id="hero-count-2">0.0</span></div>
+        <div style="font-size:0.62rem;color:var(--dim);margin-top:0.5rem">confidence band 92.7 – 97.1</div>
+        <div style="font-size:0.72rem;color:var(--dim);margin-top:0.4rem;font-style:italic;font-family:'Cormorant Garamond',serif">Official Score Expected 2027</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--blue)">sealed · Ornellaia 2025</span>
+          <a href="https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/ornellaia_2025_prediction.ots" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:0.3rem;opacity:0.6;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue)">verify</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:0.7rem;color:var(--dim);margin-top:1.8rem;margin-bottom:0.9rem">Both predictions are sealed and verifiable on the Bitcoin blockchain.</p>
+
+    <div class="selector" id="selector">
+      <button class="sel-btn active" data-ch="sassicaia">Sassicaia</button>
+      <button class="sel-btn" data-ch="ornellaia">Ornellaia</button>
+      <button class="sel-btn soon" disabled>Masseto</button>
+      <button class="sel-btn soon" disabled>Le Macchiole</button>
+      <button class="sel-btn soon" disabled>Grattamacco</button>
+      <button class="sel-btn soon" disabled>Guado al Tasso</button>
+    </div>
+
+    <div class="card" style="margin-top:2rem">
+      <div class="card-top">
+        <div class="bottle-box">
+          <div class="bottle-placeholder"><img src="sassicaia.png" alt="Sassicaia" id="b-img" style="height:160px;width:auto;object-fit:contain;display:block"></div>
+          <div class="bottle-name" id="b-name">Sassicaia</div>
+          <div class="bottle-sub" id="b-sub">Bolgheri Sassicaia DOC</div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-header">
+            <div class="chart-title">Wine-Searcher aggregate vs TerroiRisk DTR model</div>
+          </div>
+          <div class="chart-wrap"><canvas class="chart" id="chart"></canvas></div>
+          <div class="chart-legend">
+            <div class="leg"><div class="leg-line" style="border-top-color:#6f8fcd;border-top-style:dashed"></div>Wine-Searcher</div>
+            <div class="leg"><div class="leg-line" style="border-top-color:#fff;box-shadow:0 0 6px rgba(111,143,205,0.8)"></div>TerroiRisk model</div>
+            <div class="leg"><div class="leg-line" style="border:none;width:18px;height:10px;background:rgba(111,143,205,0.25)"></div>2025 range</div>
+          </div>
+          <div style="margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
+            <div class="chart-pred" style="text-align:left">
+              <div class="pred-num" id="p-num" style="font-size:3.2rem">93.1</div>
+              <div class="pred-label">2025 · our sealed prediction</div>
+              <div class="pred-band" id="p-band">range 90.9 – 95.3</div>
+              <a class="seal-verify" id="seal-link" href="https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/sassicaia_2025_prediction.ots" target="_blank" rel="noopener" style="align-items:flex-start">
+                <span class="seal-hash" id="seal-hash" style="display:flex;align-items:center;gap:0.4rem">⬡ sealed</span>
+                <span class="seal-go">verify on Bitcoin →</span>
+              </a>
+            </div>
+            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain before the 2025 vintage was tasted by any critic. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-label">Model error · LOVO validation</div><div class="stat-value">± 2.17 pt</div><div class="stat-sub">Two critics on the same bottle diverge 3–5 pt</div></div>
+        <div class="stat"><div class="stat-label">Variance explained · out-of-sample</div><div class="stat-value">21%</div><div class="stat-sub">R² = 0.21 · LOVO pool-8 producers</div></div>
+        <div class="stat"><div class="stat-label">2025 prediction · Sassicaia</div><div class="stat-value" id="s-pred">93.1</div><div class="stat-sub" id="s-pred-sub">Sealed July 2026 · bottled score expected 2027</div></div>
+        <div class="stat"><div class="stat-label">Physical axis</div><div class="stat-value">1</div><div class="stat-sub">Diurnal Temperature Range · September</div></div>
+      </div>
+    </div>
+
+    <p class="sec-foot">Our target is the Wine-Searcher aggregate, not a single critic. At Bolgheri the signal is thinner than Pomerol's, one physical axis instead of two, and the model knows it: <b>21% of variance is an honest number for a coastal, mixed-soil appellation, not a rounding error we're hiding.</b> The DTR coefficient, +0.93pt per °C of swing, is the whole story here.</p>
+  </div>
+
+  <!-- 02 HONEST LIMITS -->
+  <div class="sec">
+    <div class="sec-num">02</div>
+    <h2 class="sec-title">Where we are right, and where we are not</h2>
+    <p class="sec-lede">A model that hides its edges is a sales pitch, not a science. Bolgheri has a real limit, and we say so.</p>
+    <div class="limits">
+      <div class="limit">
+        <div class="limit-k">One axis, not three</div>
+        <p>Pomerol's blue clay gave us soil moisture and vapour pressure deficit, two orthogonal signals. Bolgheri's mixed gravel-clay-marl soils give us <b>one clean signal</b>: September's day-night temperature swing. We didn't force a second axis that isn't there. <b>Less signal, told honestly, beats a fabricated one.</b></p>
+      </div>
+      <div class="limit">
+        <div class="limit-k">The sea we haven't measured yet</div>
+        <p>Producers describe a maritime breeze that tempers the heat every afternoon. We haven't quantified it. <b>It's the next axis we're building, not a gap we're pretending isn't there.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 TRUST -->
+  <div class="sec">
+    <div class="sec-num">03</div>
+    <h2 class="sec-title">Why you can trust a number you cannot bribe</h2>
+    <div class="trust">
+      <div class="trust-left">
+        <div class="t-card"><div class="t-k">Public data only</div><p>Climate reanalysis from public European sources. No proprietary feed, no relationship with anyone who sells wine.</p></div>
+        <div class="t-card"><div class="t-k">Sealed before scored</div><p>Every prediction is hashed and timestamped on the Bitcoin blockchain before a critic tastes the vintage. The record predates the verdict.</p></div>
+        <div class="t-card"><div class="t-k">Out-of-sample or nothing</div><p>We use Leave-One-Vintage-Out (LOVO) validation: the tested year never enters its own training set. Every accuracy figure on this page was earned on data the model had never seen.</p></div>
+      </div>
+      <div class="t-card"><div class="t-k">Falsified in the open</div><p>We tested everything Pomerol taught us. Most of it didn't transfer. What remained is what you see.</p>
+        <table class="falsified">
+          <tr><th>Hypothesis tested</th><th>Result</th></tr>
+          <tr><td>Soil moisture (Pomerol model, transferred)</td><td>∗∗∗</td></tr>
+          <tr><td>Vapour Pressure Deficit</td><td>∗∗∗</td></tr>
+          <tr><td>Total September rainfall</td><td>∗∗∗</td></tr>
+          <tr><td>Growing degree days</td><td>∗∗∗</td></tr>
+          <tr><td>Spring frost signal</td><td>∗∗∗</td></tr>
+          <tr class="validated"><td>DTR September (diurnal range)</td><td>active ✓</td></tr>
+        </table>
+      </div>
+    </div>
+    <blockquote>"Pomerol taught us to read the ground. Bolgheri taught us to read the sky's swing between day and night."<cite>TerroiRisk · 2026</cite></blockquote>
+  </div>
+
+  <!-- 04 TECHNICAL DETAIL -->
+  <div class="sec">
+    <div class="sec-num">04 · technical appendix</div>
+    <h2 class="sec-title">One physical law, cleanly measured</h2>
+    <p class="sec-lede">September 2025's average diurnal temperature range across Bolgheri measured <b>7.74°C</b>. Every degree of additional swing adds roughly <b>0.93 points</b> to the model's estimate, holding other factors constant. <b>This is not a proxy for something else, it is the direct physical driver.</b></p>
+    <div class="card" style="padding:2.5rem 2rem;display:flex;align-items:center;justify-content:center;gap:clamp(1rem,4vw,3.5rem);flex-wrap:wrap">
+      <div style="text-align:center;flex:1;max-width:220px">
+        <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">DTR September 2025</div>
+        <div style="height:120px;display:flex;align-items:flex-end;justify-content:center"><span style="display:block;width:52px;height:78%;background:linear-gradient(180deg,#6f8fcd,#4a6ea8);border-radius:2px 2px 0 0;box-shadow:0 0 24px rgba(111,143,205,0.3)"></span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);margin-top:0.9rem">7.74°C</div>
+        <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">ERA5 measured</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--blue);align-self:center;padding-bottom:2.5rem">× 0.93</div>
+      <div style="text-align:center;flex:1;max-width:220px">
+        <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Score coefficient</div>
+        <div style="height:120px;display:flex;align-items:flex-end;justify-content:center"><span style="display:block;width:52px;height:60%;background:linear-gradient(180deg,var(--gold),var(--gold-d));border-radius:2px 2px 0 0;box-shadow:0 0 24px rgba(201,169,110,0.2)"></span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);margin-top:0.9rem">+0.93pt</div>
+        <div style="font-size:0.6rem;color:var(--dim);margin-top:0.3rem">per °C of swing</div>
+      </div>
+    </div>
+    <p class="sec-foot">This is an 8-producer pool with R² = 0.21, honest and modest next to Pomerol's 0.69. <b>We publish it anyway,</b> because a weaker true signal beats a stronger fabricated one, and because this is the foundation we build the maritime-breeze axis on next.</p>
+  </div>
+
+  
+
+<footer>© 2026 TerroiRisk · Predictions sealed on Bitcoin · one physical axis, zero opinion · <a href="mailto:info@terroirisk.com" style="color:var(--gold-d);text-decoration:none;letter-spacing:0.08em">info@terroirisk.com</a></footer>
+
+<script src="app-bolgheri.js"></script>
+</body>
+</html>
