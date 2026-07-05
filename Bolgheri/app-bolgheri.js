@@ -3,17 +3,17 @@
     sassicaia:{
       ws_y:[1982,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
       ws_s:[92,91,100,93,86,87,79,93,81,91,87,88,91,92,85,91,89,87,87,88,92,90,93,96,94,97,97,91,95,91,97,93,97,98,94,97,97,94,100,96,100],
-      mod_y:[],
-      mod_s:[],
-      pred:null,bandLo:null,bandHi:null,
+      mod_y:[1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      mod_s:[92.79,94.63,94.1,93.89,93.97,93.46,93.41,93.3,93.67,92.67,92.4,93.01,92.97,94.39,92.83,93.22,93.97,93.59,93.0,93.7,93.68,93.11,93.59,93.33,93.54,93.43,93.43,93.84,92.95,93.23,93.14,92.87,93.71,94.62,96.15,95.83,96.33,96.19,95.48,96.69],
+      pred:93.1,bandLo:90.9,bandHi:95.3,
       name:"Sassicaia",sub:"Bolgheri Sassicaia DOC",img:"sassicaia.png"
     },
     ornellaia:{
       ws_y:[1988,1989,1990,1993,1995,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
       ws_s:[93,76,92,88,92,94,93,94,91,96,92,93,95,93,97,93,97,97,97,94,94,96,94,93,98,96,95,97,95,96,97,98],
-      mod_y:[],
-      mod_s:[],
-      pred:null,bandLo:null,bandHi:null,
+      mod_y:[1988,1989,1990,1993,1995,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+      mod_s:[93.97,93.46,93.41,92.67,93.01,94.39,92.83,93.22,93.97,93.59,93.0,93.7,93.68,93.11,93.59,93.33,93.54,93.43,93.43,93.84,92.95,93.23,93.14,92.87,93.71,94.62,96.15,95.83,96.33,96.19,95.48,96.69],
+      pred:94.9,bandLo:92.7,bandHi:97.1,
       name:"Ornellaia",sub:"Bolgheri Superiore DOC",img:"ornellaia.png"
     }
   };
@@ -31,7 +31,7 @@
     var ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
     var PAD={top:14,right:36,bottom:28,left:34};
     var cw=W-PAD.left-PAD.right,ch=H-PAD.top-PAD.bottom;
-    var minY=Math.min.apply(null,d.ws_y)-1, maxY=Math.max.apply(null,d.ws_y)+1;
+    var minY=Math.min.apply(null,d.ws_y)-1, maxY=2026;
     var minS=Math.floor(Math.min.apply(null,d.ws_s)/5)*5-2, maxS=Math.ceil(Math.max.apply(null,d.ws_s)/5)*5+1;
     function xp(yr){return PAD.left+(yr-minY)/(maxY-minY)*cw}
     function yp(s){return PAD.top+(1-(s-minS)/(maxS-minS))*ch}
@@ -57,11 +57,22 @@
       ys.forEach(function(y,i){i===0?ctx.moveTo(xp(y),yp(ss[i])):ctx.lineTo(xp(y),yp(ss[i]));});
       ctx.stroke();ctx.shadowBlur=0;ctx.setLineDash([]);
     }
-    line(d.ws_y,d.ws_s,'#fff',2,null,true);
-    d.ws_y.forEach(function(y,i){
-      ctx.beginPath();ctx.arc(xp(y),yp(d.ws_s[i]),2,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fill();
-    });
+    line(d.ws_y,d.ws_s,'rgba(111,143,205,0.6)',1.3,[5,3]);
+    line(d.mod_y,d.mod_s,'#fff',2,null,true);
+
+    if(d.mod_y.length && d.pred){
+      var lastMod=d.mod_s[d.mod_s.length-1];
+      var lastYr=d.mod_y[d.mod_y.length-1];
+      ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1.5;ctx.setLineDash([2,2]);
+      ctx.beginPath();ctx.moveTo(xp(lastYr),yp(lastMod));
+      ctx.lineTo(xp(2025),yp(d.pred));ctx.stroke();ctx.setLineDash([]);
+      var xP=xp(2025),yP=yp(d.pred);
+      ctx.beginPath();ctx.arc(xP,yP,7,0,Math.PI*2);ctx.fillStyle='rgba(111,143,205,0.3)';ctx.fill();
+      ctx.beginPath();ctx.arc(xP,yP,3.5,0,Math.PI*2);ctx.fillStyle='#fff';
+      ctx.shadowColor='rgba(111,143,205,1)';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+      ctx.fillStyle='#fff';ctx.font='600 11px Inter,sans-serif';ctx.textAlign='center';
+      ctx.fillText(d.pred,xP,yP-12);
+    }
   }
 
   function updateUI(){
