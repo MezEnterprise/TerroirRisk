@@ -60,7 +60,6 @@
     .chart-legend{display:flex;gap:1.6rem;padding:0.7rem 0 0.2rem;flex-wrap:wrap}
     .leg{display:flex;align-items:center;gap:0.5rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
     .leg-line{width:20px;height:0;border-top-width:2px;border-top-style:solid}
-    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
     .stat{padding:1.3rem 1.6rem;border-right:1px solid var(--line)}
     .stat:last-child{border-right:none}
     .stat-label{font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-bottom:0.5rem}
