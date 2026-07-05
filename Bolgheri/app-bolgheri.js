@@ -49,6 +49,19 @@
       ctx.fillText(y,xp(y),H-PAD.bottom+12);
     }
 
+    if(d.pred && d.bandLo && d.bandHi){
+      var xb0=xp(2024.5),xb1=xp(2026);
+      var bg=ctx.createLinearGradient(xb0,0,xb1,0);
+      bg.addColorStop(0,'rgba(111,143,205,0.05)');
+      bg.addColorStop(0.5,'rgba(111,143,205,0.22)');
+      bg.addColorStop(1,'rgba(111,143,205,0.05)');
+      ctx.fillStyle=bg;ctx.fillRect(xb0,yp(d.bandHi),xb1-xb0,yp(d.bandLo)-yp(d.bandHi));
+      ctx.strokeStyle='rgba(111,143,205,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+      ctx.beginPath();ctx.moveTo(xb0,yp(d.bandHi));ctx.lineTo(xb1,yp(d.bandHi));ctx.stroke();
+      ctx.beginPath();ctx.moveTo(xb0,yp(d.bandLo));ctx.lineTo(xb1,yp(d.bandLo));ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
     function line(ys,ss,color,w,dash,glow){
       if(!ys.length)return;
       ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineJoin='round';
