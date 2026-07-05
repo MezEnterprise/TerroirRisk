@@ -82,6 +82,12 @@
     var img=document.getElementById('b-img');
     if(d.img){img.src=d.img;img.style.display='block';}
     else{img.style.display='none';}
+    var pNum=document.getElementById('p-num');
+    if(pNum) pNum.textContent=d.pred;
+    var pBand=document.getElementById('p-band');
+    if(pBand) pBand.textContent='range '+d.bandLo+' \u2013 '+d.bandHi;
+    var sealLink=document.getElementById('seal-link');
+    if(sealLink) sealLink.href='https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/bolgheri_2025_prediction.ots';
   }
 
   document.getElementById('selector').addEventListener('click',function(e){
