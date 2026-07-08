@@ -256,7 +256,7 @@
                 <span class="seal-go">verify on Bitcoin →</span>
               </a>
             </div>
-            <div style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)">29 June 2026</b>, months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
+            <div id="seal-text" style="font-size:0.82rem;line-height:1.75;color:var(--dim);padding-top:0.4rem">This prediction was hashed and timestamped on the Bitcoin blockchain on <b style="color:var(--muted)" id="seal-text-date">29 June 2026</b>, months before any critic tastes the 2025 vintage. The .ots file is mathematical proof that the number existed before the verdict. You can verify it independently at <span style="color:var(--gold-d)">opentimestamps.org</span>.</div>
           </div>
         </div>
       </div>
@@ -385,7 +385,7 @@
       mod_y:[1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
       mod_s:[93.2,94.3,96.4,90.2,91.6,91.6,93.0,92.7,93.4,94.3,91.9,95.2,95.2,93.4,95.5,96.9,95.0,94.8,97.4,96.3,96.6,96.9,95.2,95.1,98.4,95.4,97.7,96.5,97.0,94.7,99.3,96.7],
       anomaly_y:[2013],
-      pred:98.3,bandLo:97.1,bandHi:99.5,
+      pred:98.3,bandLo:97.1,bandHi:99.5,sealDate:"June 2026",sealDateFull:"29 June 2026",otsUrl:"https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/petrus_2025_prediction.ots",hash:"5ff008f1…c294ac",
       name:"Pétrus",sub:"Pomerol · 100% Merlot",img:"petrus.png"
     },
     trotanoy:{
@@ -394,7 +394,7 @@
       mod_y:[1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
       mod_s:[90.9,92.3,94.3,88.2,89.2,89.3,90.7,90.4,91.2,92.0,89.7,93.0,93.0,91.5,93.2,94.7,92.6,92.4,95.1,94.0,94.3,94.6,92.8,92.8,96.1,93.1,95.3,94.3,94.8,92.5,96.9,94.5],
       anomaly_y:[2013],
-      pred:96.0,bandLo:94.8,bandHi:97.2,
+      pred:96.0,bandLo:94.8,bandHi:97.2,sealDate:"July 2026",sealDateFull:"early July 2026",otsUrl:"https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/trotanoy_track_record.ots",hash:"3fa8c3db…5517167",
       name:"Trotanoy",sub:"Pomerol · 95% Merlot",img:"trotanoy.png"
     },
     eglise:{
@@ -403,7 +403,7 @@
       mod_y:[1988,1989,1990,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
       mod_s:[91.6,92.9,95.1,88.8,90.0,90.1,91.4,91.0,91.8,92.8,90.3,93.6,93.7,92.1,94.0,95.4,93.4,93.3,95.9,94.7,95.0,95.3,93.6,93.5,96.8,93.8,96.1,94.9,95.3,93.2,97.7,95.2],
       anomaly_y:[2013],
-      pred:96.7,bandLo:95.5,bandHi:97.9,
+      pred:96.7,bandLo:95.5,bandHi:97.9,sealDate:"July 2026",sealDateFull:"early July 2026",otsUrl:"https://github.com/MezEnterprise/TerroirRisk/blob/main/Sealed/eglise_clinet_track_record.ots",hash:"af24da8b…4a865d6",
       name:"L'Église-Clinet",sub:"Pomerol · 85% Merlot",img:"eglise.png"
     }
   };
@@ -502,15 +502,17 @@
     document.getElementById('b-name').textContent=d.name;
     document.getElementById('b-sub').textContent=d.sub;
     document.getElementById('s-pred').textContent=d.pred;
-    document.getElementById('s-pred-sub').textContent='Sealed June 2026 · bottled score expected 2028';
+    document.getElementById('s-pred-sub').textContent='Sealed '+d.sealDate+' · bottled score expected 2028';
+    document.getElementById('seal-text-date').textContent=d.sealDateFull;
     // img
     var img=document.getElementById('b-img');
     if(d.img){img.src=d.img;img.style.display='block';}
     else{img.style.display='none';}
     // seal only for petrus
     var seal=document.getElementById('seal-link');
-    if(current==='petrus'){seal.style.display='inline-flex';}
-    else{seal.style.display='none';}
+    seal.href=d.otsUrl;
+    seal.style.display='inline-flex';
+    document.getElementById('seal-hash').innerHTML='⬡ '+d.hash;
   }
 
   document.getElementById('selector').addEventListener('click',function(e){
