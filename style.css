@@ -92,7 +92,7 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(10, 10, 15, 0.82);
+      background: rgba(10, 10, 15, 0.90);
       z-index: 0;
     }
     .hero > * { position: relative; z-index: 1; }
