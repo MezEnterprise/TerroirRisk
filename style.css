@@ -251,9 +251,9 @@
 .card:hover .card-bg img { transform: scale(1.16); }
 .card-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(16,15,22,0.55), rgba(16,15,22,0.80)); }
 .card > *:not(.card-bg) { position: relative; z-index: 1; }
-.card-docg { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.card-docg { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
 .card.soon .card-docg { color: var(--muted); }
-.card-years { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 6px; }
+.card-years { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 10px; }
 .year-pip { font-size: 0.5rem; letter-spacing: 0.04em; padding: 1px 4px; border-radius: 2px; font-family: 'Inter', sans-serif; color: var(--muted); background: rgba(201,169,110,0.08); }
 .year-pip.off { color: var(--dim); background: rgba(255,255,255,0.03); }
 .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); z-index: 2; }
@@ -275,8 +275,8 @@
 }
 .card-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
 .card.soon .card-tag { color: var(--muted); }
-.card-meta { display: flex; flex-direction: column; gap: 2px; margin-bottom: auto; }
-.card .meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 0.68rem; line-height: 1.15; color: var(--muted); }
+.card-meta { display: flex; flex-direction: column; gap: 5px; margin-bottom: auto; }
+.card .meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 0.68rem; line-height: 1.4; color: var(--muted); }
 .card .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
 .card.soon .meta-dot { background: var(--dim); }
 .card-footer {
