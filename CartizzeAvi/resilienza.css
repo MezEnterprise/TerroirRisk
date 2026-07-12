@@ -1,0 +1,50 @@
+/* =========================================================================
+   resilienza.css  —  stile della VISTA RESILIENZA (bottone ⚡ + sotto-barra)
+   Da aggiungere a style.css (o caricato a parte dopo di esso).
+   Coerente col blocco #moon-btn ma in tono ambra/stress invece del viola.
+   ========================================================================= */
+
+#resil-btn {
+  background:var(--panel-bg); border:1px solid var(--border);
+  color:var(--text-mute); font-size:15px;
+  width:36px; height:36px; padding:0;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-radius:4px; transition:all 0.2s;
+  flex-shrink:0;
+}
+#resil-btn:hover { border-color:var(--gold); color:var(--text); }
+#resil-btn.active {
+  background:#2a1410; border-color:#c87850; color:#f0c098;
+  box-shadow:0 0 8px rgba(200,120,80,0.35);
+}
+
+/* sotto-barra con le due viste (Danno locale / Evento 2022) */
+#resil-bar {
+  display:flex; gap:4px; background:var(--panel-bg);
+  border:1px solid rgba(200,120,80,0.55); padding:8px 12px; border-radius:4px;
+}
+.resil-sub {
+  background:transparent; border:1px solid transparent;
+  color:var(--text-mute); font-size:12px; padding:4px 10px;
+  cursor:pointer; border-radius:3px; transition:all 0.15s; white-space:nowrap;
+}
+.resil-sub:hover { color:var(--text); border-color:var(--border); }
+.resil-sub.active { background:#9a4530; color:#fff; border-color:#9a4530; }
+
+/* banner esplicativo: in alto, centrato sulla mappa, sopra tutto */
+#resil-banner {
+  position:fixed; top:16px; left:50%; transform:translateX(-50%);
+  z-index:1200; display:none; align-items:center; gap:8px;
+  background:rgba(42,20,16,0.94); border:1px solid rgba(200,120,80,0.55);
+  color:#f0d8c8; padding:9px 18px; border-radius:20px; font-size:13px;
+  font-family:'Georgia',serif; box-shadow:0 2px 16px rgba(0,0,0,0.5);
+  white-space:nowrap; backdrop-filter:blur(3px); max-width:60vw;
+  overflow:hidden; text-overflow:ellipsis;
+}
+
+/* mobile: banner e barra si adattano */
+@media (max-width:640px){
+  #resil-banner { left:8px; right:8px; transform:none; white-space:normal; text-align:center; font-size:12px; }
+  #resil-bar { flex-wrap:wrap; }
+  .resil-sub { font-size:11px; padding:3px 8px; }
+}

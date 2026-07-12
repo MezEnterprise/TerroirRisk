@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartizze DOCG — Archivio Satellitare 2017–2025</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map"></div>
+<a href="https://bortle.it" id="home-btn">⌂ Home</a>
+
+<!-- PANNELLO SINISTRO -->
+<div id="panel">
+  <div id="panel-header">
+    <div class="logo">Sentinel-2 · Cartizze DOCG</div>
+    <h1>Cartizze</h1>
+    <div class="sub">83 vigne · 9 contrade · 2017–2025</div>
+  </div>
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Cerca vigna o contrada...">
+  </div>
+  <div id="comuni-list"></div>
+  <div id="panel-foot">
+    <a href="cartizze_metodo.pdf" id="pdf-link" target="_blank">↓ Scarica la guida (PDF)</a>
+  </div>
+</div>
+
+<!-- YEAR BAR + LUNA -->
+<div id="year-area">
+  <div id="year-bar"></div>
+  <div id="night-bar" style="display:none"></div>
+  <button id="moon-btn" title="Vista notturna · temperatura ECOSTRESS">🌙</button>
+</div>
+
+<!-- DRAWER -->
+<div id="drawer">
+  <div id="drawer-header">
+    <div class="dh-titleblock">
+      <div id="drawer-title">—</div>
+      <div id="drawer-subtitle"></div>
+    </div>
+    <button id="drawer-close" aria-label="Chiudi">✕</button>
+  </div>
+
+  <!-- INDICI come tab piccoli: nome piano sopra, sigla sotto -->
+  <div id="drawer-tabs" role="tablist" aria-label="Cosa guardare">
+    <button class="tab-btn active" data-idx="ndvi">
+      <span class="tb-name">Vigore</span><span class="tb-tech">NDVI</span>
+    </button>
+    <button class="tab-btn" data-idx="ndmi">
+      <span class="tb-name">Stato idrico</span><span class="tb-tech">NDMI</span>
+    </button>
+    <button class="tab-btn" data-idx="ndre">
+      <span class="tb-name">Clorofilla</span><span class="tb-tech">NDRE</span>
+    </button>
+  </div>
+
+  <div id="drawer-body">
+    <!-- lettura corrente -->
+    <div class="syn-block">
+      <div class="syn-label" id="read-label">Vigore nell'anno selezionato</div>
+      <div class="big-readout">
+        <span class="br-value" id="br-value">—</span>
+        <span class="br-word" id="br-word">—</span>
+      </div>
+    </div>
+
+    <!-- andamento nel tempo -->
+    <div class="syn-block">
+      <div class="syn-label" id="and-label">Andamento 2017–2025</div>
+      <div class="chart-wrap"><canvas id="chart"></canvas></div>
+      <div id="year-badges"></div>
+    </div>
+
+    <!-- morfologia -->
+    <div class="syn-block">
+      <div class="syn-label">Carta d'identità</div>
+      <div class="morfo-grid" id="morfo-grid"></div>
+      <div class="morfo-fonte">Quota, pendenza ed esposizione calcolate dal modello digitale del terreno LiDAR 5&nbsp;m (Regione Veneto), come valori medi sulla superficie di ogni vigna.</div>
+    </div>
+  </div>
+
+  <!-- legenda interna -->
+  <div id="drawer-legend">
+    <div class="drawer-leg-bar"></div>
+    <div class="drawer-leg-labels"><span>basso</span><span>alto</span></div>
+  </div>
+</div>
+
+<!-- LEGENDA esterna -->
+<div id="legend">
+  <div class="leg-title" id="leg-title">Vigore della chioma</div>
+  <div class="leg-bar"></div>
+  <div class="leg-labels"><span id="leg-lo">basso</span><span id="leg-hi">alto</span></div>
+  <div class="leg-note" id="leg-note">colori confrontabili tra tutti gli anni</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+<script src="moon.js"></script>
+<link rel="stylesheet" href="resilienza.css">
+<script src="resilienza.js"></script>
+<link rel="stylesheet" href="gestione.css">
+<script src="gestione.js"></script>
+</body>
+</html>
