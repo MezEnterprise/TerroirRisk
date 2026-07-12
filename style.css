@@ -36,6 +36,17 @@
     }
     .nav-logo b { color: var(--gold); font-weight: 300; }
 
+    .nav-contact {
+      position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Inter', sans-serif; font-weight: 400;
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.35);
+      padding: 0.5rem 1rem;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .nav-contact:hover { background: var(--gold); color: var(--noir); }
+
     /* BADGES — centrati assoluti */
     .badges {
   position: absolute; left: 50%; top: 50%;
@@ -176,6 +187,9 @@
 
     @media(max-width:680px){
       .nav-logo {
+        display: none;
+      }
+      .nav-contact {
         display: none;
       }
       nav {
