@@ -82,7 +82,7 @@
     /* HERO */
     .hero {
       position: relative; z-index: 1;
-      min-height: 62vh;
+      min-height: 48vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 76px 2rem 0;
       background-image: url('vineyard.jpg');
@@ -137,7 +137,7 @@
     /* ABOUT */
     .about {
       position: relative; z-index: 1;
-      padding: 3rem 2rem 4rem; max-width: 740px; margin: 0 auto; text-align: center;
+      padding: 1.8rem 2rem 2.2rem; max-width: 740px; margin: 0 auto; text-align: center;
     }
     blockquote {
       font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
@@ -155,11 +155,11 @@
     /* STATS */
     .stats {
       position: relative; z-index: 1;
-      display: flex; max-width: 860px; margin: 0 auto 6rem;
+      display: flex; max-width: 860px; margin: 0 auto 2rem;
       border-top: 1px solid rgba(201,169,110,0.13);
       border-bottom: 1px solid rgba(201,169,110,0.13);
     }
-    .stat { flex: 1; padding: 3rem 1.5rem; text-align: center; border-right: 1px solid rgba(201,169,110,0.13); }
+    .stat { flex: 1; padding: 1.4rem 1.5rem; text-align: center; border-right: 1px solid rgba(201,169,110,0.13); }
     .stat:last-child { border-right: none; }
     .stat-n { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2.8rem; color: var(--cream); line-height: 1; margin-bottom: 0.5rem; }
     .stat-n sup { font-size: 1.1rem; color: var(--gold); vertical-align: super; }
@@ -227,7 +227,7 @@
   position: relative; z-index: 1;
   max-width: 1180px; margin: 0 auto; padding: 0 2rem;
   display: flex; align-items: baseline; justify-content: space-between;
-  margin-top: 1rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 6px;
+  margin-top: 0.2rem; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 6px;
 }
 .section-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
 .section-note { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.02em; }
