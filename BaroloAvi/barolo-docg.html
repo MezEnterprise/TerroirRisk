@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barolo DOCG — Archivio Satellitare MGA 2017–2025</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map"></div>
+<a href="https://bortle.it" id="home-btn">⌂ Home</a>
+
+<!-- PANEL SINISTRO (invariato) -->
+<div id="panel">
+  <div id="panel-header">
+    <div class="logo">Sentinel-2 · Barolo DOCG</div>
+    <h1>Barolo</h1>
+    <div class="sub">177 MGA · 11 COMUNI · 2017–2025</div>
+  </div>
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Cerca MGA...">
+  </div>
+  <div id="comuni-list"></div>
+  <div id="mga-meta">
+    <div class="meta-name" id="meta-name">—</div>
+    <div class="meta-row">
+      <span>Quota <span class="meta-val" id="meta-quota">—</span> m</span>
+      <span>Pend. <span class="meta-val" id="meta-slope">—</span>°</span>
+      <span>Esp. <span class="meta-val" id="meta-asp">—</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- YEAR BAR (invariato) -->
+<div id="year-bar"></div>
+
+<!-- DRAWER v9 -->
+<div id="drawer">
+
+  <div id="drawer-header">
+    <div class="dh-titlerow">
+      <div class="dh-titleblock">
+        <div id="drawer-title">—</div>
+        <div id="drawer-subtitle"></div>
+      </div>
+      <button id="drawer-close" aria-label="Chiudi">✕</button>
+    </div>
+
+    <div class="dh-index-switch" role="tablist" aria-label="Indice spettrale">
+      <button class="idx-btn active" data-idx="ndvi" type="button">NDVI</button>
+      <button class="idx-btn disabled" data-idx="ndmi" type="button" disabled
+              title="In arrivo — stress idrico">NDMI</button>
+      <button class="idx-btn disabled" data-idx="ndre" type="button" disabled
+              title="In valutazione — chiome dense">NDRE</button>
+    </div>
+  </div>
+
+  <div id="drawer-tabs">
+    <button class="tab-btn active" data-tab="sintesi">Sintesi</button>
+    <button class="tab-btn" data-tab="andamento">Andamento</button>
+    <button class="tab-btn" data-tab="stagionalita">Stagionalità</button>
+  </div>
+
+  <div id="drawer-body">
+
+    <!-- TAB 1 — SINTESI -->
+    <div class="tab-panel active" id="tab-sintesi">
+
+      <div class="syn-block">
+        <div class="syn-label">
+          Andamento <span class="syn-idx-label">NDVI</span> 2017–2025
+          <span class="info-tip" data-info="serie">ⓘ</span>
+        </div>
+        <div class="chart-wrap chart-wrap-sm">
+          <canvas id="chart-sparkline"></canvas>
+        </div>
+        <div class="syn-badges" id="syn-badges"></div>
+      </div>
+
+      <div class="syn-block syn-delta">
+        <div class="syn-label">
+          Δ medio vs media DOCG
+          <span class="info-tip" data-info="delta">ⓘ</span>
+        </div>
+        <div class="syn-delta-num" id="syn-delta-num">—</div>
+        <div class="syn-delta-frame" id="syn-delta-frame"></div>
+      </div>
+
+      <div class="syn-block">
+        <div class="syn-label">
+          Morfologia da DTM 5m
+          <span class="info-tip" data-info="morfo">ⓘ</span>
+        </div>
+        <div class="morfo-grid" id="morfo-grid"></div>
+      </div>
+
+      <div class="syn-block syn-source">
+        <div class="syn-src-title">Origine dati</div>
+        <div class="syn-src-body" id="syn-src-body">—</div>
+      </div>
+
+    </div>
+
+    <!-- TAB 2 — ANDAMENTO -->
+    <div class="tab-panel" id="tab-andamento">
+      <div class="chart-label">
+        <span id="and-label">Serie NDVI 2017–2025</span>
+        <span class="info-tip" data-info="serie">ⓘ</span>
+      </div>
+
+      <div class="seg-toggle" role="tablist" aria-label="Modalità lettura">
+        <button class="seg-btn active" data-mode="abs" type="button">Valori</button>
+        <button class="seg-btn" data-mode="delta" type="button">Δ vs DOCG</button>
+      </div>
+
+      <div class="chart-wrap"><canvas id="chart-andamento"></canvas></div>
+    </div>
+
+    <!-- TAB 3 — STAGIONALITÀ -->
+    <div class="tab-panel" id="tab-stagionalita">
+      <div class="chart-label">
+        <span id="stag-label">NDVI per anno</span>
+        <span class="info-tip" data-info="stagionalita">ⓘ</span>
+      </div>
+
+      <div class="seg-toggle" role="tablist" aria-label="Vista stagionale">
+        <button class="seg-btn active" data-view="heatmap" type="button">Heatmap</button>
+        <button class="seg-btn disabled" data-view="decadica" type="button" disabled
+                title="In arrivo con estensione finestra giu–ago">Decadica</button>
+      </div>
+
+      <div id="heatmap-container"></div>
+      <div class="chart-wrap" id="decadica-wrap" hidden>
+        <canvas id="chart-decadica"></canvas>
+      </div>
+    </div>
+
+    <!-- TAB 4 — MORFO assorbita nella Sintesi -->
+
+  </div>
+
+  <div id="drawer-legend">
+    <div class="drawer-leg-bar"></div>
+    <div class="drawer-leg-labels"><span>stress</span><span>vigore</span></div>
+    <div class="drawer-leg-mean">
+      <span class="drawer-leg-mean-tick"></span>
+      <span>media DOCG dell'anno</span>
+    </div>
+  </div>
+</div>
+
+<!-- Tooltip ⓘ -->
+<div id="info-popover" hidden>
+  <div class="ip-body" id="ip-body"></div>
+  <div class="ip-ref" id="ip-ref"></div>
+</div>
+
+<!-- LEGENDA esterna mappa (invariata) -->
+<div id="legend">
+  <div class="leg-title">Stress ← NDVI → Vigore</div>
+  <div class="leg-bar"></div>
+  <div class="leg-labels"><span>stress</span><span>vigore</span></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
