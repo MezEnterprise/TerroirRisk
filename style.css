@@ -82,7 +82,7 @@
     /* HERO */
     .hero {
       position: relative; z-index: 1;
-      min-height: 100vh;
+      min-height: 62vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 76px 2rem 0;
       background-image: url('vineyard.jpg');
@@ -137,7 +137,7 @@
     /* ABOUT */
     .about {
       position: relative; z-index: 1;
-      padding: 7rem 2rem; max-width: 740px; margin: 0 auto; text-align: center;
+      padding: 3rem 2rem 4rem; max-width: 740px; margin: 0 auto; text-align: center;
     }
     blockquote {
       font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
@@ -221,3 +221,98 @@
         radial-gradient(ellipse 40% 40% at 0% 100%, rgba(139,26,46,0.18) 0%, transparent 70%),
         radial-gradient(ellipse 40% 40% at 100% 0%, rgba(139,26,46,0.12) 0%, transparent 70%);
     }
+
+/* ── TERRITORIAL MAPPING CARDS (aggiunta) ── */
+.section-head {
+  position: relative; z-index: 1;
+  max-width: 1180px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-top: 1rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 6px;
+}
+.section-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+.section-note { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.02em; }
+
+.card-grid {
+  position: relative; z-index: 1;
+  max-width: 1180px; margin: 0 auto 5rem; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+.card {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  background: #100F16;
+  border: 1px solid rgba(201,169,110,0.15);
+  padding: 1.1rem 1.1rem 0.9rem;
+  height: auto;
+  transition: border-color 0.25s;
+}
+.card-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.card-bg img { width: 100%; height: 130%; object-fit: cover; transform: scale(1.15); transition: transform 0.6s ease; display: block; }
+.card:hover .card-bg img { transform: scale(1.15) translateY(-6%); }
+.card-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(16,15,22,0.90), rgba(16,15,22,0.85)); }
+.card > *:not(.card-bg) { position: relative; z-index: 1; }
+.card-docg { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.card.soon .card-docg { color: var(--muted); }
+.card-years { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 10px; }
+.year-pip { font-size: 0.5rem; letter-spacing: 0.04em; padding: 1px 4px; border-radius: 2px; font-family: 'Inter', sans-serif; color: var(--muted); background: rgba(201,169,110,0.08); }
+.year-pip.off { color: var(--dim); background: rgba(255,255,255,0.03); }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); z-index: 2; }
+.card.beta::before { background: #A85A5A; opacity: 0.7; }
+.card.soon::before { background: transparent; }
+.card:hover { border-color: rgba(201,169,110,0.45); }
+.card.soon:hover { border-color: rgba(201,169,110,0.15); cursor: default; }
+.card-region { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+.card-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 1.7rem; color: var(--cream); line-height: 1.05; margin-bottom: 4px;
+}
+.card.soon .card-title { color: var(--muted); }
+.card-beta-tag {
+  font-family: 'Inter', sans-serif; font-size: 0.5rem; letter-spacing: 0.15em;
+  color: #A85A5A; border: 1px solid rgba(168,90,90,0.45);
+  padding: 1px 5px; border-radius: 2px; text-transform: uppercase;
+  vertical-align: middle; margin-left: 8px; font-style: normal;
+}
+.card-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.card.soon .card-tag { color: var(--muted); }
+.card-meta { display: flex; flex-direction: column; gap: 5px; margin-bottom: auto; }
+.card .meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 0.68rem; line-height: 1.4; color: var(--muted); }
+.card .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+.card.soon .meta-dot { background: var(--dim); }
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 10px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.card-status { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.card.beta .card-status { color: #A85A5A; }
+.card.soon .card-status { color: var(--dim); }
+.card-arrow { color: var(--gold); font-size: 0.9rem; transition: transform 0.2s; }
+.card:hover .card-arrow { transform: translateX(4px); }
+.card.soon .card-arrow { color: var(--dim); }
+
+/* ── AVI COLOR VARIANT (territorial mapping, distinct from gold fine-wine) ── */
+.bdg.avi.on .bdg-ring { border-color: #7B84B8; color: #7B84B8; box-shadow: 0 0 14px rgba(123,132,184,0.28); }
+.bdg.avi.on:hover .bdg-ring { box-shadow: 0 0 24px rgba(123,132,184,0.5); }
+.bdg.avi .bdg-lbl { color: #7B84B8; }
+.bdg.avi:not(.on) .bdg-ring { border-color: #4A4560; color: var(--dim); }
+.bdg.avi:not(.on) .bdg-lbl { color: var(--dim); }
+
+.section-label.avi { color: #7B84B8; }
+
+.card.avi::before { background: #7B84B8; }
+.card.avi.beta::before { background: #A85A5A; opacity: 0.7; }
+.card.avi.soon::before { background: transparent; }
+.card.avi:hover { border-color: rgba(123,132,184,0.45); }
+.card.avi .card-tag { color: #7B84B8; }
+.card.avi .meta-dot { background: #7B84B8; }
+.card.avi .card-status { color: #7B84B8; }
+.card.avi.beta .card-status { color: #A85A5A; }
+.card.avi .card-arrow { color: #7B84B8; }
+.card.avi .year-pip.on { background: rgba(123,132,184,0.12); color: #A8AFD6; }
+
+
+@media(max-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 560px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+}
