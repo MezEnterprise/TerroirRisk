@@ -290,7 +290,7 @@
 .card-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
 .card.soon .card-tag { color: var(--muted); }
 .card-meta { display: flex; flex-direction: column; gap: 5px; margin-bottom: auto; }
-.card .meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 0.68rem; line-height: 1.4; color: var(--muted); }
+.card .meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 0.68rem; line-height: 1.4; color: rgba(240,237,232,0.78); }
 .card .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
 .card.soon .meta-dot { background: var(--dim); }
 .card-footer {
