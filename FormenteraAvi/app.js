@@ -73,10 +73,9 @@ function stile(vid){
   return base;
 }
 
-const FORMENTERA_BOUNDS=L.latLngBounds([38.550,1.250],[38.800,1.720]);
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
-    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.2, minZoom:11, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
+    minZoom:10, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(VIGNE,{
@@ -137,11 +136,10 @@ function selCantina(nomeVisualizzato){
     if(bounds.length){
       let b=bounds[0];
       bounds.forEach(x=>b.extend(x));
-      const isMobile=window.innerWidth<=768;
-      map.fitBounds(b,{paddingTopLeft:[40,40],paddingBottomRight:[isMobile?40:420,isMobile?100:40],maxZoom:16});
+      map.fitBounds(b,{padding:[50,50],maxZoom:16});
     }
   } else {
-    map.fitBounds(FORMENTERA_BOUNDS);
+    map.fitBounds([[38.660,1.400],[38.690,1.570]]);
   }
 }
 
