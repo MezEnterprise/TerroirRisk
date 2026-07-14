@@ -44,8 +44,8 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   cursor:pointer; transition:all 0.15s; background:rgba(255,255,255,0.02);
 }
 .cantina-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(201,168,76,0.4); }
-.cantina-card[data-cantina="Terramoll"] { border-left:3px solid #7a9b6e; }
-.cantina-card[data-cantina="Cap de Barbaria"] { border-left:3px solid #b8875a; }
+.cantina-card[data-cantina="Terramoll"] { border-left:3px solid #7a9b6e; background:rgba(122,155,110,0.05); }
+.cantina-card[data-cantina="Cap de Barbaria"] { border-left:3px solid #b8875a; background:rgba(184,135,90,0.05); }
 .cantina-card.active { border-color:var(--gold); background:rgba(201,168,76,0.08); }
 .cc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
 .cc-name { font-size:16px; color:var(--text); font-style:italic; }
