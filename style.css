@@ -1,195 +1,210 @@
-:root {
-  --bg: #0d0d0d;
-  --burgundy: #8b2a2a;
-  --spumante: #e2cf8a;
-  --sea: #6fa8b5;
-  --gold: #c9a84c;
-  --text: #e8e0d0;
-  --text-mute: #888;
-  --panel-bg: rgba(13,13,13,0.92);
-  --border: rgba(201,168,76,0.2);
-  --panel-w: 320px;
-  --drawer-w: 385px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerroiRisk: Physics doesn't take bribes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=15">
+<style>
+  nav {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  .card-region {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .card-title {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5);
+  }
+  .card-docg {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  }
+</style>
+<base target="_blank">
+</head>
+<body onselectstart="return false" ondragstart="return false">
 
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; height:100vh; overflow:hidden; }
-#map { position:absolute; inset:0; z-index:1; }
+<canvas id="cv"></canvas>
 
-/* HOME */
-#home-btn {
-  position:absolute; top:12px; left:calc(var(--panel-w) + 10px); z-index:10;
-  background:var(--panel-bg); border:1px solid var(--border);
-  color:var(--text-mute); padding:6px 12px; font-size:11px;
-  cursor:pointer; border-radius:3px; text-decoration:none;
-  transition:color 0.15s;
-}
-#home-btn:hover { color:var(--gold); }
+<nav>
+  <a class="nav-logo" href="https://terroirisk.com/">Terroir<b>Risk</b></a>
+  <div class="badges">
 
-/* PANEL */
-#panel {
-  position:absolute; top:0; left:0; width:var(--panel-w); height:100vh;
-  background:var(--panel-bg); border-right:1px solid var(--border);
-  z-index:10; display:flex; flex-direction:column; overflow:hidden;
-}
-#panel-header { padding:16px; border-bottom:1px solid var(--border); }
-#panel-header .logo { font-size:11px; color:var(--gold); letter-spacing:3px; text-transform:uppercase; }
-#panel-header h1 { font-size:28px; margin:6px 0 4px; color:var(--sea); font-weight:700; }
-#panel-header .sub { font-size:12px; color:#fff; letter-spacing:1px; }
+    <a class="bdg on" href="Pomerol/">
+      <div class="bdg-ring">POM</div>
+      <span class="bdg-lbl">Pomerol</span>
+    </a>
 
-/* CANTINA CARDS */
-#cantina-cards { padding:14px; display:flex; flex-direction:column; gap:12px; }
-.cantina-card {
-  border:1px solid var(--border); border-radius:6px; padding:14px;
-  cursor:pointer; transition:all 0.15s; background:rgba(255,255,255,0.02);
-}
-.cantina-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(201,168,76,0.4); }
-.cantina-card[data-cantina="Terramoll"] { border-left:3px solid #7a9b6e; background:rgba(122,155,110,0.05); }
-.cantina-card[data-cantina="Cap de Barbaria"] { border-left:3px solid #b8875a; background:rgba(184,135,90,0.05); }
-.cantina-card.active { border-color:var(--gold); background:rgba(201,168,76,0.08); }
-.cc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
-.cc-name { font-size:16px; color:var(--text); font-style:italic; }
-.cc-tag { font-size:10px; color:var(--text-mute); text-align:right; }
-.cc-spark-label { font-size:9px; color:var(--text-mute); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
-.cc-spark { width:100%; height:28px; display:block; margin:2px 0 0; }
-.cc-hook { font-size:11px; color:#999; line-height:1.5; }
+    <a class="bdg on avi" href="CartizzeAvi/">
+      <div class="bdg-ring">CAR</div>
+      <span class="bdg-lbl">Cartizze</span>
+    </a>
 
-#panel-note {
-  padding:12px 14px; font-size:10px; color:var(--text-mute);
-  line-height:1.5; border-top:1px solid var(--border); font-style:italic;
-}
-#panel-foot { padding:14px 16px; border-top:1px solid var(--border); margin-top:auto; }
-#panel-foot a { color:var(--gold); font-size:11px; text-decoration:none; }
+    <a class="bdg on avi" href="FormenteraAvi/" data-internal>
+      <div class="bdg-ring">FOR</div>
+      <span class="bdg-lbl">Formentera</span>
+    </a>
 
-/* YEAR AREA + YEAR BAR */
-#year-area {
-  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
-  z-index:10; display:flex; align-items:center; gap:8px;
-}
-#year-bar {
-  display:flex; gap:4px; background:var(--panel-bg);
-  border:1px solid var(--border); padding:8px 12px; border-radius:4px;
-}
-.yr-btn {
-  background:none; border:1px solid transparent; color:var(--text-mute);
-  font-size:12px; padding:4px 10px; cursor:pointer; border-radius:2px;
-  transition:all 0.15s; font-family:monospace;
-}
-.yr-btn:hover { color:var(--text); border-color:var(--border); }
-.yr-btn.active { background:var(--burgundy); color:var(--text); border-color:var(--burgundy); }
+    <a class="bdg on avi" href="BaroloAvi/">
+      <div class="bdg-ring">BAR</div>
+      <span class="bdg-lbl">Barolo</span>
+    </a>
 
-/* LEGENDA */
-#legend {
-  position:absolute; bottom:90px; right:16px; z-index:10;
-  background:var(--panel-bg); border:1px solid var(--border);
-  padding:12px 14px; border-radius:4px; font-size:11px;
-  transition:opacity 0.2s;
-}
-#legend.hidden { display:none; }
-.leg-title { color:var(--gold); margin-bottom:8px; letter-spacing:1px; font-size:10px; text-transform:uppercase; }
-.leg-bar {
-  width:160px; height:12px;
-  background:linear-gradient(to right,rgb(105,40,32),rgb(139,58,42),rgb(170,90,58),rgb(195,135,82),rgb(214,182,112),rgb(200,190,116),rgb(165,185,105),rgb(125,172,92),rgb(90,155,82),rgb(65,150,140),rgb(55,130,175),rgb(48,108,190),rgb(38,80,178));
-  border-radius:2px; margin-bottom:4px;
-}
-.leg-labels { display:flex; justify-content:space-between; color:var(--text-mute); font-size:10px; }
-.leg-note { color:var(--text-mute); font-size:9px; margin-top:4px; font-style:italic; }
+  </div>
+  <a class="nav-contact" href="mailto:info@terroirisk.com">Get in touch</a>
+</nav>
 
-/* DRAWER */
-#drawer {
-  position:absolute; top:0; right:0; width:var(--drawer-w); height:100vh;
-  background:var(--panel-bg); border-left:1px solid var(--border);
-  z-index:20; transform:translateX(100%); transition:transform 0.3s ease;
-  display:flex; flex-direction:column;
-}
-#drawer.open { transform:translateX(0); }
-#drawer-header {
-  padding:18px 44px 16px 18px; border-bottom:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:center; flex-shrink:0;
-}
-#drawer-title { font-size:26px; color:var(--gold); font-style:italic; }
-#drawer-subtitle { font-size:13px; color:var(--text); margin-top:4px; letter-spacing:0.5px; line-height:1.4; }
-#drawer-close {
-  position:absolute; top:12px; right:14px; z-index:5;
-  background:none; border:none; color:var(--text-mute);
-  font-size:20px; cursor:pointer; line-height:1; padding:4px;
-}
-#drawer-close:hover { color:var(--text); }
+<section class="hero">
+  <p class="eyebrow">Fine wine vintage predictions · Sealed before critics score</p>
+  <h1>Physics<br>doesn't take <em>bribes</em></h1>
+  <p class="sub">
+    We know the score before anyone opens the bottle.<br><br>
+    No opinions. No relationships. No conflicts of interest.<br>
+    Only ERA5 reanalysis data and Sentinel&#8209;2 satellite imagery.
+  </p>
+  <a class="card active" href="Pomerol/" style="width:100%; max-width:780px; margin:0 auto;">
+    <div class="card-bg"><img src="Pomerol.jpg" alt=""></div>
+    <div class="card-region">Bordeaux · Pomerol</div>
+    <div class="card-title">Pétrus, Trotanoy &amp; L'Église-Clinet</div>
+    <div class="card-docg">Model v11 · SM two-epoch + VPD_p90 + flag_heat · n=96</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>LOVO out-of-sample R²=0.693 · MAE 1.18pt</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Pétrus 2025 · 98.3pt · sealed June 2026, inside WA/Suckling en primeur range</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Trotanoy 2025 · 96.0pt · sealed</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>L'Église-Clinet 2025 · 96.7pt · sealed</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+</section>
 
-#drawer-tabs { display:flex; border-bottom:1px solid var(--border); flex-shrink:0; }
-.tab-btn {
-  flex:1; padding:10px 4px; background:none; border:none;
-  color:var(--text-mute); font-size:11px; cursor:pointer;
-  letter-spacing:1px; border-bottom:2px solid transparent;
-  transition:all 0.15s; display:flex; flex-direction:column; gap:2px;
-}
-.tab-btn .tb-name { font-size:11px; }
-.tab-btn .tb-tech { font-size:9px; opacity:0.6; }
-.tab-btn:hover { color:var(--text); }
-.tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+<div class="section-head">
+  <span class="section-label">Fine Wine Intelligence</span>
+  <span class="section-note">Critic score predicted from climate physics, sealed pre-verdict on Bitcoin</span>
+</div>
 
-#drawer-body { flex:1; overflow-y:auto; padding:18px; }
-#drawer-body::-webkit-scrollbar { width:4px; }
-#drawer-body::-webkit-scrollbar-thumb { background:var(--border); }
+<section class="about">
+  <blockquote>
+    "The vine remembers every drought, every frost, every warm September night.
+    We only learned to read its memory."
+    <cite>TerroiRisk, 2026</cite>
+  </blockquote>
+  <p class="about-text">
+    TerroiRisk predicts the critic score of a vintage from climate physics alone,
+    published before any critic opens a bottle.<br><br>
+    Each prediction is sealed on the Bitcoin blockchain: proof of existence, before a date.
+    When the scores arrive, our record already exists.
+    <strong>You cannot rewrite what the atmosphere measured.</strong>
+  </p>
+</section>
 
-.syn-block { margin-bottom:22px; }
-.syn-label {
-  font-size:10px; color:var(--text-mute); text-transform:uppercase;
-  letter-spacing:1px; margin-bottom:8px;
-}
-.big-readout { display:flex; align-items:baseline; gap:10px; }
-.br-value { font-size:32px; color:var(--gold); font-family:monospace; }
-.br-word { font-size:14px; color:var(--text); font-style:italic; }
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">1.18<sup>pt</sup></div>
+    <div class="stat-l">Mean absolute error<br>Pomerol, out-of-sample</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">3</div>
+    <div class="stat-l">Wines sealed<br>Pomerol</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">2025</div>
+    <div class="stat-l">Vintage sealed<br>before critics score</div>
+  </div>
+</div>
 
-.chart-wrap { position:relative; height:180px; margin-bottom:10px; }
-#year-badges { display:flex; gap:8px; margin-top:10px; }
-.ybadge { font-size:10px; padding:3px 8px; border-radius:3px; }
-.ybadge.up { background:rgba(90,155,82,0.15); color:#8fc582; }
-.ybadge.dn { background:rgba(139,42,42,0.2); color:#d98a8a; }
+<div class="section-head">
+  <span class="section-label avi">Territorial Mapping — AVI</span>
+  <span class="section-note">Same physical rigor, applied to terroir instead of critic score</span>
+</div>
+<div class="card-grid">
+  <a class="card avi active" href="CartizzeAvi/">
+    <div class="card-bg"><img src="Valdobbiadene.jpg" alt=""></div>
+    <div class="card-region">Veneto · Valdobbiadene</div>
+    <div class="card-title">Cartizze</div>
+    <div class="card-docg">DOCG Cartizze · Glera · 107 ha</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>83 hand-drawn parcels · 9 contrade · 5m Veneto DTM</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>4 Sentinel-2 indices · NDVI · NDRE · EVI · NDMI · 9 vintages</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>2022 vintage: −55% NDMI water stress per parcel</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Resilience view: distressed years per vine · 2022 water event</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
 
-/* COSA SAPPIAMO */
-#cosa-sappiamo-grid { display:flex; flex-direction:column; gap:10px; }
-.cs-row {
-  background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  padding:12px 14px; border-radius:3px;
-}
-.cs-row .cs-label { font-size:10px; color:var(--text-mute); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
-.cs-row .cs-val { font-size:13px; color:var(--text); line-height:1.5; }
+  <a class="card avi active" href="FormenteraAvi/" data-internal>
+    <div class="card-bg"><img src="Formentera.jpg" alt=""></div>
+    <div class="card-region">Balearic Islands · Formentera</div>
+    <div class="card-title">Formentera</div>
+    <div class="card-docg">Terramoll &amp; Cap de Barbaria · International + native varieties · ~14 ha</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>Terramoll &amp; Cap De Bar · dry-farmed old-vine alberello</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>NDVI/NDMI 2017–2025 · hand-drawn perimeter, field-verified</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>2025 vintage: earliest harvest on record, −31% NDVI 2022→2025</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
 
-#drawer-legend {
-  padding:10px 18px 14px; border-top:1px solid var(--border);
-  background:var(--panel-bg); flex-shrink:0;
-}
-.drawer-leg-bar {
-  height:6px; border-radius:2px; margin-bottom:4px;
-  background:linear-gradient(to right,rgb(105,40,32),rgb(139,58,42),rgb(170,90,58),rgb(195,135,82),rgb(214,182,112),rgb(200,190,116),rgb(165,185,105),rgb(125,172,92),rgb(90,155,82),rgb(65,150,140),rgb(55,130,175),rgb(48,108,190),rgb(38,80,178));
-}
-.drawer-leg-labels {
-  display:flex; justify-content:space-between; color:var(--text-mute);
-  font-size:9px; text-transform:uppercase; letter-spacing:1px;
-}
+  <a class="card avi beta" href="BaroloAvi/">
+    <div class="card-bg"><img src="Barolo.jpg" alt=""></div>
+    <div class="card-region">Piedmont · Langhe</div>
+    <div class="card-title">Barolo<span class="card-beta-tag">Beta</span></div>
+    <div class="card-docg">DOCG Barolo · Nebbiolo · 177 MGA</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>177 MGA · 11 municipalities</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Sentinel-2 NDVI · 5m DTM · 2017–2025</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Summary · Trend · Seasonality</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Beta</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+</div>
 
-/* LEAFLET OVERRIDES */
-.leaflet-tooltip {
-  background:var(--panel-bg); border:1px solid var(--border);
-  color:var(--text); font-size:12px; padding:4px 8px;
-  border-radius:3px; font-family:'Georgia',serif;
-}
-.leaflet-control-zoom a {
-  background:var(--panel-bg) !important; color:var(--text) !important;
-  border-color:var(--border) !important;
-}
+<footer>© 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps · <a href="mailto:info@terroirisk.com" style="color:#8a724a;text-decoration:none">info@terroirisk.com</a></footer>
 
-/* Poligono sotto soglia (CAPDEBAR_07/09) */
-.leaflet-interactive.low-confidence { opacity:0.35; }
-
-/* MOBILE */
-@media (max-width: 768px) {
-  :root { --panel-w: 0px; --drawer-w: 100vw; }
-  #panel { display:none; }
-  #home-btn { left:10px; }
-  #year-area { bottom:8px; left:8px; right:8px; transform:none; }
-  #year-bar { padding:6px 8px; gap:2px; justify-content:center; }
-  .yr-btn { font-size:11px; padding:3px 6px; }
-  #legend { bottom:70px; right:8px; }
-}
+<script src="app.js?v=15"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[data-internal]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = this.href;
+      });
+    });
+  });
+</script>
+</body>
+</html>
