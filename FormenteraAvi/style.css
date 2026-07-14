@@ -2,6 +2,7 @@
   --bg: #0d0d0d;
   --burgundy: #8b2a2a;
   --spumante: #e2cf8a;
+  --sea: #6fa8b5;
   --gold: #c9a84c;
   --text: #e8e0d0;
   --text-mute: #888;
@@ -33,7 +34,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 }
 #panel-header { padding:16px; border-bottom:1px solid var(--border); }
 #panel-header .logo { font-size:11px; color:var(--gold); letter-spacing:3px; text-transform:uppercase; }
-#panel-header h1 { font-size:28px; margin:6px 0 4px; color:var(--spumante); font-weight:700; }
+#panel-header h1 { font-size:28px; margin:6px 0 4px; color:var(--sea); font-weight:700; }
 #panel-header .sub { font-size:12px; color:#fff; letter-spacing:1px; }
 
 /* CANTINA CARDS */
@@ -43,11 +44,14 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   cursor:pointer; transition:all 0.15s; background:rgba(255,255,255,0.02);
 }
 .cantina-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(201,168,76,0.4); }
+.cantina-card[data-cantina="Terramoll"] { border-left:3px solid #7a9b6e; }
+.cantina-card[data-cantina="Cap de Barbaria"] { border-left:3px solid #b8875a; }
 .cantina-card.active { border-color:var(--gold); background:rgba(201,168,76,0.08); }
 .cc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
 .cc-name { font-size:16px; color:var(--text); font-style:italic; }
 .cc-tag { font-size:10px; color:var(--text-mute); text-align:right; }
-.cc-spark { width:100%; height:28px; display:block; margin:6px 0; }
+.cc-spark-label { font-size:9px; color:var(--text-mute); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+.cc-spark { width:100%; height:28px; display:block; margin:2px 0 0; }
 .cc-hook { font-size:11px; color:#999; line-height:1.5; }
 
 #panel-note {
