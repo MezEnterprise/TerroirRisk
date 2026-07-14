@@ -73,10 +73,10 @@ function stile(vid){
   return base;
 }
 
-const FORMENTERA_BOUNDS=L.latLngBounds([38.640,1.370],[38.710,1.600]);
+const FORMENTERA_BOUNDS=L.latLngBounds([38.550,1.250],[38.800,1.720]);
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
-    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.3, minZoom:12, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
+    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.2, minZoom:11, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(VIGNE,{
