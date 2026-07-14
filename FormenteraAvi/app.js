@@ -174,11 +174,57 @@ function selVigna(vid){
   aggDrawer();
 }
 
+function serieMediaCantina(cantina, idx){
+  const out={};
+  for(const a of ANNI){
+    const vals=[];
+    for(const k in DATI){
+      if(DATI[k].c!==cantina||DATI[k].low) continue;
+      const y=DATI[k].y[a];
+      if(y&&y[idx]!=null) vals.push(y[idx]);
+    }
+    if(vals.length) out[a]=vals.reduce((s,x)=>s+x,0)/vals.length;
+  }
+  return out;
+}
+
+function posizionePercentileCantina(cantina, idx, anno){
+  const serie=serieMediaCantina(cantina, idx);
+  const vals=Object.values(serie);
+  if(!vals.length) return null;
+  const val=serie[anno];
+  if(val==null) return null;
+  const min=Math.min(...vals), max=Math.max(...vals);
+  if(max===min) return 0.5;
+  return (val-min)/(max-min);
+}
+
+function divergenzaTesto(vid, anno){
+  const cantina=DATI[vid].c;
+  const pNdvi=posizionePercentileCantina(cantina,'ndvi',anno);
+  const pNdmi=posizionePercentileCantina(cantina,'ndmi',anno);
+  if(pNdvi==null||pNdmi==null) return null;
+  const gap=pNdvi-pNdmi;
+  const nome=NOME_VISUALIZZATO[cantina]||cantina;
+  if(gap>0.25){
+    return `In ${anno}, ${nome}'s average canopy vigor (NDVI) sits near its historical high across all valid parcels, while water status (NDMI) sits much lower. The canopy still looks green, but the water signal is already down: a masked stress pattern documented in vineyard remote sensing literature.`;
+  } else if(gap<-0.25){
+    return `In ${anno}, ${nome}'s average water status (NDMI) is relatively better than canopy vigor (NDVI) across its own history: vigor is the lagging signal here, not water.`;
+  } else {
+    return `In ${anno}, ${nome}'s average canopy vigor and water status move together: no masked stress pattern detected at winery level.`;
+  }
+}
+
 function cosaSappiamo(vid){
   const v=DATI[vid];
   const rows=COSA_SAPPIAMO[v.c]||[];
   const g=document.getElementById('cosa-sappiamo-grid');
-  g.innerHTML=rows.map(([l,val])=>`<div class="cs-row"><div class="cs-label">${l}</div><div class="cs-val">${val}</div></div>`).join('');
+  let html=rows.map(([l,val])=>`<div class="cs-row"><div class="cs-label">${l}</div><div class="cs-val">${val}</div></div>`).join('');
+  const div=divergenzaTesto(vid, annoSel);
+  if(div){
+    html+=`<div class="cs-row cs-row-dynamic"><div class="cs-label">NDVI / NDMI divergence, ${annoSel}</div><div class="cs-val">${div}</div></div>`;
+  }
+  g.innerHTML=html;
 }
 
 function aggDrawer(){
