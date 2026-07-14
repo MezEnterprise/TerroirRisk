@@ -10,15 +10,15 @@ const NOME_VISUALIZZATO = {"Terramoll":"Terramoll","Cap De Bar":"Cap de Barbaria
 const COSA_SAPPIAMO = {
   "Terramoll": [
     ["Gestione idrica","100% non irrigata, biologica, stress idrico strutturale dichiarato dalla cantina."],
-    ["Fondazione","2000, acquisita giugno 2025 da Vintae (gruppo Rioja)."],
-    ["Quota","~200m, altopiano La Mola."],
-    ["Nota","Vendemmia 2025 la più precoce della storia della cantina — inizio luglio invece di fine luglio/agosto, annata secca."]
+    ["Posizione","Altopiano La Mola, ~200m — stesso calcare miocenico di Cap de Barbaria, ma su un altopiano stabile invece che su una scogliera erosa dal mare."],
+    ["Nota","Vendemmia 2025 la più precoce della storia della cantina — inizio luglio invece di fine luglio/agosto, annata secca."],
+    ["Il confronto","Nonostante la non-irrigazione, il satellite la vede sistematicamente meno stressata di Cap de Barbaria, che invece irriga in parte."]
   ],
   "Cap De Bar": [
     ["Gestione idrica","Mista: Cabernet/Merlot irrigati (~1ha), Monastrell/Fogoneu non irrigati, vigna vecchia franco di piede (~0.5ha)."],
-    ["Fondazione","2000, indipendente."],
-    ["Quota","~65m, promontorio Cap de Barbaria."],
-    ["Suolo (dichiarato dalla cantina)","Passa da molto sabbioso nella zona Merlot a molto pietroso nella zona Cabernet — la pietra calcarea aggrava lo stress idrico."]
+    ["Il suolo, dichiarato dalla cantina","\u201cIl suolo passa da molto sabbioso nella zona del Merlot a molto pietroso nella zona del Cabernet. La pietra \u00e8 calcarea e aggrava gli effetti della mancanza d'acqua.\u201d"],
+    ["Posizione","Promontorio Cap de Barbaria, ~65m — scogliera attiva, soggetta a erosione del mare: meno suolo trattenuto sopra la roccia rispetto a un altopiano stabile."],
+    ["Perch\u00e9 conta","Meno terra sopra la roccia calcarea significa meno acqua trattenuta tra una pioggia e l'altra \u2014 indipendentemente da quanto si irrighi."]
   ]
 };
 
@@ -73,10 +73,10 @@ function stile(vid){
   return base;
 }
 
-const FORMENTERA_BOUNDS=L.latLngBounds([38.660,1.400],[38.690,1.570]);
+const FORMENTERA_BOUNDS=L.latLngBounds([38.640,1.370],[38.710,1.600]);
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
-    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.7, minZoom:12}).fitBounds(FORMENTERA_BOUNDS);
+    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.3, minZoom:12, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(VIGNE,{
