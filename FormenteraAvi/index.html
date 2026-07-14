@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formentera — Archivio Satellitare 2017–2025</title>
+  <title>Formentera · Satellite Archive 2017–2025</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,41 +11,39 @@
 <div id="map"></div>
 <a href="https://terroirisk.com/" id="home-btn">⌂ Home</a>
 
-<!-- PANNELLO SINISTRO: 2 card cantina invece di lista/ricerca -->
+<!-- LEFT PANEL: 2 winery cards instead of list/search -->
 <div id="panel">
   <div id="panel-header">
     <div class="logo">Sentinel-2 · Formentera</div>
     <h1>Formentera</h1>
-    <div class="sub">2 cantine · 28 parcelle · 2017–2025</div>
+    <div class="sub">2 wineries · 28 parcels · 2017–2025</div>
   </div>
 
   <div id="cantina-cards">
     <div class="cantina-card" data-cantina="Terramoll">
       <div class="cc-top">
         <span class="cc-name">Terramoll</span>
-        <span class="cc-tag">200m · non irrigata</span>
+        <span class="cc-tag">200m · not irrigated</span>
       </div>
       <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Stress idrico 2017–25</div>
-      <div class="cc-hook">Stress idrico in aumento costante dal 2021, coerente con la vendemmia 2025 più precoce della storia della cantina.</div>
+      <div class="cc-spark-label">Water stress 2017–25</div>
+      <div class="cc-hook">Water stress rising steadily since 2021, consistent with the 2025 harvest, the earliest in the winery's history.</div>
     </div>
     <div class="cantina-card" data-cantina="Cap de Barbaria">
       <div class="cc-top">
         <span class="cc-name">Cap de Barbaria</span>
-        <span class="cc-tag">65m · irrigazione parziale</span>
+        <span class="cc-tag">65m · partially irrigated</span>
       </div>
       <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Stress idrico 2017–25</div>
-      <div class="cc-hook">Più stressata di Terramoll ogni singolo anno, nonostante l'irrigazione parziale — lo stesso stress che il mercato premia nei suoi vini.</div>
+      <div class="cc-spark-label">Water stress 2017–25</div>
+      <div class="cc-hook">More stressed than Terramoll every single year, despite partial irrigation: the same stress the market rewards in its wines.</div>
     </div>
   </div>
 
-  <div id="panel-note">
-    Caso studio
-  </div>
+  <div id="panel-note">click a parcel for details</div>
 
   <div id="panel-foot">
-    <a href="#" id="pdf-link" target="_blank" style="display:none">↓ Scarica la guida (PDF)</a>
+    <a href="#" id="pdf-link" target="_blank" style="display:none">↓ Download the guide (PDF)</a>
   </div>
 </div>
 
@@ -58,57 +56,49 @@
 <div id="drawer">
   <div id="drawer-header">
     <div class="dh-titleblock">
-      <div id="drawer-title">—</div>
+      <div id="drawer-title">···</div>
       <div id="drawer-subtitle"></div>
     </div>
-    <button id="drawer-close" aria-label="Chiudi">✕</button>
+    <button id="drawer-close" aria-label="Close">✕</button>
   </div>
 
-  <div id="drawer-tabs" role="tablist" aria-label="Cosa guardare">
+  <div id="drawer-tabs" role="tablist" aria-label="What to look at">
     <button class="tab-btn active" data-idx="ndvi">
-      <span class="tb-name">Vigore</span><span class="tb-tech">NDVI</span>
+      <span class="tb-name">Vigor</span><span class="tb-tech">NDVI</span>
     </button>
     <button class="tab-btn" data-idx="ndmi">
-      <span class="tb-name">Stato idrico</span><span class="tb-tech">NDMI</span>
+      <span class="tb-name">Water status</span><span class="tb-tech">NDMI</span>
     </button>
     <button class="tab-btn" data-idx="ndre">
-      <span class="tb-name">Clorofilla</span><span class="tb-tech">NDRE</span>
+      <span class="tb-name">Chlorophyll</span><span class="tb-tech">NDRE</span>
     </button>
   </div>
 
   <div id="drawer-body">
     <div class="syn-block">
-      <div class="syn-label" id="read-label">Vigore nell'anno selezionato</div>
+      <div class="syn-label" id="read-label">Vigor in the selected year</div>
       <div class="big-readout">
-        <span class="br-value" id="br-value">—</span>
-        <span class="br-word" id="br-word">—</span>
+        <span class="br-value" id="br-value">···</span>
+        <span class="br-word" id="br-word">···</span>
       </div>
     </div>
 
     <div class="syn-block">
-      <div class="syn-label" id="and-label">Andamento 2017–2025</div>
+      <div class="syn-label" id="and-label">Trend 2017–2025</div>
       <div class="chart-wrap"><canvas id="chart"></canvas></div>
       <div id="year-badges"></div>
     </div>
 
     <div class="syn-block" id="cosa-sappiamo-block">
-      <div class="syn-label">Cosa sappiamo</div>
+      <div class="syn-label">What we know</div>
       <div id="cosa-sappiamo-grid"></div>
     </div>
   </div>
 
   <div id="drawer-legend">
     <div class="drawer-leg-bar"></div>
-    <div class="drawer-leg-labels"><span>basso</span><span>alto</span></div>
+    <div class="drawer-leg-labels"><span>low</span><span>high</span></div>
   </div>
-</div>
-
-<!-- LEGENDA esterna -->
-<div id="legend">
-  <div class="leg-title" id="leg-title">Vigore della chioma</div>
-  <div class="leg-bar"></div>
-  <div class="leg-labels"><span id="leg-lo">basso</span><span id="leg-hi">alto</span></div>
-  <div class="leg-note" id="leg-note">colori confrontabili tra tutti gli anni</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
