@@ -3,106 +3,208 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formentera · Satellite Archive 2017–2025</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="stylesheet" href="style.css">
+  <title>TerroiRisk: Physics doesn't take bribes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=15">
+<style>
+  nav {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  .card-region {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .card-title {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5);
+  }
+  .card-docg {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  }
+</style>
+<base target="_blank">
 </head>
-<body>
-<div id="map"></div>
-<a href="https://terroirisk.com/" id="home-btn">⌂ Home</a>
+<body onselectstart="return false" ondragstart="return false">
 
-<!-- LEFT PANEL: 2 winery cards instead of list/search -->
-<div id="panel">
-  <div id="panel-header">
-    <div class="logo">Sentinel-2 · Formentera</div>
-    <h1>Formentera</h1>
-    <div class="sub">2 wineries · 28 parcels · 2017–2025</div>
+<canvas id="cv"></canvas>
+
+<nav>
+  <a class="nav-logo" href="https://terroirisk.com/">Terroir<b>Risk</b></a>
+  <div class="badges">
+
+    <a class="bdg on" href="Pomerol/">
+      <div class="bdg-ring">POM</div>
+      <span class="bdg-lbl">Pomerol</span>
+    </a>
+
+    <a class="bdg on avi" href="CartizzeAvi/">
+      <div class="bdg-ring">CAR</div>
+      <span class="bdg-lbl">Cartizze</span>
+    </a>
+
+    <a class="bdg on avi" href="FormenteraAvi/" data-internal>
+      <div class="bdg-ring">FOR</div>
+      <span class="bdg-lbl">Formentera</span>
+    </a>
+
+    <a class="bdg on avi" href="BaroloAvi/">
+      <div class="bdg-ring">BAR</div>
+      <span class="bdg-lbl">Barolo</span>
+    </a>
+
   </div>
+  <a class="nav-contact" href="mailto:info@terroirisk.com">Get in touch</a>
+</nav>
 
-  <div id="cantina-cards">
-    <div class="cantina-card" data-cantina="Terramoll">
-      <div class="cc-top">
-        <span class="cc-name">Terramoll</span>
-        <span class="cc-tag">200m · not irrigated</span>
-      </div>
-      <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Water stress 2017–25</div>
-      <div class="cc-hook">Water stress rising steadily since 2021, consistent with the 2025 harvest, the earliest in the winery's history.</div>
+<section class="hero">
+  <p class="eyebrow">Fine wine vintage predictions · Sealed before critics score</p>
+  <h1>Physics<br>doesn't take <em>bribes</em></h1>
+  <p class="sub">
+    We know the score before anyone opens the bottle.<br><br>
+    No opinions. No relationships. No conflicts of interest.<br>
+    Only ERA5 reanalysis data and Sentinel&#8209;2 satellite imagery.
+  </p>
+  <a class="card active" href="Pomerol/" style="width:100%; max-width:780px; margin:0 auto;">
+    <div class="card-bg"><img src="Pomerol.jpg" alt=""></div>
+    <div class="card-region">Bordeaux · Pomerol</div>
+    <div class="card-title">Pétrus, Trotanoy &amp; L'Église-Clinet</div>
+    <div class="card-docg">Model v11 · SM two-epoch + VPD_p90 + flag_heat · n=96</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
     </div>
-    <div class="cantina-card" data-cantina="Cap de Barbaria">
-      <div class="cc-top">
-        <span class="cc-name">Cap de Barbaria</span>
-        <span class="cc-tag">65m · partially irrigated</span>
-      </div>
-      <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Water stress 2017–25</div>
-      <div class="cc-hook">More stressed than Terramoll every single year, despite partial irrigation: the same stress the market rewards in its wines.</div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>LOVO out-of-sample R²=0.693 · MAE 1.18pt</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Pétrus 2025 · 98.3pt · sealed June 2026, inside WA/Suckling en primeur range</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Trotanoy 2025 · 96.0pt · sealed</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>L'Église-Clinet 2025 · 96.7pt · sealed</span></div>
     </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+</section>
+
+<div class="section-head">
+  <span class="section-label">Fine Wine Intelligence</span>
+  <span class="section-note">Critic score predicted from climate physics, sealed pre-verdict on Bitcoin</span>
+</div>
+
+<section class="about">
+  <blockquote>
+    "The vine remembers every drought, every frost, every warm September night.
+    We only learned to read its memory."
+    <cite>TerroiRisk, 2026</cite>
+  </blockquote>
+  <p class="about-text">
+    TerroiRisk predicts the critic score of a vintage from climate physics alone,
+    published before any critic opens a bottle.<br><br>
+    Each prediction is sealed on the Bitcoin blockchain: proof of existence, before a date.
+    When the scores arrive, our record already exists.
+    <strong>You cannot rewrite what the atmosphere measured.</strong>
+  </p>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">1.18<sup>pt</sup></div>
+    <div class="stat-l">Mean absolute error<br>Pomerol, out-of-sample</div>
   </div>
-
-  <div id="panel-note">click a parcel for details</div>
-
-  <div id="panel-foot">
-    <a href="#" id="pdf-link" target="_blank" style="display:none">↓ Download the guide (PDF)</a>
+  <div class="stat">
+    <div class="stat-n">3</div>
+    <div class="stat-l">Wines sealed<br>Pomerol</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">2025</div>
+    <div class="stat-l">Vintage sealed<br>before critics score</div>
   </div>
 </div>
 
-<!-- YEAR BAR -->
-<div id="year-area">
-  <div id="year-bar"></div>
+<div class="section-head">
+  <span class="section-label avi">Territorial Mapping — AVI</span>
+  <span class="section-note">Same physical rigor, applied to terroir instead of critic score</span>
+</div>
+<div class="card-grid">
+  <a class="card avi active" href="CartizzeAvi/">
+    <div class="card-bg"><img src="Valdobbiadene.jpg" alt=""></div>
+    <div class="card-region">Veneto · Valdobbiadene</div>
+    <div class="card-title">Cartizze</div>
+    <div class="card-docg">DOCG Cartizze · Glera · 107 ha</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>83 hand-drawn parcels · 9 contrade · 5m Veneto DTM</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>4 Sentinel-2 indices · NDVI · NDRE · EVI · NDMI · 9 vintages</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>2022 vintage: −55% NDMI water stress per parcel</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Resilience view: distressed years per vine · 2022 water event</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card avi active" href="FormenteraAvi/" data-internal>
+    <div class="card-bg"><img src="Formentera.jpg" alt=""></div>
+    <div class="card-region">Balearic Islands · Formentera</div>
+    <div class="card-title">Formentera</div>
+    <div class="card-docg">Terramoll &amp; Cap de Barbaria · International + native varieties · ~14 ha</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>Terramoll &amp; Cap De Barbaria · dry-farmed old-vine alberello</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>NDVI/NDMI 2017–2025 · hand-drawn perimeter, field-verified</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>2025 vintage: earliest harvest on record, −31% NDVI 2022→2025</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Active</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card avi beta" href="BaroloAvi/">
+    <div class="card-bg"><img src="Barolo.jpg" alt=""></div>
+    <div class="card-region">Piemonte · Langhe</div>
+    <div class="card-title">Barolo<span class="card-beta-tag">Beta</span></div>
+    <div class="card-docg">DOCG Barolo · Nebbiolo · 177 MGA</div>
+    <div class="card-years">
+      <span class="year-pip on">17</span><span class="year-pip on">18</span><span class="year-pip on">19</span><span class="year-pip on">20</span>
+      <span class="year-pip on">21</span><span class="year-pip on">22</span><span class="year-pip on">23</span><span class="year-pip on">24</span><span class="year-pip on">25</span>
+    </div>
+    <div class="card-meta">
+      <div class="meta-row"><span class="meta-dot"></span><span>177 MGA · 11 municipalities</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Sentinel-2 NDVI · 5m DTM · 2017–2025</span></div>
+      <div class="meta-row"><span class="meta-dot"></span><span>Summary · Trend · Seasonality</span></div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">● Beta</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
 </div>
 
-<!-- DRAWER -->
-<div id="drawer">
-  <div id="drawer-header">
-    <div class="dh-titleblock">
-      <div id="drawer-title">···</div>
-      <div id="drawer-subtitle"></div>
-    </div>
-    <button id="drawer-close" aria-label="Close">✕</button>
-  </div>
+<footer>© 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps · <a href="mailto:info@terroirisk.com" style="color:#8a724a;text-decoration:none">info@terroirisk.com</a></footer>
 
-  <div id="drawer-tabs" role="tablist" aria-label="What to look at">
-    <button class="tab-btn active" data-idx="ndvi">
-      <span class="tb-name">Vigor</span><span class="tb-tech">NDVI</span>
-    </button>
-    <button class="tab-btn" data-idx="ndmi">
-      <span class="tb-name">Water status</span><span class="tb-tech">NDMI</span>
-    </button>
-    <button class="tab-btn" data-idx="ndre">
-      <span class="tb-name">Chlorophyll</span><span class="tb-tech">NDRE</span>
-    </button>
-  </div>
-
-  <div id="drawer-body">
-    <div class="syn-block">
-      <div class="syn-label" id="read-label">Vigor in the selected year</div>
-      <div class="big-readout">
-        <span class="br-value" id="br-value">···</span>
-        <span class="br-word" id="br-word">···</span>
-      </div>
-    </div>
-
-    <div class="syn-block">
-      <div class="syn-label" id="and-label">Trend 2017–2025</div>
-      <div class="chart-wrap"><canvas id="chart"></canvas></div>
-      <div id="year-badges"></div>
-    </div>
-
-    <div class="syn-block" id="cosa-sappiamo-block">
-      <div class="syn-label">What we know</div>
-      <div id="cosa-sappiamo-grid"></div>
-    </div>
-  </div>
-
-  <div id="drawer-legend">
-    <div class="drawer-leg-bar"></div>
-    <div class="drawer-leg-labels"><span>low</span><span>high</span></div>
-  </div>
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=15"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[data-internal]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = this.href;
+      });
+    });
+  });
+</script>
 </body>
 </html>
