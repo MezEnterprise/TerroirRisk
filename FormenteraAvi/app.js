@@ -3,32 +3,32 @@ const VIGNE = {"type":"FeatureCollection","features":[{"type":"Feature","propert
 const ANNI = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
 const SPARK_NDMI = {"Terramoll": {"2017": -0.0631, "2018": -0.0701, "2019": -0.0845, "2020": -0.0798, "2021": -0.0514, "2022": -0.0519, "2023": -0.0974, "2024": -0.1007, "2025": -0.1137}, "Cap de Barbaria": {"2017": -0.2048, "2018": -0.176, "2019": -0.2044, "2020": -0.2033, "2021": -0.1762, "2022": -0.1879, "2023": -0.1936, "2024": -0.1613, "2025": -0.1527}};
 
-/* Formentera - Archivio Satellitare. Dati EMBEDDATI. Adattato da Cartizze per 2 cantine. */
+/* Formentera - Satellite Archive. Data EMBEDDED. Adapted from Cartizze for 2 wineries. */
 
 const NOME_VISUALIZZATO = {"Terramoll":"Terramoll","Cap De Bar":"Cap de Barbaria"};
 
 const COSA_SAPPIAMO = {
   "Terramoll": [
-    ["Gestione idrica","100% non irrigata, biologica, stress idrico strutturale dichiarato dalla cantina."],
-    ["Posizione","Altopiano La Mola, ~200m — stesso calcare miocenico di Cap de Barbaria, ma su un altopiano stabile invece che su una scogliera erosa dal mare."],
-    ["Nota","Vendemmia 2025 la più precoce della storia della cantina — inizio luglio invece di fine luglio/agosto, annata secca."],
-    ["Il confronto","Nonostante la non-irrigazione, il satellite la vede sistematicamente meno stressata di Cap de Barbaria, che invece irriga in parte."]
+    ["Water management","100% non-irrigated, organic, structural water stress declared by the winery."],
+    ["Location","La Mola plateau, ~200m: same Miocene limestone as Cap de Barbaria, but on a stable plateau rather than a sea-eroded cliff."],
+    ["Note","2025 harvest was the earliest in the winery's history, starting in July instead of late July/August, a dry vintage."],
+    ["The comparison","Despite non-irrigation, satellite data shows it consistently less stressed than Cap de Barbaria, which irrigates part of its vines."]
   ],
   "Cap De Bar": [
-    ["Gestione idrica","Mista: Cabernet/Merlot irrigati (~1ha), Monastrell/Fogoneu non irrigati, vigna vecchia franco di piede (~0.5ha)."],
-    ["Il suolo, dichiarato dalla cantina","\u201cIl suolo passa da molto sabbioso nella zona del Merlot a molto pietroso nella zona del Cabernet. La pietra \u00e8 calcarea e aggrava gli effetti della mancanza d'acqua.\u201d"],
-    ["Posizione","Promontorio Cap de Barbaria, ~65m — scogliera attiva, soggetta a erosione del mare: meno suolo trattenuto sopra la roccia rispetto a un altopiano stabile."],
-    ["Perch\u00e9 conta","Meno terra sopra la roccia calcarea significa meno acqua trattenuta tra una pioggia e l'altra \u2014 indipendentemente da quanto si irrighi."]
+    ["Water management","Mixed: Cabernet/Merlot irrigated (~1ha), Monastrell/Fogoneu non-irrigated, old own-rooted vines (~0.5ha)."],
+    ["The soil, as declared by the winery","\u201cThe soil ranges from very sandy in the Merlot area to very stony in the Cabernet area. The stone is limestone and worsens the effects of water scarcity.\u201d"],
+    ["Location","Cap de Barbaria promontory, ~65m: an active cliff, subject to erosion by the sea, with less soil retained above the bedrock than on a stable plateau."],
+    ["Why it matters","Less soil above the limestone bedrock means less water retained between one rainfall and the next, regardless of how much irrigation is applied."]
   ]
 };
 
 const PAROLE={
-  ndvi:[[0.30,'molto rigogliosa'],[0.24,'rigogliosa'],[0.20,'discreta'],[0.17,'nella media'],[0.14,'sotto la media'],[0,'poco vigorosa']],
-  ndmi:[[0.05,'ben idratata'],[0.00,'buona'],[-0.05,'discreta'],[-0.10,'un po\u2019 secca'],[-0.15,'tendente all\u2019asciutto'],[-1,'asciutta']],
-  ndre:[[0.20,'molto carica'],[0.16,'buona'],[0.13,'discreta'],[0.10,'nella media'],[0.07,'sotto la media'],[0,'scarica']]
+  ndvi:[[0.30,'very lush'],[0.24,'lush'],[0.20,'fair'],[0.17,'average'],[0.14,'below average'],[0,'sparse']],
+  ndmi:[[0.05,'well hydrated'],[0.00,'good'],[-0.05,'fair'],[-0.10,'somewhat dry'],[-0.15,'trending dry'],[-1,'dry']],
+  ndre:[[0.20,'very charged'],[0.16,'good'],[0.13,'fair'],[0.10,'average'],[0.07,'below average'],[0,'depleted']]
 };
-const NOMI={ndvi:'Vigore',ndmi:'Stato idrico',ndre:'Clorofilla'};
-const NOMI_LUNGHI={ndvi:'Vigore della chioma',ndmi:'Stato idrico',ndre:'Clorofilla'};
+const NOMI={ndvi:'Vigor',ndmi:'Water status',ndre:'Chlorophyll'};
+const NOMI_LUNGHI={ndvi:'Canopy vigor',ndmi:'Water status',ndre:'Chlorophyll'};
 
 /* range FISSO globale su tutti i poligoni Formentera validi, tutti gli anni */
 function calcolaRange(idx){
@@ -57,7 +57,7 @@ function colore(val,ix){
   return'#888';
 }
 function valore(vid,ix,anno){const v=DATI[vid];if(!v)return null;const y=v.y[anno];return(y&&y[ix]!=null)?y[ix]:null;}
-function parola(val,ix){if(val==null)return'\u2014';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
+function parola(val,ix){if(val==null)return'\u00b7\u00b7\u00b7';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
 function etichetta(vid){const v=DATI[vid];const c=NOME_VISUALIZZATO[v.c]||v.c;return c;}
 
 function stile(vid){
@@ -73,9 +73,10 @@ function stile(vid){
   return base;
 }
 
+const FORMENTERA_BOUNDS=L.latLngBounds([38.480,1.130],[38.870,1.840]);
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
-    minZoom:10, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
+    maxBounds:FORMENTERA_BOUNDS, maxBoundsViscosity:0.4, minZoom:10, maxZoom:19}).fitBounds([[38.660,1.400],[38.690,1.570]]);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(VIGNE,{
@@ -92,10 +93,7 @@ function initMap(){
 function ricolora(){for(const vid in layers)layers[vid].setStyle(stile(vid));aggLegenda();}
 
 function aggLegenda(){
-  document.getElementById('leg-title').textContent=NOMI_LUNGHI[idxSel];
-  const r=RANGE[idxSel];
-  document.getElementById('leg-lo').textContent='basso ('+r.min.toFixed(2)+')';
-  document.getElementById('leg-hi').textContent='alto ('+r.max.toFixed(2)+')';
+  /* legenda esterna rimossa: il colore resta leggibile via drawer-legend quando una parcella è selezionata */
 }
 
 /* CARD CANTINA: sparkline + click = filtra mappa su quella cantina */
@@ -171,7 +169,6 @@ function centraSu(vid){
 function selVigna(vid){
   vidSel=vid;
   document.getElementById('drawer').classList.add('open');
-  document.getElementById('legend').classList.add('hidden');
   ricolora();
   centraSu(vid);
   aggDrawer();
@@ -188,25 +185,25 @@ function aggDrawer(){
   const vid=vidSel,v=DATI[vid];
   const low=v.low;
   document.getElementById('drawer-title').textContent=etichetta(vid);
-  const sub=`${v.a} ha`+(low?' \u00b7 dato sotto soglia risoluzione':'');
+  const sub=`${v.a} ha`+(low?' \u00b7 below resolution threshold':'');
   document.getElementById('drawer-subtitle').textContent=sub;
   const val=valore(vid,idxSel,annoSel);
-  document.getElementById('read-label').textContent=NOMI_LUNGHI[idxSel]+' nel '+annoSel;
-  document.getElementById('br-value').textContent=val==null?'\u2014':val.toFixed(3);
-  document.getElementById('br-word').textContent=low?'dato limitato':parola(val,idxSel);
-  document.getElementById('and-label').textContent='Andamento '+NOMI[idxSel]+' 2017\u20132025';
+  document.getElementById('read-label').textContent=NOMI_LUNGHI[idxSel]+' in '+annoSel;
+  document.getElementById('br-value').textContent=val==null?'\u00b7\u00b7\u00b7':val.toFixed(3);
+  document.getElementById('br-word').textContent=low?'limited data':parola(val,idxSel);
+  document.getElementById('and-label').textContent='Trend '+NOMI[idxSel]+' 2017\u20132025';
   const serie=ANNI.map(a=>({a,val:v.y[a]?v.y[a][idxSel]:null})).filter(x=>x.val!=null);
   const badge=document.getElementById('year-badges');
   if(badge&&serie.length){
     const best=serie.reduce((m,x)=>x.val>m.val?x:m);
     const worst=serie.reduce((m,x)=>x.val<m.val?x:m);
-    badge.innerHTML=`<span class="ybadge up">migliore: ${best.a}</span>`+
-                    `<span class="ybadge dn">peggiore: ${worst.a}</span>`;
+    badge.innerHTML=`<span class="ybadge up">best: ${best.a}</span>`+
+                    `<span class="ybadge dn">worst: ${worst.a}</span>`;
   } else if(badge){ badge.innerHTML=''; }
   cosaSappiamo(vid);
   grafico(vid);
 }
-document.getElementById('drawer-close').onclick=()=>{document.getElementById('drawer').classList.remove('open');document.getElementById('legend').classList.remove('hidden');vidSel=null;ricolora();};
+document.getElementById('drawer-close').onclick=()=>{document.getElementById('drawer').classList.remove('open');vidSel=null;ricolora();};
 
 function grafico(vid){
   const v=DATI[vid],ctx=document.getElementById('chart');
@@ -228,8 +225,8 @@ function grafico(vid){
     ctx.beginPath();ctx.moveTo(ca.left,yV);ctx.lineTo(ca.right,yV);ctx.stroke();ctx.restore();}};
   chart=new Chart(ctx,{type:'line',
     data:{labels:ANNI,datasets:[
-      {label:'questa parcella',data:serie,borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.1)',tension:.3,spanGaps:true,pointRadius:ptRadius,pointBackgroundColor:ptColor,pointBorderColor:ptColor},
-      {label:'media '+NOME_VISUALIZZATO[cantina],data:media,borderColor:'#8b2a2a',borderDash:[4,4],tension:.3,pointRadius:0}
+      {label:'this parcel',data:serie,borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.1)',tension:.3,spanGaps:true,pointRadius:ptRadius,pointBackgroundColor:ptColor,pointBorderColor:ptColor},
+      {label:NOME_VISUALIZZATO[cantina]+' average',data:media,borderColor:'#8b2a2a',borderDash:[4,4],tension:.3,pointRadius:0}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{color:'#8a8478',font:{size:10}}},
