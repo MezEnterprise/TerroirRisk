@@ -40,7 +40,7 @@
       <span class="bdg-lbl">Cartizze</span>
     </a>
 
-    <a class="bdg on avi" href="FormenteraAvi/">
+    <a class="bdg on avi" href="FormenteraAvi/" data-internal>
       <div class="bdg-ring">FOR</div>
       <span class="bdg-lbl">Formentera</span>
     </a>
@@ -145,7 +145,7 @@
     </div>
   </a>
 
-  <a class="card avi active" href="FormenteraAvi/">
+  <a class="card avi active" href="FormenteraAvi/" data-internal>
     <div class="card-bg"><img src="Formentera.jpg" alt=""></div>
     <div class="card-region">Balearic Islands · Formentera</div>
     <div class="card-title">Formentera</div>
@@ -189,5 +189,16 @@
 <footer>© 2026 TerroiRisk · terroirisk.com · Predictions sealed on Bitcoin via OpenTimestamps · <a href="mailto:info@terroirisk.com" style="color:#8a724a;text-decoration:none">info@terroirisk.com</a></footer>
 
 <script src="app.js?v=15"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[data-internal]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = this.href;
+      });
+    });
+  });
+</script>
 </body>
 </html>
