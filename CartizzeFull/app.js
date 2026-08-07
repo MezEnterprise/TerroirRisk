@@ -53,14 +53,21 @@ function initMap(){
   L.tileLayer('https://mt0.google.com/vt/lyrs=s&hl=it&x={x}&y={y}&z={z}',{maxZoom:20,subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(CONFINE,{style:{color:'#c9a84c',weight:2,fill:false,dashArray:'5,4',opacity:0.85}}).addTo(map);
+  const TOOLTIP_MIN_ZOOM=16;
   L.geoJSON(VIGNE,{
     style:f=>stile(f.properties.vid),
     onEachFeature:(f,lyr)=>{const p=f.properties;layers[p.vid]=lyr;
       lyr.bindTooltip(etichetta(p.vid),{sticky:true,direction:'top'});
+      lyr.on('mouseover',()=>{
+        lyr.setStyle({weight:1.8,color:'#fff'});
+        if(map.getZoom()<TOOLTIP_MIN_ZOOM) lyr.closeTooltip();
+      });
       lyr.on('click',()=>selVigna(p.vid));
-      lyr.on('mouseover',()=>lyr.setStyle({weight:1.8,color:'#fff'}));
       lyr.on('mouseout',()=>lyr.setStyle(stile(p.vid)));}
   }).addTo(map);
+  map.on('zoomend',()=>{
+    if(map.getZoom()<TOOLTIP_MIN_ZOOM){for(const vid in layers)layers[vid].closeTooltip();}
+  });
 }
 function ricolora(){for(const vid in layers)layers[vid].setStyle(stile(vid));aggLegenda();}
 
