@@ -50,7 +50,7 @@ const CARTIZZE_BOUNDS=L.latLngBounds([45.882,12.010],[45.910,12.052]);
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
     maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:14}).setView([45.896,12.031],15);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19}).addTo(map);
+  L.tileLayer('https://mt0.google.com/vt/lyrs=s&hl=it&x={x}&y={y}&z={z}',{maxZoom:20,subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(CONFINE,{style:{color:'#c9a84c',weight:2,fill:false,dashArray:'5,4',opacity:0.85}}).addTo(map);
   L.geoJSON(VIGNE,{
