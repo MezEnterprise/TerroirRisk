@@ -34,7 +34,7 @@ function colore(val,ix){
 }
 function valore(vid,ix,anno){const v=DATI[vid];if(!v)return null;const y=v.y[anno];return(y&&y[ix]!=null)?y[ix]:null;}
 function parola(val,ix){if(val==null)return'\u2014';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
-function etichetta(vid){const v=DATI[vid];const c=v.c||'Cartizze';return v.q?`${c} \u2014 ${v.q} m`:c;}
+function etichetta(vid){const v=DATI[vid];if(!v)return'Cartizze \u2014 dato non disponibile';const c=v.c||'Cartizze';return v.q?`${c} \u2014 ${v.q} m`:c;}
 
 function stile(vid){
   const sel = vid===vidSel;
@@ -135,6 +135,18 @@ function selVigna(vid){
 }
 function aggDrawer(){
   const vid=vidSel,v=DATI[vid];
+  if(!v){
+    document.getElementById('drawer-title').textContent='Cartizze';
+    document.getElementById('drawer-subtitle').textContent='dato satellite non disponibile per questa parcella';
+    document.getElementById('read-label').textContent='';
+    document.getElementById('br-value').textContent='\u2014';
+    document.getElementById('br-word').textContent='\u2014';
+    document.getElementById('and-label').textContent='';
+    const badge=document.getElementById('year-badges');if(badge)badge.innerHTML='';
+    const g=document.getElementById('morfo-grid');if(g)g.innerHTML='';
+    if(chart){chart.destroy();chart=null;}
+    return;
+  }
   document.getElementById('drawer-title').textContent=v.c||'Cartizze';
   const sub=(v.q?`${v.q} m s.l.m. \u00b7 `:'')+`${v.a} ha`;
   document.getElementById('drawer-subtitle').textContent=sub;
