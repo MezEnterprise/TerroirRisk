@@ -22,13 +22,13 @@ const GEST_STATI = {
   R: { col:'#1D9E75', nome:'Rigogliosa', azione:'mantieni', colAz:'#1D9E75',
        vede:'vigore alto e costante, regge anche le annate secche',
        cosa:'il terreno la nutre da se\u2019: suolo profondo, riserve idriche proprie',
-       vigna:'non forzare \u2014 solo piccola restituzione di cio\u2019 che la vendemmia asporta',
+       vigna:'non forzare. solo piccola restituzione di cio\u2019 che la vendemmia asporta',
        cantina:'base solida e regolare; raramente d\u00e0 le punte di concentrazione delle pi\u00f9 magre' },
   D: { col:'#EF9F27', nome:'Discontinua', azione:'acqua', colAz:'#BA7517',
        vede:'vigorosa nelle buone annate, cala quando manca la pioggia',
        cosa:'il limite \u00e8 l\u2019acqua, non il nutrimento: nelle secche ha sete, non fame',
        vigna:'gestione idrica (soccorso, bacino, pacciamatura); concime solo di restituzione',
-       cantina:'lo stress idrico lieve pu\u00f2 concentrare zuccheri e aromi \u2014 spesso un pregio, da leggere col palato' },
+       cantina:'lo stress idrico lieve pu\u00f2 concentrare zuccheri e aromi. spesso un pregio, da leggere col palato' },
   S: { col:'#B4B2A9', nome:'Sobria', azione:'gestisci', colAz:'#8a8478',
        vede:'vigore contenuto ma stabile negli anni',
        cosa:'pianta in equilibrio su suolo magro, resa naturalmente bassa',
@@ -69,7 +69,7 @@ ricolora = function(){
     const g = GEST[vid], v = DATI[vid];
     if(g){
       const st = GEST_STATI[g[2]];
-      const nome = (v&&v.c?v.c:'Cartizze') + (v&&v.q?' \u2014 '+v.q+' m':'');
+      const nome = (v&&v.c?v.c:'Cartizze') + (v&&v.q?' . '+v.q+' m':'');
       if(layers[vid].getTooltip())
         layers[vid].setTooltipContent(nome+' \u00b7 '+st.nome+' \u2192 '+st.azione);
     }
