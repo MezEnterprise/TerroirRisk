@@ -24,6 +24,11 @@ const RESIL = {"AVI_0001":{"cat":"ok","res":-0.0294,"delta":-0.1978,"res_smooth"
 /* range fissi per le due scale colore */
 const RESIL_RANGE = {res:{min:-0.1416,max:0.1407}, smooth:{min:-0.0771,max:0.0846}};
 
+/* parcelle con nome proprio dichiarato (etichetta normata "Vigna", non anonime come le altre) */
+const RESIL_NOMI = {
+  'AVI_0365': 'Vigna La Rivetta \u00b7 Villa Sandi'
+};
+
 /* stato vista: false=off, 'res'=residuo, 'smooth'=zone del colle */
 let resilMode = false;
 
@@ -73,7 +78,7 @@ ricolora = function(){
     layers[vid].setStyle(stile(vid));
     if(resilMode){
       const r = RESIL[vid], v = DATI[vid];
-      const nome = (v && v.c ? v.c : 'Cartizze');
+      const nome = RESIL_NOMI[vid] || (v && v.c ? v.c : 'Cartizze');
       let txt;
       if(!r || r.cat==='nd'){
         txt = nome+' \u00b7 esclusa. '+(r?r.motivo:'dato non disponibile');
@@ -138,12 +143,22 @@ aggDrawer = function(){
       + (r ? 'esclusa. ' + r.motivo : 'dato non disponibile')
       + '</div>';
   } else {
+    let extra = '';
+    if(vid === 'AVI_0365'){
+      extra = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border,rgba(255,255,255,0.1));'
+        + 'color:var(--text-mute);font-size:12px;line-height:1.5;">'
+        + 'Su questa parcella, il 2022 \u00e8 anche il minimo assoluto di umidit\u00e0 fogliare a luglio dell\u2019intera serie 2017-2025 \u2014 '
+        + 'e coincide con il voto pi\u00f9 basso ricevuto dall\u2019etichetta in quegli anni (James Suckling, fonte pubblica). '
+        + 'Confronto singolo, non un modello: mostra che l\u2019estremo satellitare e l\u2019estremo del giudizio critico cadono nello stesso anno.'
+        + '</div>';
+    }
     box.innerHTML = '<div class="syn-label">Resilienza 2022</div>'
       + '<div style="color:var(--text-mute);font-size:12px;padding:4px 0;line-height:1.5;">'
       + 'residuo (scostamento dalla norma): <strong style="color:var(--text)">'+(r.res>=0?'+':'')+r.res.toFixed(3)+'</strong><br>'
       + 'zona (media coi vicini ~50m): <strong style="color:var(--text)">'+(r.res_smooth>=0?'+':'')+r.res_smooth.toFixed(3)+'</strong><br>'
       + 'valore grezzo 2022 (NDMI, non normalizzato): <strong style="color:var(--text)">'+r.delta.toFixed(3)+'</strong>'
-      + '</div>';
+      + '</div>'
+      + extra;
   }
 };
 
@@ -170,10 +185,12 @@ function buildResilienzaUI(){
   areaHost.parentNode.insertBefore(desc, areaHost.nextSibling);
 
   function setBanner(){
-    if(resilMode==='smooth')
+    if(resilMode==='smooth'){
       desc.textContent = 'Il colle ha zone distinte largh\u2019 qualche decina di metri, non filari isolati. pattern statisticamente non casuale';
-    else
-      desc.textContent = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022. 392 su 553, le altre escluse per qualit\u00e0 del dato';
+    } else {
+      desc.innerHTML = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022. 392 su 553, le altre escluse per qualit\u00e0 del dato'
+        + '<br><span style="opacity:0.75;font-size:0.92em;">Il 2022 \u00e8 stato l\u2019anno pi\u00f9 stressato della decade sul Cartizze. Lo stesso tipo di estremo idrico, misurato con lo stesso metodo su Pomerol (Bordeaux), anticipa cali di giudizio critico anche l\u00ec \u2014 la fisica del disagio idrico non conosce confini di denominazione.</span>';
+    }
   }
 
   function enterResil(mode){
