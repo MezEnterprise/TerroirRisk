@@ -111,7 +111,7 @@ aggLegenda = function(){
     if(lo) lo.textContent = 'peggio del solito';
     if(hi) hi.textContent = 'meglio del solito';
     if(bar){ bar.style.background = _GRD_RES; bar.style.backgroundSize = '100% 100%'; bar.style.width = '100%'; }
-    if(note) note.textContent = 'grigio = 161 parcelle su 553 escluse: geometria di bordo poco affidabile, troppo pochi pixel satellite o dato mancante';
+    if(note) note.textContent = 'come ogni parcella ha retto la siccit\u00e0 2022 rispetto al proprio comportamento normale \u2014 grigio = 161 su 553 escluse per dato insufficiente';
   }
 };
 
