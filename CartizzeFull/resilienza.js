@@ -147,26 +147,27 @@ aggDrawer = function(){
   }
 };
 
-/* ---- UI: due bottoni indipendenti, stesso livello di luna/gestione ---- */
+/* ---- UI: due bottoni indipendenti, montati in #view-icons (barra alta) ---- */
 function buildResilienzaUI(){
-  const host = document.getElementById('year-area') || document.body;
+  const iconHost = document.getElementById('view-icons') || document.getElementById('year-area') || document.body;
+  const areaHost = document.getElementById('year-area') || document.body;
 
   const btnRes = document.createElement('button');
   btnRes.id = 'resil-btn';
   btnRes.title = 'Resilienza 2022 \u2014 scostamento dalla norma per parcella';
   btnRes.textContent = '\u26A1';
-  host.appendChild(btnRes);
+  iconHost.appendChild(btnRes);
 
   const btnZone = document.createElement('button');
   btnZone.id = 'zone-btn';
   btnZone.title = 'Zone del colle \u2014 media coi vicini entro ~50m';
   btnZone.textContent = '\uD83C\uDF0A';
-  host.appendChild(btnZone);
+  iconHost.appendChild(btnZone);
 
   const desc = document.createElement('div');
   desc.id = 'resil-desc';
   desc.style.display = 'none';
-  host.appendChild(desc);
+  areaHost.parentNode.insertBefore(desc, areaHost.nextSibling);
 
   function setBanner(){
     if(resilMode==='smooth')
@@ -183,7 +184,7 @@ function buildResilienzaUI(){
     if(gb && gb.classList.contains('active')) gb.click();
 
     resilMode = mode;
-    const yb=document.getElementById('year-bar'); if(yb) yb.style.display='none';
+    const yb=document.getElementById('year-bar'); if(yb) yb.classList.add('disabled');
     const dt=document.getElementById('drawer-tabs'); if(dt) dt.style.display='none';
     desc.style.display = 'block';
     btnRes.classList.toggle('active', mode==='res');
@@ -193,7 +194,7 @@ function buildResilienzaUI(){
   }
   function exitResil(){
     resilMode = false;
-    const yb=document.getElementById('year-bar'); if(yb) yb.style.display='';
+    const yb=document.getElementById('year-bar'); if(yb) yb.classList.remove('disabled');
     const dt=document.getElementById('drawer-tabs'); if(dt) dt.style.display='';
     desc.style.display = 'none';
     btnRes.classList.remove('active');
