@@ -168,26 +168,27 @@ function buildRivettaInset(){
   const host = document.getElementById('map') || document.body;
   const box = document.createElement('div');
   box.id = 'rivetta-inset';
-  box.style.cssText = 'position:absolute;right:12px;top:64px;z-index:650;'
-    + 'width:210px;padding:11px 13px;border-radius:10px;'
-    + 'background:rgba(20,20,22,0.88);border:1px solid rgba(240,200,90,0.55);'
+  box.style.cssText = 'position:absolute;left:12px;top:64px;z-index:650;'
+    + 'width:200px;padding:11px 13px;border-radius:10px;'
+    + 'background:rgba(20,20,22,0.9);border:1px solid rgba(240,200,90,0.55);'
     + 'box-shadow:0 4px 18px rgba(0,0,0,0.45);'
-    + 'font-family:inherit;color:#eee;display:none;backdrop-filter:blur(3px);';
+    + 'font-family:inherit;color:#eee;display:none;backdrop-filter:blur(3px);box-sizing:border-box;';
   // due micro-barre: NDMI luglio (min storico) vs voto Suckling (min periodo)
   box.innerHTML =
     '<div style="font-size:11px;letter-spacing:.4px;color:#f0c85a;font-weight:600;margin-bottom:7px;">'
       + 'IL CASO LA RIVETTA \u00b7 2022</div>'
-    + '<div style="font-size:11.5px;line-height:1.45;color:#cfcfcf;margin-bottom:9px;">'
-      + 'L\u2019anno pi\u00f9 secco visto dal satellite \u00e8 anche il voto pi\u00f9 basso dato dal critico.</div>'
-    + _rivBar('umidit\u00e0 fogliare, luglio', 'minimo 2017-2025', 8, '#7aa15f')
-    + _rivBar('voto James Suckling', 'minimo del periodo', 12, '#c9974a')
-    + '<button id="rivetta-vedi" style="margin-top:9px;width:100%;padding:6px 0;'
-      + 'border:1px solid rgba(240,200,90,0.6);border-radius:7px;background:rgba(240,200,90,0.14);'
-      + 'color:#f0c85a;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;">'
-      + 'Vedi la parcella \u2192</button>'
-    + '<div style="font-size:10px;color:#8a8a8a;margin-top:7px;line-height:1.4;">'
+    + '<div style="font-size:11px;line-height:1.4;color:#cfcfcf;margin-bottom:9px;">'
+      + 'L\u2019anno pi\u00f9 secco dal satellite \u00e8 anche il voto pi\u00f9 basso del critico.</div>'
+    + _rivBar('umidit\u00e0 fogliare lug', 'min \u201917-\u201925', 8, '#7aa15f')
+    + _rivBar('voto Suckling', 'min periodo', 12, '#c9974a')
+    + '<button id="rivetta-vedi" style="margin-top:9px;width:100%;padding:8px 0;'
+      + 'border:1px solid rgba(240,200,90,0.7);border-radius:7px;background:rgba(240,200,90,0.2);'
+      + 'color:#f7d97a;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.3px;">'
+      + 'VEDI LA PARCELLA \u2192</button>'
+    + '<div style="font-size:9.5px;color:#8a8a8a;margin-top:7px;line-height:1.35;">'
       + 'confronto singolo, non un modello</div>';
   function _vaiRivetta(){
+    rivettaInsetShow(false);                       // il box piccolo lascia il posto al drawer
     if(typeof layers!=='undefined' && layers['AVI_0365']){
       const ly = layers['AVI_0365'];
       if(typeof map!=='undefined' && ly.getBounds){ try{ map.fitBounds(ly.getBounds(), {maxZoom:17, padding:[40,40]}); }catch(e){} }
