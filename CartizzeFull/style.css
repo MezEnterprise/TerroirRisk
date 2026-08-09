@@ -138,6 +138,17 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .leg-labels { display:flex; justify-content:space-between; color:var(--text-mute); font-size:10px; }
 #leg-note { line-height:1.4; }
 
+/* box spiegazione, separato dalla legenda colore */
+#view-explain {
+  position:absolute; bottom:90px; right:232px; z-index:10;
+  max-width:260px;
+  background:var(--panel-bg); border:1px solid var(--border);
+  padding:12px 14px; border-radius:4px;
+}
+#view-explain #leg-note {
+  color:#fff; font-size:13px; line-height:1.5; font-family:'Georgia',serif;
+}
+
 /* DRAWER */
 #drawer {
   position:absolute; top:0; right:0; width:var(--drawer-w); height:100vh;
@@ -800,8 +811,9 @@ body.night #night-banner { display:flex; }
 #night-banner .nb-moon { font-size:15px; }
 
 @media (max-width:768px) {
-  #night-banner {
-    left:8px; right:8px; transform:none; top:54px;
-    font-size:11px; white-space:normal; justify-content:center; text-align:center;
+  #view-explain {
+    position:absolute; bottom:190px; right:8px; left:8px;
+    max-width:none;
   }
+  #legend { right:8px; }
 }
