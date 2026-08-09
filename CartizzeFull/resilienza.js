@@ -168,7 +168,7 @@ function buildRivettaInset(){
   const host = document.getElementById('map') || document.body;
   const box = document.createElement('div');
   box.id = 'rivetta-inset';
-  box.style.cssText = 'position:absolute;left:12px;top:64px;z-index:650;'
+  box.style.cssText = 'position:absolute;left:12px;top:64px;z-index:1200;'
     + 'width:200px;padding:11px 13px;border-radius:10px;'
     + 'background:rgba(20,20,22,0.9);border:1px solid rgba(240,200,90,0.55);'
     + 'box-shadow:0 4px 18px rgba(0,0,0,0.45);'
