@@ -111,7 +111,7 @@ aggLegenda = function(){
     if(lo) lo.textContent = 'peggio del solito';
     if(hi) hi.textContent = 'meglio del solito';
     if(bar){ bar.style.background = _GRD_RES; bar.style.backgroundSize = '100% 100%'; bar.style.width = '100%'; }
-    if(note) note.textContent = 'grigio = esclusa (bordo, pochi pixel o dato mancante) \u2014 vedi scheda \u00b7 quanto la parcella si discosta dal proprio comportamento normale';
+    if(note) note.textContent = 'grigio = esclusa (bordo, pochi pixel, dato mancante) \u2014 vedi scheda per il motivo';
   }
 };
 
