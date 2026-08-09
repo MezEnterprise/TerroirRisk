@@ -76,6 +76,8 @@ function aggLegenda(){
   const r=RANGE[idxSel];
   document.getElementById('leg-lo').textContent='basso ('+r.min.toFixed(2)+')';
   document.getElementById('leg-hi').textContent='alto ('+r.max.toFixed(2)+')';
+  const note=document.getElementById('leg-note');
+  if(note) note.textContent='colori confrontabili tra tutti gli anni';
 }
 
 /* PANNELLO: vigne per contrada (come comuni/MGA di Barolo) */
