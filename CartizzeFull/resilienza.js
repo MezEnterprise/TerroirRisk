@@ -117,7 +117,7 @@ aggLegenda = function(){
 
 /* override aggDrawer: quando si clicca una parcella, aggiungo il dettaglio
    "valore grezzo 2022" in coda alla scheda esistente, indipendentemente
-   dalla vista attiva (base, resilienza o zone) — sempre visibile su richiesta
+   dalla vista attiva (base, resilienza o zone), sempre visibile su richiesta
    di dettaglio, mai come vista mappa a se'. */
 aggDrawer = function(){
   _aggDrawer_resil_base();
