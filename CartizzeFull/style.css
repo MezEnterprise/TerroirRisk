@@ -99,15 +99,17 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 #mga-meta .meta-row { display:flex; gap:12px; color:var(--text-mute); flex-wrap:wrap; }
 #mga-meta .meta-val { color:var(--text); font-size:12px; }
 
-/* YEAR AREA + YEAR BAR + LUNA */
+/* YEAR AREA (in alto): year-bar + icone viste, sullo stesso piano */
 #year-area {
-  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  position:absolute; top:16px; left:50%; transform:translateX(-50%);
   z-index:10; display:flex; align-items:center; gap:8px;
 }
 #year-bar {
   display:flex; gap:4px; background:var(--panel-bg);
   border:1px solid var(--border); padding:8px 12px; border-radius:4px;
+  transition:opacity 0.2s;
 }
+#year-bar.disabled { opacity:0.35; pointer-events:none; }
 .yr-btn {
   background:none; border:1px solid transparent; color:var(--text-mute);
   font-size:12px; padding:4px 10px; cursor:pointer; border-radius:2px;
@@ -115,6 +117,9 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 }
 .yr-btn:hover { color:var(--text); border-color:var(--border); }
 .yr-btn.active { background:var(--burgundy); color:var(--text); border-color:var(--burgundy); }
+
+/* contenitore icone viste (resilienza, zone, gestione...) */
+#view-icons { display:flex; align-items:center; gap:6px; }
 
 /* LEGENDA */
 #legend {
@@ -246,7 +251,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   :root { --panel-w: 0px; --drawer-w: 100vw; }
   #panel { display:none; }
   #home-btn { left:10px; }
-  #year-area { bottom:8px; left:8px; right:8px; transform:none; }
+  #year-area { top:8px; left:8px; right:8px; transform:none; flex-wrap:wrap; }
   #year-bar { padding:6px 8px; gap:2px; }
   .yr-btn { font-size:11px; padding:3px 6px; }
   #basemap-switch, #color-switch { right:8px; }
