@@ -142,32 +142,33 @@ if(typeof aggDrawer==='function'){
   };
 }
 
-/* ---- UI: bottone foglia accanto a luna e fulmine ---- */
+/* ---- UI: bottone foglia, montato in #view-icons (barra alta) ---- */
 function buildGestioneUI(){
-  const host=document.getElementById('year-area')||document.body;
+  const iconHost=document.getElementById('view-icons')||document.getElementById('year-area')||document.body;
+  const areaHost=document.getElementById('year-area')||document.body;
   if(document.getElementById('gest-btn')) return;
   const btn=document.createElement('button');
   btn.id='gest-btn'; btn.title='Vista gestione \u00b7 come si comporta la vigna';
   btn.textContent='\uD83C\uDF43'; // 🍃
-  host.appendChild(btn);
+  iconHost.appendChild(btn);
 
   const desc=document.createElement('div');
   desc.id='gest-desc'; desc.style.display='none';
   desc.textContent='Non quanto \u00e8 verde una vigna, ma come gestisce acqua e nutrienti nel tempo. Clicca una parcella per il dettaglio.';
-  host.appendChild(desc);
+  areaHost.parentNode.insertBefore(desc, areaHost.nextSibling);
 
   function enter(){
-    if(_gActive()){ const mb=document.getElementById('moon-btn'); if(mb) mb.click(); }
     if(_gResil()){ const rb=document.getElementById('resil-btn'); if(rb) rb.click(); }
+    const zb=document.getElementById('zone-btn'); if(zb && zb.classList.contains('active')) zb.click();
     gestMode=true;
-    const yb=document.getElementById('year-bar'); if(yb) yb.style.display='none';
+    const yb=document.getElementById('year-bar'); if(yb) yb.classList.add('disabled');
     const dt=document.getElementById('drawer-tabs'); if(dt) dt.style.display='none';
     desc.style.display='block'; btn.classList.add('active');
     ricolora(); if(vidSel) gestDrawer(vidSel);
   }
   function exit(){
     gestMode=false;
-    const yb=document.getElementById('year-bar'); if(yb) yb.style.display='';
+    const yb=document.getElementById('year-bar'); if(yb) yb.classList.remove('disabled');
     const dt=document.getElementById('drawer-tabs'); if(dt) dt.style.display='';
     desc.style.display='none'; btn.classList.remove('active');
     gestDrawerHide(); aggLegenda(); ricolora();
