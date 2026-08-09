@@ -162,6 +162,52 @@ aggDrawer = function(){
   }
 };
 
+/* ---- INSET "caso La Rivetta": riquadro fisso, visibile solo in vista residuo ---- */
+function buildRivettaInset(){
+  if(document.getElementById('rivetta-inset')) return;
+  const host = document.getElementById('map') || document.body;
+  const box = document.createElement('div');
+  box.id = 'rivetta-inset';
+  box.style.cssText = 'position:absolute;right:12px;bottom:12px;z-index:650;'
+    + 'width:210px;padding:11px 13px;border-radius:10px;'
+    + 'background:rgba(20,20,22,0.88);border:1px solid rgba(240,200,90,0.55);'
+    + 'box-shadow:0 4px 18px rgba(0,0,0,0.45);cursor:pointer;'
+    + 'font-family:inherit;color:#eee;display:none;backdrop-filter:blur(3px);';
+  // due micro-barre: NDMI luglio (min storico) vs voto Suckling (min periodo)
+  box.innerHTML =
+    '<div style="font-size:11px;letter-spacing:.4px;color:#f0c85a;font-weight:600;margin-bottom:7px;">'
+      + 'IL CASO LA RIVETTA \u00b7 2022</div>'
+    + '<div style="font-size:11.5px;line-height:1.45;color:#cfcfcf;margin-bottom:9px;">'
+      + 'L\u2019anno pi\u00f9 secco visto dal satellite \u00e8 anche il voto pi\u00f9 basso dato dal critico.</div>'
+    + _rivBar('umidit\u00e0 fogliare, luglio', 'minimo 2017-2025', 8, '#7aa15f')
+    + _rivBar('voto James Suckling', 'minimo del periodo', 12, '#c9974a')
+    + '<div style="font-size:10px;color:#8a8a8a;margin-top:8px;line-height:1.4;">'
+      + 'confronto singolo, non un modello \u00b7 clicca per la parcella</div>';
+  box.onclick = function(){
+    if(typeof layers!=='undefined' && layers['AVI_0365']){
+      const ly = layers['AVI_0365'];
+      if(typeof map!=='undefined' && ly.getBounds){ try{ map.fitBounds(ly.getBounds(), {maxZoom:17, padding:[40,40]}); }catch(e){} }
+      vidSel = 'AVI_0365';
+      ricolora();
+      if(typeof aggDrawer==='function') aggDrawer();
+    }
+  };
+  host.appendChild(box);
+}
+/* micro-barra orizzontale: frazione riempita = quanto "basso" (barra corta = estremo) */
+function _rivBar(label, sub, fillPct, col){
+  return '<div style="margin-bottom:7px;">'
+    + '<div style="font-size:10.5px;color:#bdbdbd;display:flex;justify-content:space-between;">'
+      + '<span>'+label+'</span><span style="color:#f0c85a;">'+sub+'</span></div>'
+    + '<div style="height:7px;border-radius:4px;background:rgba(255,255,255,0.09);margin-top:3px;overflow:hidden;">'
+      + '<div style="height:100%;width:'+fillPct+'%;background:'+col+';border-radius:4px;"></div></div>'
+    + '</div>';
+}
+function rivettaInsetShow(on){
+  const b = document.getElementById('rivetta-inset');
+  if(b) b.style.display = on ? 'block' : 'none';
+}
+
 /* ---- UI: due bottoni indipendenti, montati in #view-icons (barra alta) ---- */
 function buildResilienzaUI(){
   const iconHost = document.getElementById('view-icons') || document.getElementById('year-area') || document.body;
@@ -206,6 +252,7 @@ function buildResilienzaUI(){
     desc.style.display = 'block';
     btnRes.classList.toggle('active', mode==='res');
     btnZone.classList.toggle('active', mode==='smooth');
+    rivettaInsetShow(mode==='res');
     setBanner();
     ricolora();
   }
@@ -216,6 +263,7 @@ function buildResilienzaUI(){
     desc.style.display = 'none';
     btnRes.classList.remove('active');
     btnZone.classList.remove('active');
+    rivettaInsetShow(false);
     aggLegenda();
     ricolora();
   }
@@ -227,6 +275,8 @@ function buildResilienzaUI(){
   if(moonBtn){
     moonBtn.addEventListener('click', ()=>{ if(resilMode) exitResil(); }, true);
   }
+
+  buildRivettaInset();
 }
 
 function avviaResilienza(tentativi){
