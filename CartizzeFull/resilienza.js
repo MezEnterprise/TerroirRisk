@@ -279,6 +279,10 @@ function buildResilienzaUI(){
   btnRes.onclick = ()=>{ resilMode==='res' ? exitResil() : enterResil('res'); };
   btnZone.onclick = ()=>{ resilMode==='smooth' ? exitResil() : enterResil('smooth'); };
 
+  /* esposta a livello globale: gestione.js deve poter spegnere la vista resilienza
+     (qualunque modalita') senza cliccare bottoni alla cieca */
+  window.exitResil = exitResil;
+
   const moonBtn = document.getElementById('moon-btn');
   if(moonBtn){
     moonBtn.addEventListener('click', ()=>{ if(resilMode) exitResil(); }, true);
