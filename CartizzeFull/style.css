@@ -138,12 +138,13 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .leg-labels { display:flex; justify-content:space-between; color:var(--text-mute); font-size:10px; }
 #leg-note { line-height:1.4; }
 
-/* box spiegazione, separato dalla legenda colore */
+/* box spiegazione, monoriga in basso al centro (dove prima era la year-bar) */
 #view-explain {
-  position:absolute; bottom:90px; right:232px; z-index:10;
-  max-width:260px;
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  z-index:15; max-width:90vw;
   background:var(--panel-bg); border:1px solid var(--border);
-  padding:12px 14px; border-radius:4px;
+  padding:10px 20px; border-radius:20px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 #view-explain #leg-note {
   color:#fff; font-size:13px; line-height:1.5; font-family:'Georgia',serif;
@@ -812,8 +813,8 @@ body.night #night-banner { display:flex; }
 
 @media (max-width:768px) {
   #view-explain {
-    position:absolute; bottom:190px; right:8px; left:8px;
-    max-width:none;
+    left:8px; right:8px; transform:none; bottom:8px;
+    max-width:none; white-space:normal; text-align:center; font-size:12px;
   }
   #legend { right:8px; }
 }
