@@ -158,7 +158,15 @@ function buildGestioneUI(){
   areaHost.parentNode.insertBefore(desc, areaHost.nextSibling);
 
   function enter(){
-    if(_gResil()){ const rb=document.getElementById('resil-btn'); if(rb) rb.click(); }
+    if(_gResil()){
+      // spegne la vista resilienza attiva QUALUNQUE sia (⚡ res o 🌊 smooth):
+      // cliccare resil-btn alla cieca, da 'smooth', accende invece il fulmine.
+      if(typeof exitResil==='function'){ exitResil(); }
+      else {
+        const activeId = (resilMode==='smooth') ? 'zone-btn' : 'resil-btn';
+        const rb=document.getElementById(activeId); if(rb) rb.click();
+      }
+    }
     const zb=document.getElementById('zone-btn'); if(zb && zb.classList.contains('active')) zb.click();
     gestMode=true;
     const yb=document.getElementById('year-bar'); if(yb) yb.classList.add('disabled');
