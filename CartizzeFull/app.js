@@ -34,7 +34,7 @@ function colore(val,ix){
 }
 function valore(vid,ix,anno){const v=DATI[vid];if(!v)return null;const y=v.y[anno];return(y&&y[ix]!=null)?y[ix]:null;}
 function parola(val,ix){if(val==null)return'\u2014';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
-function etichetta(vid){const v=DATI[vid];if(!v)return'Cartizze \u2014 dato non disponibile';const c=v.c||'Cartizze';return v.q?`${c} \u2014 ${v.q} m`:c;}
+function etichetta(vid){const v=DATI[vid];if(!v)return'Cartizze . dato non disponibile';const c=v.c||'Cartizze';return v.q?`${c} . ${v.q} m`:c;}
 
 function stile(vid){
   const sel = vid===vidSel;
