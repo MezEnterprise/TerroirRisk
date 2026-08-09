@@ -149,7 +149,7 @@ aggDrawer = function(){
         + 'color:var(--text-mute);font-size:12px;line-height:1.5;">'
         + 'Su questa parcella, il 2022 \u00e8 anche il minimo assoluto di umidit\u00e0 fogliare a luglio dell\u2019intera serie 2017-2025 \u2014 '
         + 'e coincide con il voto pi\u00f9 basso ricevuto dall\u2019etichetta in quegli anni (James Suckling, fonte pubblica). '
-        + 'Confronto singolo, non un modello: mostra che l\u2019estremo satellitare e l\u2019estremo del giudizio critico cadono nello stesso anno.'
+        + 'Due misure indipendenti, satellite e critico, che nell\u2019anno estremo convergono. Lo stesso principio regge a Pomerol: altro terroir, altra fisica.'
         + '</div>';
     }
     box.innerHTML = '<div class="syn-label">Resilienza 2022</div>'
@@ -185,8 +185,9 @@ function buildRivettaInset(){
       + 'border:1px solid rgba(240,200,90,0.7);border-radius:7px;background:rgba(240,200,90,0.2);'
       + 'color:#f7d97a;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.3px;">'
       + 'VEDI LA PARCELLA \u2192</button>'
-    + '<div style="font-size:9.5px;color:#8a8a8a;margin-top:7px;line-height:1.35;">'
-      + 'confronto singolo, non un modello</div>';
+    + '<div style="font-size:9.5px;color:#a8a8a8;margin-top:7px;line-height:1.4;">'
+      + 'Due misure indipendenti \u2014 satellite e critico \u2014 che nell\u2019anno estremo convergono. '
+      + 'Lo stesso principio regge a Pomerol: altro terroir, altra fisica.</div>';
   function _vaiRivetta(){
     rivettaInsetShow(false);                       // il box piccolo lascia il posto al drawer
     if(typeof layers!=='undefined' && layers['AVI_0365']){
