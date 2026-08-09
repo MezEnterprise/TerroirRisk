@@ -76,7 +76,7 @@ ricolora = function(){
       const nome = (v && v.c ? v.c : 'Cartizze');
       let txt;
       if(!r || r.cat==='nd'){
-        txt = nome+' \u00b7 esclusa \u2014 '+(r?r.motivo:'dato non disponibile');
+        txt = nome+' \u00b7 esclusa. '+(r?r.motivo:'dato non disponibile');
       } else if(resilMode==='smooth'){
         txt = nome+' \u00b7 zona: '+(r.res_smooth>=0?'+':'')+r.res_smooth.toFixed(3);
       } else {
@@ -111,13 +111,13 @@ aggLegenda = function(){
     if(lo) lo.textContent = 'peggio del solito';
     if(hi) hi.textContent = 'meglio del solito';
     if(bar){ bar.style.background = _GRD_RES; bar.style.backgroundSize = '100% 100%'; bar.style.width = '100%'; }
-    if(note) note.textContent = 'come ogni parcella ha retto la siccit\u00e0 2022 rispetto al proprio comportamento normale \u2014 grigio = 161 su 553 escluse per dato insufficiente';
+    if(note) note.textContent = 'come ogni parcella ha retto la siccit\u00e0 2022 rispetto al proprio comportamento normale. grigio = 161 su 553 escluse per dato insufficiente';
   }
 };
 
 /* override aggDrawer: quando si clicca una parcella, aggiungo il dettaglio
    "valore grezzo 2022" in coda alla scheda esistente, indipendentemente
-   dalla vista attiva (base, resilienza o zone), sempre visibile su richiesta
+   dalla vista attiva (base, resilienza o zone) — sempre visibile su richiesta
    di dettaglio, mai come vista mappa a se'. */
 aggDrawer = function(){
   _aggDrawer_resil_base();
@@ -135,7 +135,7 @@ aggDrawer = function(){
   if(!r || r.cat === 'nd'){
     box.innerHTML = '<div class="syn-label">Resilienza 2022</div>'
       + '<div style="color:var(--text-mute);font-size:12px;padding:4px 0;">'
-      + (r ? 'esclusa \u2014 ' + r.motivo : 'dato non disponibile')
+      + (r ? 'esclusa. ' + r.motivo : 'dato non disponibile')
       + '</div>';
   } else {
     box.innerHTML = '<div class="syn-label">Resilienza 2022</div>'
@@ -154,13 +154,13 @@ function buildResilienzaUI(){
 
   const btnRes = document.createElement('button');
   btnRes.id = 'resil-btn';
-  btnRes.title = 'Resilienza 2022 \u2014 scostamento dalla norma per parcella';
+  btnRes.title = 'Resilienza 2022. scostamento dalla norma per parcella';
   btnRes.textContent = '\u26A1';
   iconHost.appendChild(btnRes);
 
   const btnZone = document.createElement('button');
   btnZone.id = 'zone-btn';
-  btnZone.title = 'Zone del colle \u2014 media coi vicini entro ~50m';
+  btnZone.title = 'Zone del colle. media coi vicini entro ~50m';
   btnZone.textContent = '\uD83C\uDF0A';
   iconHost.appendChild(btnZone);
 
@@ -171,9 +171,9 @@ function buildResilienzaUI(){
 
   function setBanner(){
     if(resilMode==='smooth')
-      desc.textContent = 'Il colle ha zone distinte largh\u2019 qualche decina di metri, non filari isolati \u2014 pattern statisticamente non casuale';
+      desc.textContent = 'Il colle ha zone distinte largh\u2019 qualche decina di metri, non filari isolati. pattern statisticamente non casuale';
     else
-      desc.textContent = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022 \u2014 392 su 553, le altre escluse per qualit\u00e0 del dato';
+      desc.textContent = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022. 392 su 553, le altre escluse per qualit\u00e0 del dato';
   }
 
   function enterResil(mode){
