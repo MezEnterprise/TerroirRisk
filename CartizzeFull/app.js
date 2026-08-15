@@ -57,7 +57,7 @@ const STORICI_SET = new Set(VIGNE.features.filter(f=>f.properties.gruppo==='stor
 const RIVETTA_EXTRA_SET = new Set(VIGNE.features.filter(f=>f.properties.rivetta_extra===true).map(f=>f.properties.vid));
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
-    maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:11}).setView([45.896,12.031],15);
+    maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:11, renderer:L.svg()}).setView([45.896,12.031],15);
   L.tileLayer('https://mt0.google.com/vt/lyrs=s&hl=it&x={x}&y={y}&z={z}',{maxZoom:20,subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   L.geoJSON(CONFINE,{style:{color:'#c9a84c',weight:2,fill:false,dashArray:'5,4',opacity:0.85}}).addTo(map);
