@@ -237,9 +237,9 @@ function morfo(vid){
   const dlt=(v.delta&&v.delta[idxSel]!=null)?v.delta[idxSel]:null;
   let dltTxt,dltSub;
   if(dlt==null){dltTxt='\u2014';dltSub='';}
-  else if(Math.abs(dlt)<0.008){dltTxt='in media';dltSub='come il resto del Cartizze';}
-  else if(dlt>0){dltTxt='+'+dlt.toFixed(3);dltSub='sopra la media Cartizze';}
-  else{dltTxt=dlt.toFixed(3);dltSub='sotto la media Cartizze';}
+  else if(Math.abs(dlt)<0.008){dltTxt='in media';dltSub='come il proprio andamento normale nel 2022';}
+  else if(dlt>0){dltTxt='+'+dlt.toFixed(3);dltSub='sopra il proprio andamento normale nel 2022';}
+  else{dltTxt=dlt.toFixed(3);dltSub='sotto il proprio andamento normale nel 2022';}
   const espAff = v.pend!=null && v.pend>=8;  // sotto 8° l'esposizione e' poco attendibile
   const espVal = v.esp?espParola(v.esp):'\u2014';
   const espSub = !v.esp?'' : (espAff?'prevalente':'versante quasi piano, indicativa');
@@ -247,7 +247,7 @@ function morfo(vid){
     ['Quota media', v.q?v.q+'<small> m slm</small>':'\u2014','media del versante'],
     ['Pendenza', v.pend!=null?pendParola(v.pend)+' <small>('+v.pend+'\u00b0)</small>':'\u2014','del versante'],
     ['Esposizione', espVal, espSub],
-    ['Confronto', dltTxt, dltSub],
+    ['Scostamento 2022', dltTxt, dltSub],
   ];
   g.innerHTML=cells.map(([l,val,sub])=>`<div class="morfo-card"><div class="mc-label">${l}</div><div class="mc-val">${val}</div>${sub?`<div class="mc-sub">${sub}</div>`:''}</div>`).join('');
 }
