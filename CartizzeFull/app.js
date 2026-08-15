@@ -200,7 +200,12 @@ function aggDrawer(){
       titleBlock.insertBefore(bottleBox, titleBlock.firstChild);
     }
     bottleBox.style.display='flex';
-    bottleBox.innerHTML='<div id="bottle-placeholder">\u{1F37E}</div>';
+    bottleBox.innerHTML='';
+    const img=document.createElement('img');
+    img.src='Image/'+vid+'.jpg';
+    img.alt='';
+    img.onerror=function(){ bottleBox.innerHTML='<div id="bottle-placeholder">\u{1F37E}</div>'; };
+    bottleBox.appendChild(img);
   } else if(bottleBox){
     bottleBox.style.display='none';
   }
