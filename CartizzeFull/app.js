@@ -42,11 +42,12 @@ function stile(vid){
   const extra = RIVETTA_EXTRA_SET.has(vid);
   const val=valore(vid,idxSel,annoSel);
   const dash = extra ? '4,3' : null;
-  if(val==null)return{fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':(storico?'#c9a84c':'#555'),weight:sel?3:(storico?1:0.5),dashArray:dash};
+  const baseColor = extra ? '#1a1a1a' : (storico ? '#c9a84c' : '#1a1a1a');
+  if(val==null)return{fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':(extra?'#1a1a1a':(storico?'#c9a84c':'#555')),weight:sel?3:(storico&&!extra?1:0.5),dashArray:dash};
   return{fillColor:colore(val,idxSel),
     fillOpacity:vidSel&&!sel?0.4:0.72,
-    color:sel?'#f0d878':(storico?'#c9a84c':'#1a1a1a'),
-    weight:sel?3:(storico?1:0.7),
+    color:sel?'#f0d878':baseColor,
+    weight:sel?3:(storico&&!extra?1:0.7),
     dashArray:dash};
 }
 
