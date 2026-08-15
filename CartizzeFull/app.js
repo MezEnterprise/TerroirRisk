@@ -86,21 +86,23 @@ function aggLegenda(){
 function buildPanel(){
   const list=document.getElementById('comuni-list');
 
-  /* --- gruppo VIGNETI STORICI: nomi diretti, no sotto-raggruppamento --- */
+  /* --- gruppo VIGNE-MENZIONE: nomi diretti, no sotto-raggruppamento --- */
   const nomePulito=n=>(n||'').replace(/^(Vigna|Vigneto|Vinga)\s+/i,'');
   const storiche=VIGNE.features.filter(f=>f.properties.gruppo==='storico').map(f=>f.properties)
     .sort((a,b)=>nomePulito(a.nome_vigna||a.label).localeCompare(nomePulito(b.nome_vigna||b.label)));
   if(storiche.length){
     const macro=document.createElement('div');macro.className='macro-group storico';
     const macroHead=document.createElement('div');macroHead.className='macro-header collapsible';
-    macroHead.innerHTML=`<span>Vigneti Storici</span><span style="display:flex;align-items:center;gap:8px"><span style="color:var(--text-mute);font-size:10px">${storiche.length}</span><span class="macro-arrow">\u25B4</span></span>`;
+    macroHead.innerHTML=`<span>Vigne-Menzione</span><span style="display:flex;align-items:center;gap:8px"><span style="color:var(--text-mute);font-size:10px">${storiche.length}</span><span class="macro-arrow">\u25B4</span></span>`;
+    const macroNote=document.createElement('div');macroNote.className='macro-note';
+    macroNote.textContent='nome ufficiale depositato per obbligo di etichetta';
     const vlist=document.createElement('div');vlist.className='mga-list open';
     storiche.forEach(p=>{const item=document.createElement('div');item.className='mga-item storico';
       item.textContent=nomePulito(p.nome_vigna||p.label);item.dataset.vid=p.vid;
       item.onclick=()=>selVigna(p.vid);
       vlist.appendChild(item);});
-    macroHead.onclick=()=>{vlist.classList.toggle('open');macroHead.classList.toggle('collapsed');};
-    macro.appendChild(macroHead);macro.appendChild(vlist);list.appendChild(macro);
+    macroHead.onclick=()=>{vlist.classList.toggle('open');macroHead.classList.toggle('collapsed');macroNote.style.display=vlist.classList.contains('open')?'':'none';};
+    macro.appendChild(macroHead);macro.appendChild(macroNote);macro.appendChild(vlist);list.appendChild(macro);
   }
 
   /* --- gruppo CARTIZZE: contrade come prima --- */
