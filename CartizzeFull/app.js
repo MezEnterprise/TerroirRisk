@@ -159,15 +159,10 @@ function centraSu(vid){
   const isMobile=window.innerWidth<=768;
   const drawerW=isMobile?0:385;
   const bounds=lyr.getBounds();
-  const mapSize=map.getSize();
-  const topLeft=map.latLngToContainerPoint(bounds.getNorthWest());
-  const bottomRight=map.latLngToContainerPoint(bounds.getSouthEast());
-  const visibleRight=mapSize.x-(drawerW+40);
-  const larghezzaPx=Math.abs(bottomRight.x-topLeft.x);
-  const altezzaPx=Math.abs(bottomRight.y-topLeft.y);
-  const dimensioneUtile = larghezzaPx>=80 && altezzaPx>=80; // troppo piccola in pixel = zoom insufficiente, anche se "dentro" i margini
-  const giaVisibile = dimensioneUtile && topLeft.x>=60 && topLeft.y>=60 && bottomRight.x<=visibleRight && bottomRight.y<=(mapSize.y-(isMobile?120:60));
-  if(giaVisibile) return;
+  const zoomAttuale=map.getZoom();
+  const zoomSufficiente = zoomAttuale>=15;
+  const dentroVista = map.getBounds().pad(-0.05).contains(bounds); // -5% di margine: non basta sfiorare il bordo
+  if(zoomSufficiente && dentroVista) return;
   map.fitBounds(bounds,{
     paddingTopLeft:[60,60],
     paddingBottomRight:[drawerW+40,isMobile?120:60],
