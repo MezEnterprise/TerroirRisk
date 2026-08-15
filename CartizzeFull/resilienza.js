@@ -24,11 +24,6 @@ const RESIL = {"AVI_0001":{"cat":"ok","res":-0.0294,"delta":-0.1978,"res_smooth"
 /* range fissi per le due scale colore */
 const RESIL_RANGE = {res:{min:-0.1416,max:0.1407}, smooth:{min:-0.0771,max:0.0846}};
 
-/* parcelle con nome proprio dichiarato (etichetta normata "Vigna", non anonime come le altre) */
-const RESIL_NOMI = {
-  'AVI_0365': 'Vigna La Rivetta \u00b7 Villa Sandi'
-};
-
 /* stato vista: false=off, 'res'=residuo, 'smooth'=zone del colle */
 let resilMode = false;
 
@@ -58,6 +53,9 @@ stile = function(vid){
   if(typeof notturnoMode!=='undefined' && notturnoMode) return _stile_base(vid);
   if(!resilMode) return _stile_base(vid);
   const sel = vid===vidSel;
+  const v = DATI[vid];
+  const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
+  if(fuoriScope) return _stile_base(vid);
   const r = RESIL[vid];
   if(!r || r.cat==='nd'){
     return {fillColor:_COL_ND,
@@ -78,9 +76,12 @@ ricolora = function(){
     layers[vid].setStyle(stile(vid));
     if(resilMode){
       const r = RESIL[vid], v = DATI[vid];
-      const nome = RESIL_NOMI[vid] || (v && v.c ? v.c : 'Cartizze');
+      const nome = (v && v.c ? v.c : 'Cartizze');
+      const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
       let txt;
-      if(!r || r.cat==='nd'){
+      if(fuoriScope){
+        txt = etichetta(vid);
+      } else if(!r || r.cat==='nd'){
         txt = nome+' \u00b7 esclusa. '+(r?r.motivo:'dato non disponibile');
       } else if(resilMode==='smooth'){
         txt = nome+' \u00b7 zona: '+(r.res_smooth>=0?'+':'')+r.res_smooth.toFixed(3);
@@ -128,9 +129,15 @@ aggDrawer = function(){
   _aggDrawer_resil_base();
   const vid = vidSel;
   if(!vid) return;
+  const v = DATI[vid];
+  const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
   const r = RESIL[vid];
   const body = document.getElementById('drawer-body');
   let box = document.getElementById('resil-detail');
+  if(fuoriScope){
+    if(box) box.remove();
+    return;
+  }
   if(!box){
     box = document.createElement('div');
     box.id = 'resil-detail';
@@ -143,78 +150,14 @@ aggDrawer = function(){
       + (r ? 'esclusa. ' + r.motivo : 'dato non disponibile')
       + '</div>';
   } else {
-    let extra = '';
-    if(vid === 'AVI_0365'){
-      extra = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border,rgba(255,255,255,0.1));'
-        + 'color:var(--text-mute);font-size:12px;line-height:1.5;">'
-        + 'Su questa parcella, il 2022 \u00e8 anche il minimo assoluto di umidit\u00e0 fogliare a luglio dell\u2019intera serie 2017-2025 \u2014 '
-        + 'e coincide con il voto pi\u00f9 basso ricevuto dall\u2019etichetta in quegli anni (James Suckling, fonte pubblica). '
-        + 'Satellite e voto critico, due misure indipendenti che nell\u2019anno estremo convergono: \u00e8 lo stesso principio fisico con cui, a Pomerol, abbiamo previsto e sigillato un giudizio prima della sua uscita.'
-        + '</div>';
-    }
     box.innerHTML = '<div class="syn-label">Resilienza 2022</div>'
       + '<div style="color:var(--text-mute);font-size:12px;padding:4px 0;line-height:1.5;">'
       + 'residuo (scostamento dalla norma): <strong style="color:var(--text)">'+(r.res>=0?'+':'')+r.res.toFixed(3)+'</strong><br>'
       + 'zona (media coi vicini ~50m): <strong style="color:var(--text)">'+(r.res_smooth>=0?'+':'')+r.res_smooth.toFixed(3)+'</strong><br>'
       + 'valore grezzo 2022 (NDMI, non normalizzato): <strong style="color:var(--text)">'+r.delta.toFixed(3)+'</strong>'
-      + '</div>'
-      + extra;
+      + '</div>';
   }
 };
-
-/* ---- INSET "caso La Rivetta": riquadro fisso, visibile solo in vista residuo ---- */
-function buildRivettaInset(){
-  if(document.getElementById('rivetta-inset')) return;
-  const host = document.getElementById('map') || document.body;
-  const box = document.createElement('div');
-  box.id = 'rivetta-inset';
-  box.style.cssText = 'position:absolute;right:12px;top:64px;z-index:1200;'
-    + 'width:200px;padding:11px 13px;border-radius:10px;'
-    + 'background:rgba(20,20,22,0.9);border:1px solid rgba(240,200,90,0.55);'
-    + 'box-shadow:0 4px 18px rgba(0,0,0,0.45);'
-    + 'font-family:inherit;color:#eee;display:none;backdrop-filter:blur(3px);box-sizing:border-box;';
-  // due micro-barre: NDMI luglio (min storico) vs voto Suckling (min periodo)
-  box.innerHTML =
-    '<div style="font-size:11px;letter-spacing:.4px;color:#f0c85a;font-weight:600;margin-bottom:7px;">'
-      + 'IL CASO LA RIVETTA \u00b7 2022</div>'
-    + '<div style="font-size:11px;line-height:1.4;color:#cfcfcf;margin-bottom:9px;">'
-      + 'L\u2019anno pi\u00f9 secco dal satellite \u00e8 anche il voto pi\u00f9 basso del critico.</div>'
-    + _rivBar('umidit\u00e0 fogliare lug', 'min \u201917-\u201925', 8, '#7aa15f')
-    + _rivBar('voto Suckling', 'min periodo', 12, '#c9974a')
-    + '<button id="rivetta-vedi" style="margin-top:9px;width:100%;padding:8px 0;'
-      + 'border:1px solid rgba(240,200,90,0.7);border-radius:7px;background:rgba(240,200,90,0.2);'
-      + 'color:#f7d97a;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.3px;">'
-      + 'VEDI LA PARCELLA \u2192</button>'
-    + '<div style="font-size:9.5px;color:#a8a8a8;margin-top:7px;line-height:1.4;">'
-      + 'Satellite e voto critico: due misure indipendenti che nell\u2019anno estremo convergono. '
-      + '\u00c8 lo stesso principio fisico con cui, a Pomerol, abbiamo previsto e sigillato un giudizio prima della sua uscita.</div>';
-  function _vaiRivetta(){
-    rivettaInsetShow(false);                       // il box piccolo lascia il posto al drawer
-    if(typeof layers!=='undefined' && layers['AVI_0365']){
-      const ly = layers['AVI_0365'];
-      if(typeof map!=='undefined' && ly.getBounds){ try{ map.fitBounds(ly.getBounds(), {maxZoom:17, padding:[40,40]}); }catch(e){} }
-      vidSel = 'AVI_0365';
-      ricolora();
-      if(typeof aggDrawer==='function') aggDrawer();
-    }
-  }
-  host.appendChild(box);
-  const vb = document.getElementById('rivetta-vedi');
-  if(vb) vb.onclick = function(ev){ ev.stopPropagation(); _vaiRivetta(); };
-}
-/* micro-barra orizzontale: frazione riempita = quanto "basso" (barra corta = estremo) */
-function _rivBar(label, sub, fillPct, col){
-  return '<div style="margin-bottom:7px;">'
-    + '<div style="font-size:10.5px;color:#bdbdbd;display:flex;justify-content:space-between;">'
-      + '<span>'+label+'</span><span style="color:#f0c85a;">'+sub+'</span></div>'
-    + '<div style="height:7px;border-radius:4px;background:rgba(255,255,255,0.09);margin-top:3px;overflow:hidden;">'
-      + '<div style="height:100%;width:'+fillPct+'%;background:'+col+';border-radius:4px;"></div></div>'
-    + '</div>';
-}
-function rivettaInsetShow(on){
-  const b = document.getElementById('rivetta-inset');
-  if(b) b.style.display = on ? 'block' : 'none';
-}
 
 /* ---- UI: due bottoni indipendenti, montati in #view-icons (barra alta) ---- */
 function buildResilienzaUI(){
@@ -239,12 +182,10 @@ function buildResilienzaUI(){
   areaHost.parentNode.insertBefore(desc, areaHost.nextSibling);
 
   function setBanner(){
-    if(resilMode==='smooth'){
+    if(resilMode==='smooth')
       desc.textContent = 'Il colle ha zone distinte largh\u2019 qualche decina di metri, non filari isolati. pattern statisticamente non casuale';
-    } else {
-      desc.innerHTML = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022. 392 su 553, le altre escluse per qualit\u00e0 del dato'
-        + '<br><span style="opacity:0.75;font-size:0.92em;">Il 2022 \u00e8 stato l\u2019anno pi\u00f9 stressato della decade sul Cartizze. Lo stesso tipo di estremo idrico, misurato con lo stesso metodo su Pomerol (Bordeaux), anticipa cali di giudizio critico anche l\u00ec \u2014 la fisica del disagio idrico non conosce confini di denominazione.</span>';
-    }
+    else
+      desc.textContent = 'Quanto ogni parcella si e\u2019 discostata dal proprio comportamento normale nel 2022. 392 su 553, le altre escluse per qualit\u00e0 del dato';
   }
 
   function enterResil(mode){
@@ -260,7 +201,6 @@ function buildResilienzaUI(){
     desc.style.display = 'block';
     btnRes.classList.toggle('active', mode==='res');
     btnZone.classList.toggle('active', mode==='smooth');
-    rivettaInsetShow(mode==='res');
     setBanner();
     ricolora();
   }
@@ -271,7 +211,6 @@ function buildResilienzaUI(){
     desc.style.display = 'none';
     btnRes.classList.remove('active');
     btnZone.classList.remove('active');
-    rivettaInsetShow(false);
     aggLegenda();
     ricolora();
   }
@@ -279,16 +218,10 @@ function buildResilienzaUI(){
   btnRes.onclick = ()=>{ resilMode==='res' ? exitResil() : enterResil('res'); };
   btnZone.onclick = ()=>{ resilMode==='smooth' ? exitResil() : enterResil('smooth'); };
 
-  /* esposta a livello globale: gestione.js deve poter spegnere la vista resilienza
-     (qualunque modalita') senza cliccare bottoni alla cieca */
-  window.exitResil = exitResil;
-
   const moonBtn = document.getElementById('moon-btn');
   if(moonBtn){
     moonBtn.addEventListener('click', ()=>{ if(resilMode) exitResil(); }, true);
   }
-
-  buildRivettaInset();
 }
 
 function avviaResilienza(tentativi){
