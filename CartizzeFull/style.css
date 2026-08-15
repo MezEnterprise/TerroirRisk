@@ -90,6 +90,24 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .mga-item:hover { color:var(--text); background:rgba(139,42,42,0.15); }
 .mga-item.active { color:var(--gold); background:rgba(139,42,42,0.25); }
 
+/* macro-gruppi: Vigneti Storici / Cartizze */
+.macro-group { border-bottom:2px solid rgba(201,168,76,0.3); }
+.macro-header {
+  padding:10px 14px; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold); font-weight:600; display:flex; justify-content:space-between; align-items:center;
+  background:rgba(201,168,76,0.06);
+}
+.macro-group.storico .mga-item { padding-left:14px; border-left:2px solid rgba(201,168,76,0.4); }
+.macro-group.storico .mga-item:hover { border-left-color:var(--gold); }
+
+/* box immagine bottiglia nel drawer, solo vigne storiche */
+#bottle-box {
+  display:none; align-items:center; justify-content:center;
+  width:56px; height:56px; margin-bottom:8px;
+  background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.3); border-radius:6px;
+}
+#bottle-placeholder { font-size:28px; line-height:1; }
+
 /* MGA META */
 #mga-meta {
   padding:12px 14px; border-top:1px solid var(--border);
