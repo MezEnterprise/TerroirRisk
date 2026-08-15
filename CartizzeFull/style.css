@@ -100,13 +100,13 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .macro-group.storico .mga-item { padding-left:14px; border-left:2px solid rgba(201,168,76,0.4); }
 .macro-group.storico .mga-item:hover { border-left-color:var(--gold); }
 
-/* box immagine bottiglia nel drawer, solo vigne storiche */
+/* box immagine bottiglia nel drawer, a fianco del titolo, solo vigne storiche */
 #bottle-box {
   display:none; align-items:center; justify-content:center;
-  width:56px; height:56px; margin-bottom:8px;
+  width:64px; height:64px; flex-shrink:0;
   background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.3); border-radius:6px;
 }
-#bottle-placeholder { font-size:28px; line-height:1; }
+#bottle-placeholder { font-size:32px; line-height:1; }
 
 /* MGA META */
 #mga-meta {
@@ -182,6 +182,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 }
 #drawer-title { font-size:26px; color:var(--gold); font-style:italic; }
 #drawer-subtitle { font-size:13px; color:var(--text); margin-top:4px; letter-spacing:0.5px; line-height:1.4; font-variant-numeric: lining-nums tabular-nums; }
+#drawer-text-block { min-width:0; flex:1; }
 #drawer-close {
   position:absolute; top:12px; right:14px; z-index:5;
   background:none; border:none; color:var(--text-mute);
@@ -413,7 +414,7 @@ body.tab-stagionalita-active .drawer-leg-mean {
   align-items: flex-start;
   gap: 10px;
 }
-.dh-titleblock { min-width: 0; flex: 1; }
+.dh-titleblock { min-width: 0; flex: 1; display:flex; flex-direction:row; align-items:center; gap:12px; }
 
 /* Selettore indice globale */
 .dh-index-switch {
