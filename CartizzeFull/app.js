@@ -48,7 +48,7 @@ function stile(vid){
     weight:sel?3:(storico?1:0.7)};
 }
 
-const CARTIZZE_BOUNDS=L.latLngBounds([45.8160,11.9362],[45.9908,12.2962]); /* allargato per includere le 26 Vigne storiche + margine 4km, apertura resta zoomata su Cartizze */
+const CARTIZZE_BOUNDS=L.latLngBounds([45.7800,11.8843],[46.0269,12.3480]); /* allargato per includere le 26 Vigne storiche + margine 8km, apertura resta zoomata su Cartizze */
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
     maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:11}).setView([45.896,12.031],15);
@@ -87,17 +87,19 @@ function buildPanel(){
   const list=document.getElementById('comuni-list');
 
   /* --- gruppo VIGNETI STORICI: nomi diretti, no sotto-raggruppamento --- */
+  const nomePulito=n=>(n||'').replace(/^(Vigna|Vigneto|Vinga)\s+/i,'');
   const storiche=VIGNE.features.filter(f=>f.properties.gruppo==='storico').map(f=>f.properties)
-    .sort((a,b)=>(a.nome_vigna||a.label).localeCompare(b.nome_vigna||b.label));
+    .sort((a,b)=>nomePulito(a.nome_vigna||a.label).localeCompare(nomePulito(b.nome_vigna||b.label)));
   if(storiche.length){
     const macro=document.createElement('div');macro.className='macro-group storico';
-    const macroHead=document.createElement('div');macroHead.className='macro-header';
-    macroHead.innerHTML=`<span>Vigneti Storici</span><span style="color:var(--text-mute);font-size:10px">${storiche.length}</span>`;
+    const macroHead=document.createElement('div');macroHead.className='macro-header collapsible';
+    macroHead.innerHTML=`<span>Vigneti Storici</span><span style="display:flex;align-items:center;gap:8px"><span style="color:var(--text-mute);font-size:10px">${storiche.length}</span><span class="macro-arrow">\u25B4</span></span>`;
     const vlist=document.createElement('div');vlist.className='mga-list open';
     storiche.forEach(p=>{const item=document.createElement('div');item.className='mga-item storico';
-      item.textContent=p.nome_vigna||p.label;item.dataset.vid=p.vid;
+      item.textContent=nomePulito(p.nome_vigna||p.label);item.dataset.vid=p.vid;
       item.onclick=()=>selVigna(p.vid);
       vlist.appendChild(item);});
+    macroHead.onclick=()=>{vlist.classList.toggle('open');macroHead.classList.toggle('collapsed');};
     macro.appendChild(macroHead);macro.appendChild(vlist);list.appendChild(macro);
   }
 
@@ -154,7 +156,14 @@ function centraSu(vid){
   const lyr=layers[vid]; if(!lyr)return;
   const isMobile=window.innerWidth<=768;
   const drawerW=isMobile?0:385;
-  map.fitBounds(lyr.getBounds(),{
+  const bounds=lyr.getBounds();
+  const mapSize=map.getSize();
+  const topLeft=map.latLngToContainerPoint(bounds.getNorthWest());
+  const bottomRight=map.latLngToContainerPoint(bounds.getSouthEast());
+  const visibleRight=mapSize.x-(drawerW+40);
+  const giaVisibile = topLeft.x>=60 && topLeft.y>=60 && bottomRight.x<=visibleRight && bottomRight.y<=(mapSize.y-(isMobile?120:60));
+  if(giaVisibile) return;
+  map.fitBounds(bounds,{
     paddingTopLeft:[60,60],
     paddingBottomRight:[drawerW+40,isMobile?120:60],
     maxZoom:16
