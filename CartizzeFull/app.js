@@ -163,7 +163,10 @@ function centraSu(vid){
   const topLeft=map.latLngToContainerPoint(bounds.getNorthWest());
   const bottomRight=map.latLngToContainerPoint(bounds.getSouthEast());
   const visibleRight=mapSize.x-(drawerW+40);
-  const giaVisibile = topLeft.x>=60 && topLeft.y>=60 && bottomRight.x<=visibleRight && bottomRight.y<=(mapSize.y-(isMobile?120:60));
+  const larghezzaPx=Math.abs(bottomRight.x-topLeft.x);
+  const altezzaPx=Math.abs(bottomRight.y-topLeft.y);
+  const dimensioneUtile = larghezzaPx>=80 && altezzaPx>=80; // troppo piccola in pixel = zoom insufficiente, anche se "dentro" i margini
+  const giaVisibile = dimensioneUtile && topLeft.x>=60 && topLeft.y>=60 && bottomRight.x<=visibleRight && bottomRight.y<=(mapSize.y-(isMobile?120:60));
   if(giaVisibile) return;
   map.fitBounds(bounds,{
     paddingTopLeft:[60,60],
