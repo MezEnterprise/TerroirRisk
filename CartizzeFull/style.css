@@ -97,6 +97,9 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   color:var(--gold); font-weight:600; display:flex; justify-content:space-between; align-items:center;
   background:rgba(201,168,76,0.06);
 }
+.macro-header.collapsible { cursor:pointer; }
+.macro-arrow { font-size:11px; transition:transform 0.2s; display:inline-block; }
+.macro-header.collapsed .macro-arrow { transform:rotate(180deg); }
 .macro-group.storico .mga-item { padding-left:14px; border-left:2px solid rgba(201,168,76,0.4); }
 .macro-group.storico .mga-item:hover { border-left-color:var(--gold); }
 
