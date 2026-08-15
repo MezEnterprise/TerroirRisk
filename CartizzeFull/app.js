@@ -192,7 +192,8 @@ function aggDrawer(){
   if(v.zona==='Vigna_menzione_Valdobbiadene'){
     if(!bottleBox){
       bottleBox=document.createElement('div'); bottleBox.id='bottle-box';
-      document.getElementById('drawer-title').parentNode.insertBefore(bottleBox, document.getElementById('drawer-title'));
+      const titleBlock=document.querySelector('.dh-titleblock');
+      titleBlock.insertBefore(bottleBox, titleBlock.firstChild);
     }
     bottleBox.style.display='flex';
     bottleBox.innerHTML='<div id="bottle-placeholder">\u{1F37E}</div>';
