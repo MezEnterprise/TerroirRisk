@@ -41,11 +41,11 @@ function stile(vid){
   const v = DATI[vid];
   const storico = v && v.zona==='Vigna_menzione_Valdobbiadene';
   const val=valore(vid,idxSel,annoSel);
-  if(val==null)return{fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':(storico?'#c9a84c':'#555'),weight:sel?3:(storico?2:0.5)};
+  if(val==null)return{fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':(storico?'#c9a84c':'#555'),weight:sel?3:(storico?1:0.5)};
   return{fillColor:colore(val,idxSel),
     fillOpacity:vidSel&&!sel?0.4:0.72,
     color:sel?'#f0d878':(storico?'#c9a84c':'#1a1a1a'),
-    weight:sel?3:(storico?2:0.7)};
+    weight:sel?3:(storico?1:0.7)};
 }
 
 const CARTIZZE_BOUNDS=L.latLngBounds([45.8160,11.9362],[45.9908,12.2962]); /* allargato per includere le 26 Vigne storiche + margine 4km, apertura resta zoomata su Cartizze */
