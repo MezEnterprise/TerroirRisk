@@ -204,7 +204,7 @@ function aggDrawer(){
     bottleBox.style.display='flex';
     bottleBox.innerHTML='';
     const img=document.createElement('img');
-    img.src='Image/'+vid+'.jpg';
+    img.src='/CartizzeAvi/Image/'+vid+'.jpg';
     img.alt='';
     img.onerror=function(){ bottleBox.innerHTML='<div id="bottle-placeholder">\u{1F37E}</div>'; };
     bottleBox.appendChild(img);
