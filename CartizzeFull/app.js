@@ -39,7 +39,7 @@ function etichetta(vid){const v=DATI[vid];if(!v)return'Cartizze . dato non dispo
 function stile(vid){
   const sel = vid===vidSel;
   const v = DATI[vid];
-  const storico = v && v.zona==='Vigna_menzione_Valdobbiadene';
+  const storico = STORICI_SET.has(vid);
   const val=valore(vid,idxSel,annoSel);
   if(val==null)return{fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':(storico?'#c9a84c':'#555'),weight:sel?3:(storico?1:0.5)};
   return{fillColor:colore(val,idxSel),
@@ -49,6 +49,8 @@ function stile(vid){
 }
 
 const CARTIZZE_BOUNDS=L.latLngBounds([45.7800,11.8843],[46.0269,12.3480]); /* allargato per includere le 26 Vigne storiche + margine 8km, apertura resta zoomata su Cartizze */
+/* set dei vid nel gruppo "storico" letto da VIGNE (non da DATI.zona, che per la Rivetta resta 'Cartizze' perche' e' li' fisicamente) */
+const STORICI_SET = new Set(VIGNE.features.filter(f=>f.properties.gruppo==='storico').map(f=>f.properties.vid));
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
     maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:11}).setView([45.896,12.031],15);
@@ -193,7 +195,7 @@ function aggDrawer(){
 
   /* box immagine bottiglia, solo per le vigne storiche (nome pubblico noto) */
   let bottleBox=document.getElementById('bottle-box');
-  if(v.zona==='Vigna_menzione_Valdobbiadene'){
+  if(STORICI_SET.has(vid)){
     if(!bottleBox){
       bottleBox=document.createElement('div'); bottleBox.id='bottle-box';
       const titleBlock=document.querySelector('.dh-titleblock');
