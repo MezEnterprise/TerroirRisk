@@ -90,6 +90,33 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .mga-item:hover { color:var(--text); background:rgba(139,42,42,0.15); }
 .mga-item.active { color:var(--gold); background:rgba(139,42,42,0.25); }
 
+/* macro-gruppi: Vigneti Storici / Cartizze */
+.macro-group { border-bottom:2px solid rgba(201,168,76,0.3); }
+.macro-header {
+  padding:10px 14px; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold); font-weight:600; display:flex; justify-content:space-between; align-items:center;
+  background:rgba(201,168,76,0.06);
+}
+.macro-header.collapsible { cursor:pointer; }
+.macro-arrow { font-size:11px; transition:transform 0.2s; display:inline-block; }
+.macro-header.collapsed .macro-arrow { transform:rotate(180deg); }
+.macro-note {
+  padding:0 14px 8px; font-size:10px; color:var(--text-mute); font-style:italic;
+  background:rgba(201,168,76,0.06);
+}
+.macro-group.storico .mga-item { padding-left:14px; border-left:2px solid rgba(201,168,76,0.4); }
+.macro-group.storico .mga-item:hover { border-left-color:var(--gold); }
+
+/* box immagine bottiglia nel drawer, a fianco del titolo, solo vigne storiche */
+#bottle-box {
+  display:none; align-items:center; justify-content:center;
+  width:60px; height:80px; min-width:60px; min-height:80px; max-width:60px; max-height:80px;
+  flex-shrink:0; overflow:hidden;
+  background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.3); border-radius:6px;
+}
+#bottle-placeholder { font-size:28px; line-height:1; }
+#bottle-box img { display:block; width:60px; height:80px; object-fit:contain; border-radius:5px; }
+
 /* MGA META */
 #mga-meta {
   padding:12px 14px; border-top:1px solid var(--border);
@@ -99,15 +126,17 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 #mga-meta .meta-row { display:flex; gap:12px; color:var(--text-mute); flex-wrap:wrap; }
 #mga-meta .meta-val { color:var(--text); font-size:12px; }
 
-/* YEAR AREA + YEAR BAR + LUNA */
+/* YEAR AREA (in alto): year-bar + icone viste, sullo stesso piano */
 #year-area {
-  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  position:absolute; top:16px; left:50%; transform:translateX(-50%);
   z-index:10; display:flex; align-items:center; gap:8px;
 }
 #year-bar {
   display:flex; gap:4px; background:var(--panel-bg);
   border:1px solid var(--border); padding:8px 12px; border-radius:4px;
+  transition:opacity 0.2s;
 }
+#year-bar.disabled { opacity:0.35; pointer-events:none; }
 .yr-btn {
   background:none; border:1px solid transparent; color:var(--text-mute);
   font-size:12px; padding:4px 10px; cursor:pointer; border-radius:2px;
@@ -116,20 +145,37 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .yr-btn:hover { color:var(--text); border-color:var(--border); }
 .yr-btn.active { background:var(--burgundy); color:var(--text); border-color:var(--burgundy); }
 
+/* contenitore icone viste (resilienza, zone, gestione...) */
+#view-icons { display:flex; align-items:center; gap:6px; }
+
 /* LEGENDA */
 #legend {
   position:absolute; bottom:90px; right:16px; z-index:10;
   background:var(--panel-bg); border:1px solid var(--border);
   padding:12px 14px; border-radius:4px; font-size:11px;
   transition:opacity 0.2s;
+  width:200px;
 }
 #legend .leg-title { color:var(--gold); margin-bottom:8px; letter-spacing:1px; font-size:10px; text-transform:uppercase; }
 .leg-bar {
-  width:160px; height:12px;
+  width:100%; height:12px;
   background:linear-gradient(to right,rgb(105,40,32),rgb(139,58,42),rgb(170,90,58),rgb(195,135,82),rgb(214,182,112),rgb(200,190,116),rgb(165,185,105),rgb(125,172,92),rgb(90,155,82),rgb(65,150,140),rgb(55,130,175),rgb(48,108,190),rgb(38,80,178));
   border-radius:2px; margin-bottom:4px;
 }
 .leg-labels { display:flex; justify-content:space-between; color:var(--text-mute); font-size:10px; }
+#leg-note { line-height:1.4; }
+
+/* box spiegazione, monoriga in basso al centro (dove prima era la year-bar) */
+#view-explain {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  z-index:15; max-width:90vw;
+  background:var(--panel-bg); border:1px solid var(--border);
+  padding:10px 20px; border-radius:20px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#view-explain #leg-note {
+  color:#fff; font-size:13px; line-height:1.5; font-family:'Georgia',serif;
+}
 
 /* DRAWER */
 #drawer {
@@ -145,6 +191,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 }
 #drawer-title { font-size:26px; color:var(--gold); font-style:italic; }
 #drawer-subtitle { font-size:13px; color:var(--text); margin-top:4px; letter-spacing:0.5px; line-height:1.4; font-variant-numeric: lining-nums tabular-nums; }
+#drawer-text-block { min-width:0; flex:1; }
 #drawer-close {
   position:absolute; top:12px; right:14px; z-index:5;
   background:none; border:none; color:var(--text-mute);
@@ -246,7 +293,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   :root { --panel-w: 0px; --drawer-w: 100vw; }
   #panel { display:none; }
   #home-btn { left:10px; }
-  #year-area { bottom:8px; left:8px; right:8px; transform:none; }
+  #year-area { top:8px; left:8px; right:8px; transform:none; flex-wrap:wrap; }
   #year-bar { padding:6px 8px; gap:2px; }
   .yr-btn { font-size:11px; padding:3px 6px; }
   #basemap-switch, #color-switch { right:8px; }
@@ -266,6 +313,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   font-size: 11px;
   transition: right 0.28s ease, bottom 0.28s ease, border-radius 0.28s ease;
   pointer-events: none;
+  width: 200px;
 }
 #legend.in-drawer {
   position: fixed;
@@ -375,7 +423,7 @@ body.tab-stagionalita-active .drawer-leg-mean {
   align-items: flex-start;
   gap: 10px;
 }
-.dh-titleblock { min-width: 0; flex: 1; }
+.dh-titleblock { min-width: 0; flex: 1; display:flex; flex-direction:row; align-items:center; gap:12px; }
 
 /* Selettore indice globale */
 .dh-index-switch {
@@ -792,8 +840,9 @@ body.night #night-banner { display:flex; }
 #night-banner .nb-moon { font-size:15px; }
 
 @media (max-width:768px) {
-  #night-banner {
-    left:8px; right:8px; transform:none; top:54px;
-    font-size:11px; white-space:normal; justify-content:center; text-align:center;
+  #view-explain {
+    left:8px; right:8px; transform:none; bottom:8px;
+    max-width:none; white-space:normal; text-align:center; font-size:12px;
   }
+  #legend { right:8px; }
 }
