@@ -16,7 +16,7 @@
   <div id="panel-header">
     <div class="logo">Sentinel-2 · Cartizze DOCG</div>
     <h1>Cartizze</h1>
-    <div class="sub">83 vigne · 9 contrade · 2017–2025</div>
+    <div class="sub">553 parcelle · 9 contrade · 2017–2025</div>
   </div>
   <div id="search-wrap">
     <input id="search" type="text" placeholder="Cerca vigna o contrada...">
@@ -27,19 +27,20 @@
   </div>
 </div>
 
-<!-- YEAR BAR + LUNA -->
+<!-- BARRA SUPERIORE: anni + icone viste -->
 <div id="year-area">
   <div id="year-bar"></div>
-  <div id="night-bar" style="display:none"></div>
-  <button id="moon-btn" title="Vista notturna · temperatura ECOSTRESS">🌙</button>
+  <div id="view-icons"></div>
 </div>
 
 <!-- DRAWER -->
 <div id="drawer">
   <div id="drawer-header">
     <div class="dh-titleblock">
-      <div id="drawer-title">—</div>
-      <div id="drawer-subtitle"></div>
+      <div id="drawer-text-block">
+        <div id="drawer-title">—</div>
+        <div id="drawer-subtitle"></div>
+      </div>
     </div>
     <button id="drawer-close" aria-label="Chiudi">✕</button>
   </div>
@@ -89,18 +90,19 @@
   </div>
 </div>
 
+<!-- SPIEGAZIONE vista attiva -->
+<div id="view-explain"><span id="leg-note">colori confrontabili tra tutti gli anni</span></div>
+
 <!-- LEGENDA esterna -->
 <div id="legend">
   <div class="leg-title" id="leg-title">Vigore della chioma</div>
   <div class="leg-bar"></div>
   <div class="leg-labels"><span id="leg-lo">basso</span><span id="leg-hi">alto</span></div>
-  <div class="leg-note" id="leg-note">colori confrontabili tra tutti gli anni</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="app.js"></script>
-<script src="moon.js"></script>
 <link rel="stylesheet" href="resilienza.css">
 <script src="resilienza.js"></script>
 <link rel="stylesheet" href="gestione.css">
