@@ -96,24 +96,6 @@ function aggLegenda(){
 function buildPanel(){
   const list=document.getElementById('comuni-list');
 
-  /* --- gruppo GEROTTO: conferitore esterno, raggiungibile solo via click --- */
-  const gerotto=VIGNE.features.filter(f=>f.properties.gruppo==='conferitore').map(f=>f.properties)
-    .sort((a,b)=>(a.nome_vigna||a.label).localeCompare(b.nome_vigna||b.label));
-  if(gerotto.length){
-    const macroG=document.createElement('div');macroG.className='macro-group conferitore';
-    const macroHeadG=document.createElement('div');macroHeadG.className='macro-header collapsible';
-    macroHeadG.innerHTML=`<span>Gerotto</span><span style="display:flex;align-items:center;gap:8px"><span style="color:var(--text-mute);font-size:10px">${gerotto.length}</span><span class="macro-arrow">\u25B4</span></span>`;
-    const macroNoteG=document.createElement('div');macroNoteG.className='macro-note';
-    macroNoteG.textContent='conferitore, Castelfranco Veneto \u2014 fuori dal colle Cartizze';
-    const vlistG=document.createElement('div');vlistG.className='mga-list open';
-    gerotto.forEach(p=>{const item=document.createElement('div');item.className='mga-item conferitore';
-      item.textContent=p.nome_vigna||p.label;item.dataset.vid=p.vid;
-      item.onclick=()=>selVignaLontana(p.vid);
-      vlistG.appendChild(item);});
-    macroHeadG.onclick=()=>{vlistG.classList.toggle('open');macroHeadG.classList.toggle('collapsed');macroNoteG.style.display=vlistG.classList.contains('open')?'':'none';};
-    macroG.appendChild(macroHeadG);macroG.appendChild(macroNoteG);macroG.appendChild(vlistG);list.appendChild(macroG);
-  }
-
   /* --- gruppo VIGNE-MENZIONE: nomi diretti, no sotto-raggruppamento --- */
   const nomePulito=n=>(n||'').replace(/^(Vigna|Vigneto|Vinga)\s+/i,'');
   const storiche=VIGNE.features.filter(f=>f.properties.gruppo==='storico').map(f=>f.properties)
@@ -158,6 +140,22 @@ function buildPanel(){
   });
   list.appendChild(macroCartizze);
 
+  /* --- gruppo CONFERITORI: in fondo, nomi abbreviati, no sottotesto --- */
+  const conferitori=VIGNE.features.filter(f=>f.properties.gruppo==='conferitore').map(f=>f.properties)
+    .sort((a,b)=>(a.nome_vigna||a.label).localeCompare(b.nome_vigna||b.label));
+  if(conferitori.length){
+    const macroF=document.createElement('div');macroF.className='macro-group conferitore';
+    const macroHeadF=document.createElement('div');macroHeadF.className='macro-header collapsible';
+    macroHeadF.innerHTML=`<span>Conferitori</span><span style="display:flex;align-items:center;gap:8px"><span style="color:var(--text-mute);font-size:10px">${conferitori.length}</span><span class="macro-arrow">\u25B4</span></span>`;
+    const vlistF=document.createElement('div');vlistF.className='mga-list open';
+    conferitori.forEach(p=>{const item=document.createElement('div');item.className='mga-item conferitore';
+      item.textContent='Ger. '+(p.nome_vigna||p.label).replace(/^Glera\s*/i,'Glera ').replace(/^PinotG\s*/i,'PinotGrigio ').trim();item.dataset.vid=p.vid;
+      item.onclick=()=>selVignaLontana(p.vid);
+      vlistF.appendChild(item);});
+    macroHeadF.onclick=()=>{vlistF.classList.toggle('open');macroHeadF.classList.toggle('collapsed');};
+    macroF.appendChild(macroHeadF);macroF.appendChild(vlistF);list.appendChild(macroF);
+  }
+
   document.getElementById('search').oninput=e=>{
     const q=e.target.value.toLowerCase();
     document.querySelectorAll('.mga-item').forEach(it=>{
@@ -186,8 +184,9 @@ function centraSu(vid){
   const lyr=layers[vid]; if(!lyr)return;
   const isMobile=window.innerWidth<=768;
   const drawerW=isMobile?0:385;
+  const panelW=isMobile?0:270;
   map.fitBounds(lyr.getBounds(),{
-    paddingTopLeft:[60,60],
+    paddingTopLeft:[panelW+20,60],
     paddingBottomRight:[drawerW+40,isMobile?120:60],
     maxZoom:16
   });
@@ -208,7 +207,7 @@ let fuoriBoundsAttivo = false;
 function selVignaLontana(vid){
   const lyr=layers[vid]; if(!lyr) return;
   // allarga temporaneamente i bounds per includere questa geometria, poi vola
-  const b = lyr.getBounds().pad(0.5);
+  const b = lyr.getBounds().pad(0.2);
   const esteso = L.latLngBounds(CARTIZZE_BOUNDS_NORMALI.getSouthWest(), CARTIZZE_BOUNDS_NORMALI.getNorthEast()).extend(b);
   map.setMaxBounds(esteso);
   fuoriBoundsAttivo = true;
