@@ -54,7 +54,7 @@ stile = function(vid){
   if(!resilMode) return _stile_base(vid);
   const sel = vid===vidSel;
   const v = DATI[vid];
-  const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
+  const fuoriScope = v && (v.zona==='Vigna_menzione_Valdobbiadene' || v.zona==='Conferitore');
   if(fuoriScope) return _stile_base(vid);
   const r = RESIL[vid];
   if(!r || r.cat==='nd'){
@@ -77,7 +77,7 @@ ricolora = function(){
     if(resilMode){
       const r = RESIL[vid], v = DATI[vid];
       const nome = (v && v.c ? v.c : 'Cartizze');
-      const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
+      const fuoriScope = v && (v.zona==='Vigna_menzione_Valdobbiadene' || v.zona==='Conferitore');
       let txt;
       if(fuoriScope){
         txt = etichetta(vid);
@@ -130,7 +130,7 @@ aggDrawer = function(){
   const vid = vidSel;
   if(!vid) return;
   const v = DATI[vid];
-  const fuoriScope = v && v.zona==='Vigna_menzione_Valdobbiadene';
+  const fuoriScope = v && (v.zona==='Vigna_menzione_Valdobbiadene' || v.zona==='Conferitore');
   const r = RESIL[vid];
   const body = document.getElementById('drawer-body');
   let box = document.getElementById('resil-detail');
