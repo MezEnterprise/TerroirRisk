@@ -192,11 +192,18 @@ function initTabs(){
     b.classList.add('active');ricolora();if(vidSel)aggDrawer();};});
 }
 
-function centraSu(vid){
+function centraSu(vid, zoomLibero){
   const lyr=layers[vid]; if(!lyr)return;
   const isMobile=window.innerWidth<=768;
   const drawerW=isMobile?0:385;
   const panelW=isMobile?0:270;
+  if(zoomLibero){
+    // target piccolo e lontano dal resto della mappa: fitBounds con padding fisso
+    // puo' degenerare (padding > spazio disponibile su schermi stretti). Uso invece
+    // uno zoom fisso sul centro geometrico del layer, affidabile a qualunque dimensione schermo.
+    map.setView(lyr.getBounds().getCenter(), 17, {animate:true});
+    return;
+  }
   map.fitBounds(lyr.getBounds(),{
     paddingTopLeft:[panelW+20,60],
     paddingBottomRight:[drawerW+40,isMobile?120:60],
@@ -210,7 +217,7 @@ function selVigna(vid, mantieniBounds){
   ricolora();              // ridisegna con evidenziamento
   document.querySelectorAll('.mga-item').forEach(it=>it.classList.toggle('sel',it.dataset.vid===vid));
   if(!mantieniBounds) ripristinaBoundsNormali();
-  centraSu(vid);
+  centraSu(vid, mantieniBounds);
   aggDrawer();
 }
 /* bounds originali salvati per poterli ripristinare dopo una visita "lontana" */
@@ -218,20 +225,14 @@ const CARTIZZE_BOUNDS_NORMALI = CARTIZZE_BOUNDS;
 let fuoriBoundsAttivo = false;
 function selVignaLontana(vid){
   const lyr=layers[vid]; if(!lyr) return;
-  // rimuovo temporaneamente ogni vincolo di bounds durante il volo, per evitare
-  // conflitti tra il vecchio maxBounds e il nuovo target durante l'animazione
-  map.setMaxBounds(null);
   fuoriBoundsAttivo = true;
+  map.setMaxBounds(CONFERITORE_BOUNDS);
   selVigna(vid, true);
-  // imposto i bounds ristretti all'area conferitore solo dopo che la vista si e' stabilizzata
-  map.once('moveend', function(){
-    if(fuoriBoundsAttivo) map.setMaxBounds(CONFERITORE_BOUNDS);
-  });
 }
 function ripristinaBoundsNormali(){
   if(!fuoriBoundsAttivo) return;
-  map.setMaxBounds(CARTIZZE_BOUNDS_NORMALI);
   fuoriBoundsAttivo = false;
+  map.setMaxBounds(CARTIZZE_BOUNDS_NORMALI);
 }
 function aggDrawer(){
   const vid=vidSel,v=DATI[vid];
