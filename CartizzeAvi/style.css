@@ -108,6 +108,10 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .macro-group.storico .mga-item:hover { border-left-color:var(--gold); }
 .macro-group.conferitore .mga-item { padding-left:14px; border-left:2px solid rgba(90,168,192,0.4); }
 .macro-group.conferitore .mga-item:hover { border-left-color:#5aa8c0; }
+.macro-group.conferitore .macro-header {
+  color:#5aa8c0; font-size:10px; font-weight:500; letter-spacing:1.5px;
+  background:rgba(90,168,192,0.05); padding:7px 14px;
+}
 
 /* box immagine bottiglia nel drawer, a fianco del titolo, solo vigne storiche */
 #bottle-box {
