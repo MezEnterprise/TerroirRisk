@@ -59,6 +59,18 @@ const STORICI_SET = new Set(VIGNE.features.filter(f=>f.properties.gruppo==='stor
 /* set dei vid con bordo tratteggiato: particelle collegate a un produttore noto ma escluse dalla menzione ufficiale in etichetta */
 const RIVETTA_EXTRA_SET = new Set(VIGNE.features.filter(f=>f.properties.rivetta_extra===true).map(f=>f.properties.vid));
 const CONFERITORE_SET = new Set(VIGNE.features.filter(f=>f.properties.gruppo==='conferitore').map(f=>f.properties.vid));
+/* bounds che coprono TUTTE le parcelle conferitore insieme (non solo quella cliccata),
+   cosi' ci si puo' muovere da un campo Gerotto all'altro senza che i bounds si stringano ogni volta */
+const CONFERITORE_BOUNDS = (function(){
+  let b = null;
+  VIGNE.features.forEach(f=>{
+    if(f.properties.gruppo==='conferitore'){
+      const lyrBounds = L.geoJSON(f.geometry).getBounds();
+      b = b ? b.extend(lyrBounds) : lyrBounds;
+    }
+  });
+  return b ? b.pad(0.3) : null;
+})();
 function initMap(){
   map=L.map('map',{zoomControl:false,attributionControl:false,
     maxBounds:CARTIZZE_BOUNDS, maxBoundsViscosity:0.9, minZoom:11, renderer:L.svg()}).setView([45.896,12.031],15);
@@ -206,12 +218,15 @@ const CARTIZZE_BOUNDS_NORMALI = CARTIZZE_BOUNDS;
 let fuoriBoundsAttivo = false;
 function selVignaLontana(vid){
   const lyr=layers[vid]; if(!lyr) return;
-  // allarga temporaneamente i bounds per includere questa geometria, poi vola
-  const b = lyr.getBounds().pad(0.2);
-  const esteso = L.latLngBounds(CARTIZZE_BOUNDS_NORMALI.getSouthWest(), CARTIZZE_BOUNDS_NORMALI.getNorthEast()).extend(b);
-  map.setMaxBounds(esteso);
+  // rimuovo temporaneamente ogni vincolo di bounds durante il volo, per evitare
+  // conflitti tra il vecchio maxBounds e il nuovo target durante l'animazione
+  map.setMaxBounds(null);
   fuoriBoundsAttivo = true;
   selVigna(vid, true);
+  // imposto i bounds ristretti all'area conferitore solo dopo che la vista si e' stabilizzata
+  map.once('moveend', function(){
+    if(fuoriBoundsAttivo) map.setMaxBounds(CONFERITORE_BOUNDS);
+  });
 }
 function ripristinaBoundsNormali(){
   if(!fuoriBoundsAttivo) return;
