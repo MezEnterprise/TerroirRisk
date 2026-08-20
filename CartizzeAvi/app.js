@@ -86,7 +86,7 @@ function initMap(){
         lyr.setStyle({weight:1.8,color:'#fff'});
         if(map.getZoom()<TOOLTIP_MIN_ZOOM) lyr.closeTooltip();
       });
-      lyr.on('click',()=>selVigna(p.vid));
+      lyr.on('click',()=>{ CONFERITORE_SET.has(p.vid) ? selVignaLontana(p.vid) : selVigna(p.vid); });
       lyr.on('mouseout',()=>lyr.setStyle(stile(p.vid)));}
   }).addTo(map);
   map.on('zoomend',()=>{
