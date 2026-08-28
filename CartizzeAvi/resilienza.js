@@ -76,7 +76,7 @@ ricolora = function(){
     layers[vid].setStyle(stile(vid));
     if(resilMode){
       const r = RESIL[vid], v = DATI[vid];
-      const nome = (v && v.c ? v.c : 'Cartizze');
+      const nome = (v && v.c ? nomePulito(v.c) : 'Cartizze');
       const fuoriScope = v && (v.zona==='Vigna_menzione_Valdobbiadene' || v.zona==='Conferitore');
       let txt;
       if(fuoriScope){
