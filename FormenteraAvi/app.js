@@ -28,10 +28,11 @@ const PIOGGIA_N_ANNI = 86;
 const PAROLE = {
   ndvi:[[0.30,'very lush'],[0.24,'lush'],[0.20,'fair'],[0.17,'average'],[0.14,'below average'],[0,'sparse']],
   ndmi:[[0.05,'well hydrated'],[0.00,'good'],[-0.05,'fair'],[-0.10,'somewhat dry'],[-0.15,'trending dry'],[-1,'dry']],
-  ndre:[[0.20,'very charged'],[0.16,'good'],[0.13,'fair'],[0.10,'average'],[0.07,'below average'],[0,'depleted']]
+  ndre:[[0.20,'very charged'],[0.16,'good'],[0.13,'fair'],[0.10,'average'],[0.07,'below average'],[0,'depleted']],
+  evi:[[0.21,'very lush'],[0.16,'lush'],[0.13,'fair'],[0.11,'average'],[0.09,'below average'],[0,'sparse']]
 };
-const NOMI={ndvi:'Vigor',ndmi:'Water status',ndre:'Chlorophyll'};
-const NOMI_LUNGHI={ndvi:'Canopy vigor',ndmi:'Water status',ndre:'Chlorophyll'};
+const NOMI={ndvi:'Vigor',ndmi:'Water status',ndre:'Chlorophyll',evi:'Biomass'};
+const NOMI_LUNGHI={ndvi:'Canopy vigor',ndmi:'Water status',ndre:'Chlorophyll',evi:'Canopy biomass (EVI)'};
 
 function calcolaRange(idx){
   let vals=[];
@@ -42,7 +43,7 @@ function calcolaRange(idx){
   const p=(q)=>vals[Math.floor(q*(vals.length-1))];
   return {min:p(0.05),max:p(0.95)};
 }
-const RANGE={ndvi:calcolaRange('ndvi'),ndmi:calcolaRange('ndmi'),ndre:calcolaRange('ndre')};
+const RANGE={ndvi:calcolaRange('ndvi'),ndmi:calcolaRange('ndmi'),ndre:calcolaRange('ndre'),evi:calcolaRange('evi')};
 
 function colore(val,ix){
   if(val==null)return '#333';
