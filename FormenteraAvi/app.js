@@ -71,9 +71,9 @@ function stile(vid){
   let base;
   if(val==null)base={fillColor:'#333',fillOpacity:sel?0.45:0.2,color:sel?'#c9a84c':'#555',weight:sel?3:0.5};
   else base={fillColor:colore(val,idxSel),
-    fillOpacity:vidSel&&!sel?0.35:(isCore?0.75:0.4),
-    color:sel?'#f0d878':(isCore?'#1a1a1a':'#333'),
-    weight:sel?3:(isCore?0.7:0.4)};
+    fillOpacity:vidSel&&!sel?0.35:(isCore?0.78:0.62),
+    color:sel?'#f0d878':(isCore?'#1a1a1a':'rgba(255,255,255,0.75)'),
+    weight:sel?3:(isCore?0.7:0.9)};
   return base;
 }
 
@@ -246,6 +246,20 @@ function buildRankingPanel(){
   });
 }
 
+/* Elenco compatto dei campi non-core (contesto, non nella statistica principale) */
+function buildOtherFieldsPanel(){
+  const el = document.getElementById('other-fields-list');
+  if(!el) return;
+  const others = Object.keys(DATI).filter(c=>!CORE8.includes(c)).sort((a,b)=>{
+    const na=parseInt(a.slice(1),10), nb=parseInt(b.slice(1),10);
+    return na-nb;
+  });
+  el.innerHTML = others.map(c=>`<span class="of-chip" data-vid="${c}">${c}</span>`).join('');
+  el.querySelectorAll('.of-chip').forEach(chip=>{
+    chip.onclick=()=>selVigna(chip.dataset.vid);
+  });
+}
+
 let annoSel='2026', idxSel='ndvi', vidSel=null, map, layers={}, chart=null;
 
-initMap();buildYearBar();initTabs();buildRankingPanel();
+initMap();buildYearBar();initTabs();buildRankingPanel();buildOtherFieldsPanel();
