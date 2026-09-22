@@ -10,6 +10,53 @@
 <body>
 <div id="map"></div>
 <a href="https://terroirisk.com/" id="home-btn">⌂ Home</a>
+<button id="help-btn" aria-label="How to read this">?</button>
+
+<!-- HELP OVERLAY -->
+<div id="help-overlay">
+  <div id="help-panel">
+    <button id="help-close" aria-label="Close">✕</button>
+    <h2>How to read this</h2>
+
+    <div class="help-section">
+      <div class="help-h">The colors</div>
+      <p>Each field is colored by how it measured on the selected indicator
+      (pick one of the four tabs when you open a field), for the selected
+      year (bottom bar). Blue/green = healthier reading, red/brown = more
+      stressed. The scale is fixed across all fields and all years, so a
+      color means the same thing everywhere on this map.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h">The four indicators</div>
+      <p><b>Vigor (NDVI)</b> — how dense and green the canopy is. The
+      standard vegetation reading from satellite imagery.</p>
+      <p><b>Water status (NDMI)</b> — how much water is in the canopy right
+      now. Usually the first to react to a dry spell.</p>
+      <p><b>Chlorophyll (NDRE)</b> — a more sensitive read on plant health,
+      often moves before visible stress shows up.</p>
+      <p><b>Biomass (EVI)</b> — canopy volume, less sensitive to soil color
+      showing through than NDVI, useful for sparse or young vines.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h">Using the map</div>
+      <p>Click any field for its detail and 2017–2026 trend. Use the year
+      bar at the bottom to see how the whole map changes across a decade.
+      The 8 highlighted fields (opaque, listed on the left) are the ones
+      used in the statistical analysis; the rest are shown for context.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h">Where this data comes from</div>
+      <p>Sentinel-2 satellite imagery (European Space Agency, Copernicus
+      programme), 10 m resolution, 2017–2026. Field boundaries from SIGPAC
+      (Spain's official agricultural parcel registry) and visual correction
+      against recent imagery. Rainfall reference from AEMET, Spain's
+      national weather service.</p>
+    </div>
+  </div>
+</div>
 
 <!-- LEFT PANEL -->
 <div id="panel">
