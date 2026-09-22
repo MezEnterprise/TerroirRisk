@@ -71,6 +71,20 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   margin-top:12px; font-style:italic;
 }
 
+/* OTHER FIELDS (non-core, context only) */
+#other-fields-block { padding:14px 16px; border-bottom:1px solid var(--border); }
+.of-title {
+  font-size:10px; color:var(--text-mute); text-transform:uppercase;
+  letter-spacing:1px; margin-bottom:10px; line-height:1.4;
+}
+#other-fields-list { display:flex; flex-wrap:wrap; gap:6px; }
+.of-chip {
+  font-size:10px; font-family:monospace; color:var(--text-mute);
+  border:1px solid var(--border); border-radius:3px; padding:3px 7px;
+  cursor:pointer; transition:all 0.15s;
+}
+.of-chip:hover { color:var(--text); border-color:rgba(201,168,76,0.4); background:rgba(255,255,255,0.03); }
+
 #panel-note {
   padding:12px 14px; font-size:10px; color:var(--text-mute);
   line-height:1.5; border-top:1px solid var(--border); font-style:italic;
