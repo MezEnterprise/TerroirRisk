@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formentera · Satellite Archive 2017–2025</title>
+  <title>La Mola, Formentera · Satellite Archive 2017–2026</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,36 +11,40 @@
 <div id="map"></div>
 <a href="https://terroirisk.com/" id="home-btn">⌂ Home</a>
 
-<!-- LEFT PANEL: 2 winery cards instead of list/search -->
+<!-- LEFT PANEL -->
 <div id="panel">
   <div id="panel-header">
-    <div class="logo">Sentinel-2 · Formentera</div>
-    <h1>Formentera</h1>
-    <div class="sub">2 wineries · 28 parcels · 2017–2025</div>
+    <div class="logo">Sentinel-2 · La Mola, Formentera</div>
+    <h1>La Mola</h1>
+    <div class="sub">58 vineyard fields · 2017–2026</div>
   </div>
 
-  <div id="cantina-cards">
-    <div class="cantina-card" data-cantina="Terramoll">
-      <div class="cc-top">
-        <span class="cc-name">Terramoll</span>
-        <span class="cc-tag">200m · not irrigated</span>
-      </div>
-      <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Water stress 2017–25</div>
-      <div class="cc-hook">Water stress rising steadily since 2021, consistent with the 2025 harvest, the earliest in the winery's history.</div>
+  <div id="intro-block">
+    <div class="intro-hook">
+      Ownership of individual fields is not publicly available. We analysed
+      every vineyard field on the La Mola plateau visible in recent imagery
+      and SIGPAC records — not only Terramoll's declared parcels. If you can
+      point us to which ones are yours, we'll gladly re-run the analysis on
+      your fields only.
     </div>
-    <div class="cantina-card" data-cantina="Cap de Barbaria">
-      <div class="cc-top">
-        <span class="cc-name">Cap de Barbaria</span>
-        <span class="cc-tag">65m · partially irrigated</span>
-      </div>
-      <svg class="cc-spark" viewBox="0 0 200 28" preserveAspectRatio="none"></svg>
-      <div class="cc-spark-label">Water stress 2017–25</div>
-      <div class="cc-hook">More stressed than Terramoll every single year, despite partial irrigation: the same stress the market rewards in its wines.</div>
+    <div class="intro-fact">
+      <span class="if-value">Oct–Jun 2023–24 was the driest on record at La Mola</span>
+      <span class="if-sub">121 mm observed (AEMET, Formentera station, 8.5 km) — the driest of 86 years since 1941, not the second-driest.</span>
     </div>
   </div>
 
-  <div id="panel-note">click a parcel for details</div>
+  <div id="ranking-block">
+    <div class="rk-title">8 core fields, ranked by summer vigor (avg. rank, 2017–2026)</div>
+    <div id="ranking-list"></div>
+    <div class="rk-note">
+      C03 has been the most vigorous of the 8 every single year, 10 for 10 —
+      despite sitting on the steepest slope (33%). C04 has ranked near the
+      bottom in 9 of the 10 years, despite being nearly flat (12%). Slope
+      alone doesn't explain it. Click a field, or a row above, for detail.
+    </div>
+  </div>
+
+  <div id="panel-note">click a field for detail</div>
 
   <div id="panel-foot">
     <a href="#" id="pdf-link" target="_blank" style="display:none">↓ Download the guide (PDF)</a>
@@ -84,7 +88,7 @@
     </div>
 
     <div class="syn-block">
-      <div class="syn-label" id="and-label">Trend 2017–2025</div>
+      <div class="syn-label" id="and-label">Trend 2017–2026</div>
       <div class="chart-wrap"><canvas id="chart"></canvas></div>
       <div id="year-badges"></div>
     </div>
