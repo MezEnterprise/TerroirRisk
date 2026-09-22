@@ -263,4 +263,14 @@ function buildOtherFieldsPanel(){
 
 let annoSel='2026', idxSel='ndvi', vidSel=null, map, layers={}, chart=null;
 
-initMap();buildYearBar();initTabs();buildRankingPanel();buildOtherFieldsPanel();
+function initHelp(){
+  const btn=document.getElementById('help-btn');
+  const overlay=document.getElementById('help-overlay');
+  const close=document.getElementById('help-close');
+  if(!btn||!overlay)return;
+  btn.onclick=()=>overlay.classList.add('open');
+  close.onclick=()=>overlay.classList.remove('open');
+  overlay.onclick=(e)=>{if(e.target===overlay)overlay.classList.remove('open');};
+}
+
+initMap();buildYearBar();initTabs();buildRankingPanel();buildOtherFieldsPanel();initHelp();
