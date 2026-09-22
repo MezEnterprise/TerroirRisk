@@ -8,7 +8,7 @@
   --text-mute: #888;
   --panel-bg: rgba(13,13,13,0.92);
   --border: rgba(201,168,76,0.2);
-  --panel-w: 320px;
+  --panel-w: 340px;
   --drawer-w: 385px;
 }
 
@@ -30,35 +30,53 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 #panel {
   position:absolute; top:0; left:0; width:var(--panel-w); height:100vh;
   background:var(--panel-bg); border-right:1px solid var(--border);
-  z-index:10; display:flex; flex-direction:column; overflow:hidden;
+  z-index:10; display:flex; flex-direction:column; overflow-y:auto;
 }
-#panel-header { padding:16px; border-bottom:1px solid var(--border); }
+#panel-header { padding:16px; border-bottom:1px solid var(--border); flex-shrink:0; }
 #panel-header .logo { font-size:11px; color:var(--gold); letter-spacing:3px; text-transform:uppercase; }
 #panel-header h1 { font-size:28px; margin:6px 0 4px; color:var(--sea); font-weight:700; }
 #panel-header .sub { font-size:12px; color:#fff; letter-spacing:1px; }
 
-/* CANTINA CARDS */
-#cantina-cards { padding:14px; display:flex; flex-direction:column; gap:12px; }
-.cantina-card {
-  border:1px solid var(--border); border-radius:6px; padding:14px;
-  cursor:pointer; transition:all 0.15s; background:rgba(255,255,255,0.02);
+/* INTRO */
+#intro-block { padding:14px 16px; border-bottom:1px solid var(--border); }
+.intro-hook {
+  font-size:11px; color:#999; line-height:1.55; font-style:italic;
+  margin-bottom:14px;
 }
-.cantina-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(201,168,76,0.4); }
-.cantina-card[data-cantina="Terramoll"] { border-left:3px solid #7a9b6e; background:rgba(122,155,110,0.05); }
-.cantina-card[data-cantina="Cap de Barbaria"] { border-left:3px solid #b8875a; background:rgba(184,135,90,0.05); }
-.cantina-card.active { border-color:var(--gold); background:rgba(201,168,76,0.08); }
-.cc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
-.cc-name { font-size:16px; color:var(--text); font-style:italic; }
-.cc-tag { font-size:10px; color:var(--text-mute); text-align:right; }
-.cc-spark-label { font-size:9px; color:var(--text-mute); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
-.cc-spark { width:100%; height:28px; display:block; margin:2px 0 0; }
-.cc-hook { font-size:11px; color:#999; line-height:1.5; }
+.intro-fact {
+  background:rgba(201,168,76,0.06); border-left:2px solid var(--gold);
+  padding:10px 12px; border-radius:2px;
+}
+.if-value { display:block; font-size:13px; color:var(--gold); line-height:1.4; margin-bottom:4px; }
+.if-sub { display:block; font-size:10px; color:var(--text-mute); line-height:1.5; }
+
+/* RANKING */
+#ranking-block { padding:14px 16px; border-bottom:1px solid var(--border); }
+.rk-title {
+  font-size:10px; color:var(--text-mute); text-transform:uppercase;
+  letter-spacing:1px; margin-bottom:10px; line-height:1.4;
+}
+#ranking-list { display:flex; flex-direction:column; gap:6px; }
+.rk-row {
+  display:flex; align-items:center; gap:8px; cursor:pointer;
+  padding:3px 0; transition:opacity 0.15s;
+}
+.rk-row:hover { opacity:0.75; }
+.rk-name { font-size:11px; color:var(--text); width:28px; font-family:monospace; flex-shrink:0; }
+.rk-bar-wrap { flex:1; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
+.rk-bar { height:100%; background:linear-gradient(to right, var(--burgundy), var(--gold)); border-radius:3px; }
+.rk-val { font-size:10px; color:var(--text-mute); width:22px; text-align:right; font-family:monospace; flex-shrink:0; }
+.rk-note {
+  font-size:10px; color:var(--text-mute); line-height:1.55;
+  margin-top:12px; font-style:italic;
+}
 
 #panel-note {
   padding:12px 14px; font-size:10px; color:var(--text-mute);
   line-height:1.5; border-top:1px solid var(--border); font-style:italic;
+  flex-shrink:0;
 }
-#panel-foot { padding:14px 16px; border-top:1px solid var(--border); margin-top:auto; }
+#panel-foot { padding:14px 16px; border-top:1px solid var(--border); margin-top:auto; flex-shrink:0; }
 #panel-foot a { color:var(--gold); font-size:11px; text-decoration:none; }
 
 /* YEAR AREA + YEAR BAR */
@@ -78,23 +96,6 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .yr-btn:hover { color:var(--text); border-color:var(--border); }
 .yr-btn.active { background:var(--burgundy); color:var(--text); border-color:var(--burgundy); }
 
-/* LEGENDA */
-#legend {
-  position:absolute; bottom:90px; right:16px; z-index:10;
-  background:var(--panel-bg); border:1px solid var(--border);
-  padding:12px 14px; border-radius:4px; font-size:11px;
-  transition:opacity 0.2s;
-}
-#legend.hidden { display:none; }
-.leg-title { color:var(--gold); margin-bottom:8px; letter-spacing:1px; font-size:10px; text-transform:uppercase; }
-.leg-bar {
-  width:160px; height:12px;
-  background:linear-gradient(to right,rgb(105,40,32),rgb(139,58,42),rgb(170,90,58),rgb(195,135,82),rgb(214,182,112),rgb(200,190,116),rgb(165,185,105),rgb(125,172,92),rgb(90,155,82),rgb(65,150,140),rgb(55,130,175),rgb(48,108,190),rgb(38,80,178));
-  border-radius:2px; margin-bottom:4px;
-}
-.leg-labels { display:flex; justify-content:space-between; color:var(--text-mute); font-size:10px; }
-.leg-note { color:var(--text-mute); font-size:9px; margin-top:4px; font-style:italic; }
-
 /* DRAWER */
 #drawer {
   position:absolute; top:0; right:0; width:var(--drawer-w); height:100vh;
@@ -106,8 +107,9 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 #drawer-header {
   padding:18px 44px 16px 18px; border-bottom:1px solid var(--border);
   display:flex; justify-content:space-between; align-items:center; flex-shrink:0;
+  position:relative;
 }
-#drawer-title { font-size:26px; color:var(--gold); font-style:italic; }
+#drawer-title { font-size:26px; color:var(--gold); font-style:italic; font-family:monospace; }
 #drawer-subtitle { font-size:13px; color:var(--text); margin-top:4px; letter-spacing:0.5px; line-height:1.4; }
 #drawer-close {
   position:absolute; top:12px; right:14px; z-index:5;
@@ -155,8 +157,6 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 }
 .cs-row .cs-label { font-size:10px; color:var(--text-mute); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
 .cs-row .cs-val { font-size:13px; color:var(--text); line-height:1.5; }
-.cs-row-dynamic { border-left:2px solid var(--gold); }
-.cs-row-dynamic .cs-label { color:var(--gold); }
 
 #drawer-legend {
   padding:10px 18px 14px; border-top:1px solid var(--border);
@@ -182,9 +182,6 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   border-color:var(--border) !important;
 }
 
-/* Poligono sotto soglia (CAPDEBAR_07/09) */
-.leaflet-interactive.low-confidence { opacity:0.35; }
-
 /* MOBILE */
 @media (max-width: 768px) {
   :root { --panel-w: 0px; --drawer-w: 100vw; }
@@ -193,5 +190,4 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
   #year-area { bottom:8px; left:8px; right:8px; transform:none; }
   #year-bar { padding:6px 8px; gap:2px; justify-content:center; }
   .yr-btn { font-size:11px; padding:3px 6px; }
-  #legend { bottom:70px; right:8px; }
 }
