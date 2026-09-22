@@ -29,10 +29,10 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 /* HELP */
 #help-btn {
   position:absolute; top:12px; left:calc(var(--panel-w) + 100px); z-index:10;
-  background:var(--panel-bg); border:1px solid var(--border);
-  color:var(--text-mute); width:28px; height:28px; border-radius:50%;
+  background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45);
+  color:var(--gold); width:28px; height:28px; border-radius:50%;
   font-size:13px; font-family:'Georgia',serif; cursor:pointer;
-  transition:color 0.15s;
+  transition:all 0.15s;
 }
 #help-btn:hover { color:var(--gold); }
 
