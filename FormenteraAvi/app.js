@@ -183,7 +183,7 @@ function cosaSappiamo(vid){
   const v = DATI[vid];
   let rows = [];
   if(v && v.pendenza!=null){
-    rows.push(["Slope (SIGPAC)", v.pendenza+"%"]);
+    rows.push(["Slope (SIGPAC)", (v.pendenza/10).toFixed(1)+"%"]);
   }
   if(isCore){
     const r = rankBadge(vid, annoSel);
@@ -191,9 +191,9 @@ function cosaSappiamo(vid){
     rows.push(["Rank among the 8 core fields, "+annoSel, r ? (r+" of 8 (1 = most vigorous)") : "···"]);
     rows.push(["Average rank, 2017–2026", rm+" of 8 across all 10 years"]);
     if(vid==="C03"){
-      rows.push(["What stands out", "C03 has been the single most vigorous of the 8 core fields in <b>every one of the 10 years</b> analysed — no exceptions. It also sits on one of the steepest slopes of the 8 core fields (33%, shared with C01 and C09), the opposite of what you'd expect if drainage alone explained vigor."]);
+      rows.push(["What stands out", "C03 has been the single most vigorous of the 8 core fields in <b>every one of the 10 years</b> analysed — no exceptions. Its slope is gentle (3.3%), as is that of all 8 core fields (0.7–3.3%), so terrain alone does not obviously explain it."]);
     } else if(vid==="C04"){
-      rows.push(["What stands out", "C04 has ranked in the bottom three of the 8 core fields in all 10 years, and last in 6 of them. It is nearly flat (12% slope) — slope alone doesn't explain why it consistently underperforms."]);
+      rows.push(["What stands out", "C04 has ranked in the bottom three of the 8 core fields in all 10 years, and last in 6 of them. It is nearly flat (1.2% slope), but all 8 core fields lie between 0.7% and 3.3%, so slope differences are small and do not obviously explain the gap."]);
     } else {
       rows.push(["Context", "Across the 8 core fields, C03 has been the strongest every single year since 2017, and C04 in the bottom three every year (last in 6 of 10) — a stable hierarchy, not a single bad season."]);
     }
@@ -209,7 +209,7 @@ function aggDrawer(){
   if(!v){ return; }
   document.getElementById('drawer-title').textContent=vid;
   const isCore = CORE8.includes(vid);
-  const slopeTxt = v.pendenza!=null ? ` · ${v.pendenza}% slope` : '';
+  const slopeTxt = v.pendenza!=null ? ` · ${(v.pendenza/10).toFixed(1)}% slope` : '';
   const sub=`${v.a} ha${slopeTxt}`+(isCore?' · core field':'');
   document.getElementById('drawer-subtitle').textContent=sub;
   const val=valore(vid,idxSel,annoSel);
