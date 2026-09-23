@@ -100,7 +100,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 .rk-row:hover { opacity:0.75; }
 .rk-name { font-size:11px; color:var(--text); width:28px; font-family:monospace; flex-shrink:0; }
 .rk-bar-wrap { flex:1; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
-.rk-bar { height:100%; background:linear-gradient(to right, var(--burgundy), var(--gold)); border-radius:3px; }
+.rk-bar { height:100%; border-radius:3px; transition:background 0.3s; }
 .rk-val { font-size:10px; color:var(--text-mute); width:22px; text-align:right; font-family:monospace; flex-shrink:0; }
 .rk-note {
   font-size:10px; color:var(--text-mute); line-height:1.55;
