@@ -71,7 +71,17 @@ function chipColore(val,ix){
       const r=Math.round(c0[0]+f*(c1[0]-c0[0])),g=Math.round(c0[1]+f*(c1[1]-c0[1])),b=Math.round(c0[2]+f*(c1[2]-c0[2]));
       return`rgba(${r},${g},${b},0.28)`;}}
   return 'rgba(255,255,255,0.03)';
+}function barColore(val,ix){
+  const t=calcolaT(val,ix);
+  if(t==null)return 'rgba(255,255,255,0.12)';
+  const stops=[[0,[176,72,64]],[.5,[189,158,64]],[1,[92,148,74]]];
+  for(let i=0;i<stops.length-1;i++){const[t0,c0]=stops[i],[t1,c1]=stops[i+1];
+    if(t>=t0&&t<=t1){const f=(t-t0)/(t1-t0);
+      const r=Math.round(c0[0]+f*(c1[0]-c0[0])),g=Math.round(c0[1]+f*(c1[1]-c0[1])),b=Math.round(c0[2]+f*(c1[2]-c0[2]));
+      return `rgb(${r},${g},${b})`;}}
+  return 'rgba(255,255,255,0.12)';
 }
+
 function valore(vid,ix,anno){const v=DATI[vid];if(!v)return null;const y=v.y[anno];return(y&&y[ix]!=null)?y[ix]:null;}
 function parola(val,ix){if(val==null)return'···';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
 
@@ -254,11 +264,12 @@ function buildRankingPanel(){
   el.innerHTML = ordered.map(c=>{
     const rm = RANK_MEDIO[c];
     const bar = Math.round((9-rm)/8*100);
-    return `<div class="rk-row" data-vid="${c}"><span class="rk-name">${c}</span><div class="rk-bar-wrap"><div class="rk-bar" style="width:${bar}%"></div></div><span class="rk-val">${rm}</span></div>`;
+    return `<div class="rk-row" data-vid="${c}"><span class="rk-name">${c}</span><div class="rk-bar-wrap"><div class="rk-bar" data-vid="${c}" style="width:${bar}%"></div></div><span class="rk-val">${rm}</span></div>`;
   }).join('');
   el.querySelectorAll('.rk-row').forEach(row=>{
     row.onclick=()=>selVigna(row.dataset.vid);
   });
+  ricoloraChips();
 }
 
 /* Elenco compatto dei campi non-core (contesto, non nella statistica principale) */
@@ -280,6 +291,11 @@ function ricoloraChips(){
     const vid=chip.dataset.vid;
     const val=valore(vid,idxSel,annoSel);
     chip.style.background=chipColore(val,idxSel);
+  });
+  document.querySelectorAll('.rk-bar').forEach(bar=>{
+    const vid=bar.dataset.vid;
+    const val=valore(vid,idxSel,annoSel);
+    bar.style.background=barColore(val,idxSel);
   });
 }
 
