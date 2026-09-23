@@ -45,11 +45,15 @@ function calcolaRange(idx){
 }
 const RANGE={ndvi:calcolaRange('ndvi'),ndmi:calcolaRange('ndmi'),ndre:calcolaRange('ndre'),evi:calcolaRange('evi')};
 
-function colore(val,ix){
-  if(val==null)return '#333';
+function calcolaT(val,ix){
+  if(val==null)return null;
   const r=RANGE[ix];
   let t=Math.max(0,Math.min(1,(val-r.min)/(r.max-r.min||1)));
-  t=Math.pow(t,1.3);
+  return Math.pow(t,1.3);
+}
+function colore(val,ix){
+  const t=calcolaT(val,ix);
+  if(t==null)return '#333';
   const stops=[[0,[105,40,32]],[.08,[139,58,42]],[.16,[170,90,58]],[.24,[195,135,82]],
     [.33,[214,182,112]],[.42,[200,190,116]],[.51,[165,185,105]],[.60,[125,172,92]],
     [.69,[90,155,82]],[.78,[65,150,140]],[.87,[55,130,175]],[.93,[48,108,190]],[1,[38,80,178]]];
@@ -57,6 +61,16 @@ function colore(val,ix){
     if(t>=t0&&t<=t1){const f=(t-t0)/(t1-t0);
       return`rgb(${Math.round(c0[0]+f*(c1[0]-c0[0]))},${Math.round(c0[1]+f*(c1[1]-c0[1]))},${Math.round(c0[2]+f*(c1[2]-c0[2]))})`;}}
   return'#888';
+}
+function chipColore(val,ix){
+  const t=calcolaT(val,ix);
+  if(t==null)return 'rgba(255,255,255,0.03)';
+  const stops=[[0,[150,60,55]],[.5,[150,130,55]],[1,[75,120,60]]];
+  for(let i=0;i<stops.length-1;i++){const[t0,c0]=stops[i],[t1,c1]=stops[i+1];
+    if(t>=t0&&t<=t1){const f=(t-t0)/(t1-t0);
+      const r=Math.round(c0[0]+f*(c1[0]-c0[0])),g=Math.round(c0[1]+f*(c1[1]-c0[1])),b=Math.round(c0[2]+f*(c1[2]-c0[2]));
+      return`rgba(${r},${g},${b},0.28)`;}}
+  return 'rgba(255,255,255,0.03)';
 }
 function valore(vid,ix,anno){const v=DATI[vid];if(!v)return null;const y=v.y[anno];return(y&&y[ix]!=null)?y[ix]:null;}
 function parola(val,ix){if(val==null)return'···';for(const[s,t]of PAROLE[ix])if(val>=s)return t;return PAROLE[ix].slice(-1)[0][1];}
@@ -98,7 +112,7 @@ function initMap(){
     }
   }).addTo(map);
 }
-function ricolora(){for(const vid in layers)layers[vid].setStyle(stile(vid));}
+function ricolora(){for(const vid in layers)layers[vid].setStyle(stile(vid));ricoloraChips();}
 
 function buildYearBar(){
   const bar=document.getElementById('year-bar');
@@ -258,6 +272,14 @@ function buildOtherFieldsPanel(){
   el.innerHTML = others.map(c=>`<span class="of-chip" data-vid="${c}">${c}</span>`).join('');
   el.querySelectorAll('.of-chip').forEach(chip=>{
     chip.onclick=()=>selVigna(chip.dataset.vid);
+  });
+  ricoloraChips();
+}
+function ricoloraChips(){
+  document.querySelectorAll('.of-chip').forEach(chip=>{
+    const vid=chip.dataset.vid;
+    const val=valore(vid,idxSel,annoSel);
+    chip.style.background=chipColore(val,idxSel);
   });
 }
 
