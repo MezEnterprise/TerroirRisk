@@ -29,7 +29,7 @@ body { background:var(--bg); color:var(--text); font-family:'Georgia',serif; hei
 /* HELP */
 #help-btn {
   position:absolute; top:12px; left:calc(var(--panel-w) + 100px); z-index:10;
-  background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45);
+  background:rgba(13,13,13,0.92); border:1px solid rgba(201,168,76,0.45);
   color:var(--gold); width:28px; height:28px; border-radius:50%;
   font-size:13px; font-family:'Georgia',serif; cursor:pointer;
   transition:all 0.15s;
