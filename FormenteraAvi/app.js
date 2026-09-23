@@ -191,11 +191,11 @@ function cosaSappiamo(vid){
     rows.push(["Rank among the 8 core fields, "+annoSel, r ? (r+" of 8 (1 = most vigorous)") : "···"]);
     rows.push(["Average rank, 2017–2026", rm+" of 8 across all 10 years"]);
     if(vid==="C03"){
-      rows.push(["What stands out", "C03 has been the single most vigorous of the 8 core fields in <b>every one of the 10 years</b> analysed — no exceptions. It also has the steepest slope of the group (33%), the opposite of what you'd expect if drainage alone explained vigor."]);
+      rows.push(["What stands out", "C03 has been the single most vigorous of the 8 core fields in <b>every one of the 10 years</b> analysed — no exceptions. It also sits on one of the steepest slopes of the 8 core fields (33%, shared with C01 and C09), the opposite of what you'd expect if drainage alone explained vigor."]);
     } else if(vid==="C04"){
-      rows.push(["What stands out", "C04 has ranked among the two weakest of the 8 core fields in 9 of the last 10 years. It is nearly flat (12% slope) — slope alone doesn't explain why it consistently underperforms."]);
+      rows.push(["What stands out", "C04 has ranked in the bottom three of the 8 core fields in all 10 years, and last in 6 of them. It is nearly flat (12% slope) — slope alone doesn't explain why it consistently underperforms."]);
     } else {
-      rows.push(["Context", "Across the 8 core fields, C03 has been the strongest every single year since 2017, and C04 the weakest in 9 of 10 years — a stable hierarchy, not a single bad season."]);
+      rows.push(["Context", "Across the 8 core fields, C03 has been the strongest every single year since 2017, and C04 in the bottom three every year (last in 6 of 10) — a stable hierarchy, not a single bad season."]);
     }
   } else {
     rows.push(["Status", "Outside the 8 fields used for the main statistical analysis (below the 0.5 ha threshold, or excluded after visual check — see note)."]);
